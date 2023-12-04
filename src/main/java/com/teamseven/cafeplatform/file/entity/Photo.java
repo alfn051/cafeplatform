@@ -16,7 +16,6 @@ public class Photo {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String directory;
     private String orgName;
     private String saveName;
     private Classify classify;
