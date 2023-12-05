@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel = "stylesheet" th:href = "@{css/signin.css}"/>
+
+</head>
+<body>
+
+<div th:include="/common/navbar"></div>
+
+
+<div class="signin">
+
+    <form action = "/signin" class = "signin-form" method="post">
+
+        <input type = "text" id = "input-box-1" class="id" name = "id" placeholder="아이디를 입력해주세요" />
+        <input type = "text" id = "input-box-2" class="password" name = "password" placeholder="비밀번호를 입력해주세요"/>
+        <button type = "submit" class = "signin-btn">로그인하기</button>
+
+    </form>
+
+</div>
+
+
+</body>
+</html>
