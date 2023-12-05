@@ -32,4 +32,11 @@ public class UserService {
         if (!user.getPassword().equals(dto.getPassword())) return null;
         return user;
     }
+
+    public User getUserById(Long id){
+        if(id!=null) {
+            return userRepository.findById(id).orElse(null);
+        }
+        return null;
+    }
 }
