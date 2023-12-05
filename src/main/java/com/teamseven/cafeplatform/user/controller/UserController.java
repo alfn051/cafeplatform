@@ -3,38 +3,49 @@ package com.teamseven.cafeplatform.user.controller;
 import com.teamseven.cafeplatform.user.dto.UserLoginDTO;
 import com.teamseven.cafeplatform.user.entity.User;
 import com.teamseven.cafeplatform.user.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/user")
 public class UserController {
 
-
-    @Autowired
     private final UserService userService;
 
     @GetMapping("/signin")
-    public String SignInPage(){
+    public String SignInPage() {
 
-        return "/common/signin";
+        return "user/signin";
     }
 
 
-    @RequestMapping("/signin")
-    public String SignIn(@RequestParam String id, @RequestParam String password){
-        HttpSession session  =
-            System.out.println(id+password);
-            UserLoginDTO login = UserLoginDTO.builder().loginId(id).password(password).build();
-            User user = userService.login(login);
-            return "/home/index";
-
+    @PostMapping("/signin")
+    public String login(@ModelAttribute UserLoginDTO dto, HttpServletRequest httpServletRequest, Model model) {
+        User user = userService.login(dto);
+        if (user == null) {
+            return "user/signin";
         }
+
+        httpServletRequest.getSession().invalidate();
+        HttpSession session = httpServletRequest.getSession(true);
+        session.setAttribute("loginUser", user);
+        session.setMaxInactiveInterval(3600);
+        return "redirect:/";
     }
 
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            session.invalidate();
+        }
+        return "redirect:/";
+    }
 
+}
