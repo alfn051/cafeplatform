@@ -1,8 +1,8 @@
 package com.teamseven.cafeplatform;
 
-import com.teamseven.cafeplatform.user.dto.UserLoginDTO;
-import com.teamseven.cafeplatform.user.entity.User;
-import com.teamseven.cafeplatform.user.service.UserService;
+import com.teamseven.cafeplatform.domain.user.dto.UserLoginDTO;
+import com.teamseven.cafeplatform.domain.user.entity.User;
+import com.teamseven.cafeplatform.domain.user.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

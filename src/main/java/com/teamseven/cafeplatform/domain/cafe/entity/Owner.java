@@ -1,6 +1,6 @@
-package com.teamseven.cafeplatform.file.entity;
+package com.teamseven.cafeplatform.domain.cafe.entity;
 
-import com.teamseven.cafeplatform.domain.cafe.entity.Review;
+import com.teamseven.cafeplatform.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,19 +12,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "review_photo")
-public class ReviewPhoto {
+@Table(name = "owner")
+public class Owner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "photo_id")
-    private Photo photo;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "review_id")
-    private Review review;
+    @JoinColumn(name = "cafe_id")
+    private Cafe cafe;
 
 }

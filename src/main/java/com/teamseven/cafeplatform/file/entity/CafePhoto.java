@@ -1,6 +1,6 @@
 package com.teamseven.cafeplatform.file.entity;
 
-import com.teamseven.cafeplatform.cafe.entity.Cafe;
+import com.teamseven.cafeplatform.domain.cafe.entity.Cafe;
 import jakarta.persistence.*;
 import lombok.*;
 
