@@ -3,11 +3,14 @@ package com.teamseven.cafeplatform.user.controller;
 import com.teamseven.cafeplatform.user.dto.UserLoginDTO;
 import com.teamseven.cafeplatform.user.entity.User;
 import com.teamseven.cafeplatform.user.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -23,12 +26,12 @@ public class UserController {
     public String SignInPage(){
 
         return "/common/signin";
+
     }
 
 
     @RequestMapping("/signin")
-    public String SignIn(@RequestParam String id, @RequestParam String password){
-        HttpSession session  =
+    public String SignIn(@RequestParam String id, @RequestParam String password ){
             System.out.println(id+password);
             UserLoginDTO login = UserLoginDTO.builder().loginId(id).password(password).build();
             User user = userService.login(login);
