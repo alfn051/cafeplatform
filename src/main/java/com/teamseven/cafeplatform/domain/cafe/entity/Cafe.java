@@ -2,6 +2,7 @@ package com.teamseven.cafeplatform.domain.cafe.entity;
 
 import com.teamseven.cafeplatform.domain.cafe.common.CafeState;
 import com.teamseven.cafeplatform.config.BaseEntity;
+import com.teamseven.cafeplatform.domain.user.entity.User;
 import com.teamseven.cafeplatform.file.entity.CafePhoto;
 import com.teamseven.cafeplatform.domain.propensity.entity.CafePropensity;
 import jakarta.persistence.*;
@@ -26,7 +27,8 @@ public class Cafe extends BaseEntity {
     private String introduction;
     @Enumerated(EnumType.STRING)
     private CafeState state;
-    private double ratingAverage;
+    private Double ratingAverage;
+    private int reviewCount;
     private int color;
     private boolean partnership;
 
@@ -35,5 +37,9 @@ public class Cafe extends BaseEntity {
 
     @OneToMany(mappedBy = "cafe", orphanRemoval = true)
     private List<CafePhoto> cafePhotos = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
 
 }

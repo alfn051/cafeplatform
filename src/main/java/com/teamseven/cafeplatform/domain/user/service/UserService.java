@@ -1,13 +1,18 @@
 package com.teamseven.cafeplatform.domain.user.service;
 
+import com.teamseven.cafeplatform.domain.cafe.service.CafeService;
 import com.teamseven.cafeplatform.domain.user.dto.UserJoinDTO;
 import com.teamseven.cafeplatform.domain.user.dto.UserLoginDTO;
+import com.teamseven.cafeplatform.domain.user.entity.Follow;
 import com.teamseven.cafeplatform.domain.user.entity.User;
+import com.teamseven.cafeplatform.domain.user.repository.FollowRepository;
 import com.teamseven.cafeplatform.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -15,6 +20,7 @@ import java.util.Optional;
 @Slf4j
 public class UserService {
     private final UserRepository userRepository;
+    private final FollowRepository followRepository;
 
     public User join(UserJoinDTO dto) {
         if(checkLoginIdDuplicate(dto.getLoginId())) return null;
@@ -39,4 +45,35 @@ public class UserService {
         }
         return null;
     }
+
+    public User getUserByLoginId(String loginId){
+        if(loginId!=null) {
+            return userRepository.findByLoginId(loginId).orElse(null);
+        }
+        return null;
+    }
+
+    public List<User> getAllUsers(){
+        return userRepository.findAll();
+    }
+
+    @Transactional
+    public Follow follow(Long followerId, Long followeeId){
+        Optional<User> follower = userRepository.findById(followerId); //아몰라 걍 리턴널 때릴래
+        Optional<User> followee = userRepository.findById(followeeId);
+        if(follower.isPresent() && followee.isPresent()){
+            return followRepository.save(Follow.builder()
+                    .follower(follower.get())
+                    .followee(followee.get())
+                    .build());
+        }
+        return null;
+    }
+
+    public void unFollow(Long followId){
+        followRepository.deleteById(followId);
+    }
+
+
+
 }
