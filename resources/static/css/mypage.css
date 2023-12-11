@@ -1,0 +1,91 @@
+.customer-myPage-1 {
+  width: 1080px;
+  height: 720px;
+  position: relative;
+}
+
+.tab-1 {
+  width: 150px;
+  height: 250px;
+  border: 1px solid #000000;
+  position: absolute;
+  top: 150px;
+  left: 50px;
+}
+
+.myinfo {
+  width: 112px;
+  height: 33px;
+  background-color: #ae57f3;
+  border: 1px solid #dddddd;
+  border-radius: 7px;
+  color: #ffffff;
+  font-weight: lighter;
+  font-size: 12px;
+}
+.order-info {
+  width: 112px;
+  height: 33px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  color: #000000;
+  border-radius: 7px;
+  font-weight: lighter;
+  font-size: 12px;
+}
+
+.stamp-info {
+  width: 112px;
+  height: 33px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  color: #000000;
+  border-radius: 7px;
+  font-weight: lighter;
+  font-size: 12px;
+}
+.cafe-info {
+  width: 112px;
+  height: 33px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  color: #000000;
+  border-radius: 7px;
+  font-weight: lighter;
+  font-size: 12px;
+}
+.my-attend {
+  width: 112px;
+  height: 33px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  color: #000000;
+  border-radius: 7px;
+  font-weight: lighter;
+  font-size: 12px;
+}
+.follwing-review {
+  width: 112px;
+  height: 33px;
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  color: #000000;
+  border-radius: 7px;
+  font-weight: lighter;
+  font-size: 12px;
+}
+
+#tab-button {
+  margin-top: 5px;
+}
+
+.customer-mypage-container-1 {
+  position: absolute;
+  left: 320px;
+  top: 100px;
+  width: 660px;
+  height: 490px;
+
+  border: 1px solid #dddddd;
+  border-radius: 7px;
+}
