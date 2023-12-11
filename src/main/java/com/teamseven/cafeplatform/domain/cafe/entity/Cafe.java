@@ -3,6 +3,7 @@ package com.teamseven.cafeplatform.domain.cafe.entity;
 import com.teamseven.cafeplatform.domain.cafe.common.CafeState;
 import com.teamseven.cafeplatform.config.BaseEntity;
 import com.teamseven.cafeplatform.domain.user.entity.User;
+import com.teamseven.cafeplatform.domain.cafe.common.StampImage;
 import com.teamseven.cafeplatform.file.entity.CafePhoto;
 import com.teamseven.cafeplatform.domain.propensity.entity.CafePropensity;
 import jakarta.persistence.*;
@@ -29,8 +30,11 @@ public class Cafe extends BaseEntity {
     private CafeState state;
     private Double ratingAverage;
     private int reviewCount;
-    private int color;
+    private String color;
     private boolean partnership;
+    private StampImage stampImage;
+    private double longitude; //경도
+    private double latitude; //위도
 
     @OneToOne(mappedBy = "cafe", orphanRemoval = true)
     private CafePropensity cafePropensity;

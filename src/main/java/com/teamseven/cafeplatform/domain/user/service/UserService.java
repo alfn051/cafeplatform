@@ -1,6 +1,8 @@
 package com.teamseven.cafeplatform.domain.user.service;
 
 import com.teamseven.cafeplatform.domain.cafe.service.CafeService;
+import com.teamseven.cafeplatform.domain.propensity.dto.UserPropensityDTO;
+import com.teamseven.cafeplatform.domain.propensity.service.PropensityService;
 import com.teamseven.cafeplatform.domain.user.dto.UserJoinDTO;
 import com.teamseven.cafeplatform.domain.user.dto.UserLoginDTO;
 import com.teamseven.cafeplatform.domain.user.entity.Follow;
@@ -21,6 +23,7 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final FollowRepository followRepository;
+    private final PropensityService propensityService;
 
     public User join(UserJoinDTO dto) {
         if(checkLoginIdDuplicate(dto.getLoginId())) return null;
@@ -36,6 +39,14 @@ public class UserService {
         if (optionalUser.isEmpty()) return null;
         User user = optionalUser.get();
         if (!user.getPassword().equals(dto.getPassword())) return null;
+        return user;
+    }
+
+    public User setPropensity(UserPropensityDTO dto) {
+        Optional<User> optionalUser = userRepository.findById(dto.getUserId());
+        if (optionalUser.isEmpty()) return null;
+        User user = optionalUser.get();
+        propensityService.setUserPropensity(dto, user);
         return user;
     }
 

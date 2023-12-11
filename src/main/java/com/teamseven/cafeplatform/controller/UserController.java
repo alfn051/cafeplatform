@@ -21,7 +21,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/signin")
-    public String SignInPage() {
+    public String signInPage() {
         return "user/signin";
     }
 

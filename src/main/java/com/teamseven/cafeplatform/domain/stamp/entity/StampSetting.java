@@ -4,6 +4,7 @@ import com.teamseven.cafeplatform.domain.cafe.entity.Cafe;
 import com.teamseven.cafeplatform.domain.cafe.entity.Menu;
 import com.teamseven.cafeplatform.config.BaseEntity;
 import com.teamseven.cafeplatform.domain.stamp.common.StampExpiration;
+import com.teamseven.cafeplatform.domain.stamp.common.TotalStamp;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -17,7 +18,7 @@ import lombok.*;
 @Entity
 @Table(name = "stamp_setting")
 public class StampSetting extends BaseEntity {
-    private int total_stamp;
+    private TotalStamp totalStamp;
     private StampExpiration expiration;
     private long criterionAmount;
     private boolean eventFirst;
