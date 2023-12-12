@@ -9,5 +9,5 @@ import lombok.Data;
 public class CafeDisplayDTO {
     private Cafe cafe;
     private double fitness;
-    private int distance;
+    private double distance;
 }

@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface CafeRepository extends JpaRepository<Cafe, Long> {
     public List<Cafe> findAllByState(CafeState state);
+
+    public List<Cafe> findAllByStateAndNameContaining(CafeState state, String keyword);
 }

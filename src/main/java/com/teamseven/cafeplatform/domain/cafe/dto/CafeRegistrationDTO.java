@@ -39,7 +39,7 @@ public class CafeRegistrationDTO {
                 .detailAddress(detailAddress)
                 .postalCode(postalCode)
                 .introduction(introduction)
-                .ratingAverage(null)
+                .ratingAverage(0.0)
                 .reviewCount(0)
                 .color(color)
                 .stampImage(stampImage)

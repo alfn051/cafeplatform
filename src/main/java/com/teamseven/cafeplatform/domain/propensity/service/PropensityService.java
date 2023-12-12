@@ -70,7 +70,4 @@ public class PropensityService {
         return fitness;
     }
 
-//    public List<CafeDisplayDTO> getMatchedCafesByPropensity(User user, List<Cafe> cafeList) {
-//
-//    }
 }

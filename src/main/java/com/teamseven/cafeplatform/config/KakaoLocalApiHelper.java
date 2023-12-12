@@ -4,6 +4,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.gavaghan.geodesy.Ellipsoid;
+import org.gavaghan.geodesy.GeodeticCalculator;
+import org.gavaghan.geodesy.GeodeticCurve;
+import org.gavaghan.geodesy.GlobalCoordinates;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -68,4 +72,13 @@ public class KakaoLocalApiHelper {
         return firstDocument.get("region_2depth_name").toString();
     }
 
+    public double calculateDistance(DirectionDTO dir1, DirectionDTO dir2) {
+        GeodeticCalculator geoCalc = new GeodeticCalculator();
+        Ellipsoid reference = Ellipsoid.WGS84;
+        GlobalCoordinates coords1 = new GlobalCoordinates(dir1.getLatitude(), dir1.getLongitude());
+        GlobalCoordinates coords2 = new GlobalCoordinates(dir2.getLatitude(), dir2.getLongitude());
+
+        GeodeticCurve geoCurve = geoCalc.calculateGeodeticCurve(reference, coords1, coords2);
+        return geoCurve.getEllipsoidalDistance();
+    }
 }

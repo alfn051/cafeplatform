@@ -28,8 +28,9 @@ public class Cafe extends BaseEntity {
     private String introduction;
     @Enumerated(EnumType.STRING)
     private CafeState state;
-    private Double ratingAverage;
     private int reviewCount;
+    @Column(nullable = true)
+    private Double ratingAverage;
     private String color;
     private boolean partnership;
     private StampImage stampImage;
