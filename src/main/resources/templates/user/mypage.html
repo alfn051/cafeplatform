@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel = "stylesheet" href = "style.css"/>
+
+    <link rel = "stylesheet" th:href = "@{/css/mypage.css}"/>
+
+
+    <link rel = "stylesheet" href = "../Navbar/style.css"/>    
+
+</head>
+<body>
+
+    <div data-include-path="../Navbar/index.html"></div>
+
+    <div class="customer-myPage-1">
+
+    <div class="tab-1">
+
+        <button class="myinfo" id = "tab-button">내정보</button>
+        <button class="order-info" id=  "tab-button">주문 내역 조회</button>
+        <button class="stamp-info" id = "tab-button">스탬프</button>
+        <button class="cafe-info" id = "tab-button">등록한 카페 조회</button>
+        <button class="my-attend" id = "tab-button">나의 출석</button>
+        <button class="follwing-review" id = "tab-button">팔로잉 리뷰</button>
+
+    </div>
+
+    <div class="customer-mypage-container-1">
+
+    </div>
+
+    </div>
+ 
+
+
+<!-- 임시 include 대신 사용 -->
+<script>
+ 
+    window.addEventListener('load', function() {
+        var allElements = document.getElementsByTagName('*');
+        Array.prototype.forEach.call(allElements, function(el) {
+            var includePath = el.dataset.includePath;
+            if (includePath) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        el.outerHTML = this.responseText;
+                    }
+                };
+                xhttp.open('GET', includePath, true);
+                xhttp.send();
+            }
+        });
+    });
+
+</script>
+   
+</body>
+</html>

@@ -1,0 +1,23 @@
+.Main-container {
+  width: 1080px;
+  min-height: 1920px;
+  /* background-color: red; */
+  position: relative;
+}
+.title {
+  position: absolute;
+  width: 500px;
+  /* min-height: 13px; */
+  height: 45px;
+  border-bottom: 1px solid #000000;
+  justify-content: left;
+  display: flex;
+  left: 40px;
+}
+
+.table-container {
+  position: absolute;
+  width: 500px;
+  height: 70px;
+  top: 300px;
+}
