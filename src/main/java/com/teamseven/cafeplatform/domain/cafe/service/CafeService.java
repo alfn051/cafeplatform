@@ -7,7 +7,9 @@ import com.teamseven.cafeplatform.domain.cafe.common.StampImage;
 import com.teamseven.cafeplatform.domain.cafe.dto.CafeDisplayDTO;
 import com.teamseven.cafeplatform.domain.cafe.dto.CafeRegistrationDTO;
 import com.teamseven.cafeplatform.domain.cafe.dto.CafeThemeDTO;
+import com.teamseven.cafeplatform.domain.cafe.dto.MenuCreateDTO;
 import com.teamseven.cafeplatform.domain.cafe.entity.Cafe;
+import com.teamseven.cafeplatform.domain.cafe.entity.Menu;
 import com.teamseven.cafeplatform.domain.cafe.entity.Partnership;
 import com.teamseven.cafeplatform.domain.cafe.repository.CafeRepository;
 import com.teamseven.cafeplatform.domain.cafe.repository.PartnershipRepository;
@@ -40,6 +42,7 @@ public class CafeService {
     private final PartnershipRepository partnershipRepository;
     private final UserService userService;
     private final FileService fileService;
+    private final MenuService menuService;
     private final PropensityService propensityService;
     private final KakaoLocalApiHelper kakaoLocalApiHelper;
 
@@ -96,6 +99,14 @@ public class CafeService {
         Cafe cafe = optionalCafe.get();
         propensityService.setCafePropensity(dto, cafe);
         return cafe;
+    }
+
+    @Transactional
+    public Menu addMenu(MenuCreateDTO dto) {
+        Optional<Cafe> optionalCafe = cafeRepository.findById(dto.getCafeId());
+        if(optionalCafe.isEmpty()) return null;
+        Cafe cafe = optionalCafe.get();
+        return menuService.createMenu(dto, cafe);
     }
 
     public Cafe getCafeById(Long id){

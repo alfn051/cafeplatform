@@ -110,5 +110,4 @@ public class FileService {
                 .map(cafePhotoRepository::save).collect(Collectors.toList());
     }
 
-
 }
