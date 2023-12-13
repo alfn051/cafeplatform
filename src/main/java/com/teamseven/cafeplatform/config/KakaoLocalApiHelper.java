@@ -24,6 +24,8 @@ import java.nio.charset.StandardCharsets;
 @RequiredArgsConstructor
 @Slf4j
 public class KakaoLocalApiHelper {
+
+
     private final RestTemplate restTemplate;
     @Value("${kakao_api_key}")
     private String apiKey;

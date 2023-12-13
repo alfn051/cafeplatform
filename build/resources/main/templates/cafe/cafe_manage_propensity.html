@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<head>
+    <link rel = "stylesheet" th:href = "@{/css/cafe_manage_propensity.css}"/>
+
+</head>
+
+
+<body>
+
+<!--점포관리(성향서비스)-->
+
+<div th:include="/common/navbar"></div>
+
+
+<div class="shop-manage-wrap-3">
+    <div class="shop-manage-tab-3">
+        <a href = "/cafe/manage/getmoney">
+        <button class="shop-sell-3">
+            매출 관리
+        </button>
+        </a>
+        <a href = "/cafe/manage/#">
+
+        <button class="shop-menu-3">
+            메뉴 관리
+        </button>
+        </a>
+
+        <a href = "/cafe/manage/stamp">
+        <button class="shop-stamp-3">스탬프 관리</button>
+        </a>
+        <a href = "/cafe/manage/propensity">
+        <button class="shop-marry-3">성향 서비스</button>
+        </a>
+
+    </div>
+
+    <div class="marry-manage-container">
+        <div class="attract">ATTRACT</div>
+        <div class="attract-title">성향 매칭 서비스</div>
+        <div class="attract-content">월 10,800원으로 카페의 성향을 자랑해보세요~</div>
+        <div class="attract-content-2">성향 매칭 검색결과 노출 / 카페 노출 결과 증가</div>
+        <a href = "/cafe/manage/propensity/order">
+        <button class="register">가입하기</button>
+        </a>
+    </div>
+
+</div>
+
+
+
+
+</body>
+</html>
