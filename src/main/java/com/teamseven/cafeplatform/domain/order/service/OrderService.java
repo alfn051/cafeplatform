@@ -2,6 +2,8 @@ package com.teamseven.cafeplatform.domain.order.service;
 
 import com.teamseven.cafeplatform.domain.cafe.entity.Cafe;
 import com.teamseven.cafeplatform.domain.cafe.entity.Menu;
+import com.teamseven.cafeplatform.domain.cafe.repository.CafeRepository;
+import com.teamseven.cafeplatform.domain.cafe.service.CafeService;
 import com.teamseven.cafeplatform.domain.cafe.service.MenuService;
 import com.teamseven.cafeplatform.domain.order.common.AddCartDTO;
 import com.teamseven.cafeplatform.domain.order.common.OrderState;
@@ -12,12 +14,14 @@ import com.teamseven.cafeplatform.domain.order.repository.OrderRepository;
 import com.teamseven.cafeplatform.domain.stamp.entity.StampGift;
 import com.teamseven.cafeplatform.domain.stamp.service.StampService;
 import com.teamseven.cafeplatform.domain.user.entity.User;
+import com.teamseven.cafeplatform.domain.user.repository.UserRepository;
 import com.teamseven.cafeplatform.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -28,6 +32,8 @@ public class OrderService {
     private final OrderMenuRepository orderMenuRepository;
     private final MenuService menuService;
     private final StampService stampService;
+    private final UserRepository userRepository;
+    private final CafeRepository cafeRepository;
 
     @Transactional
     public Order createPreparingOrder(User user, Cafe cafe) {
@@ -120,4 +126,24 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    public List<Order> getAllOrderByUser(long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if(optionalUser.isEmpty()) return null;
+        User user = optionalUser.get();
+        return orderRepository.findAllByUser(user);
+    }
+
+    public List<Order> getAllOrderByUserAndCafe(long userId, long cafeId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if(optionalUser.isEmpty()) return null;
+        User user = optionalUser.get();
+        Optional<Cafe> optionalCafe = cafeRepository.findById(cafeId);
+        if (optionalCafe.isEmpty()) return null;
+        Cafe cafe = optionalCafe.get();
+        return orderRepository.findAllByUserAndCafe(user, cafe);
+    }
+
+    public Order getOrderById(long orderId) {
+        return orderRepository.findById(orderId).orElse(null);
+    }
 }

@@ -2,6 +2,7 @@ package com.teamseven.cafeplatform.domain.cafe.entity;
 
 import com.teamseven.cafeplatform.domain.cafe.common.CafeState;
 import com.teamseven.cafeplatform.config.BaseEntity;
+import com.teamseven.cafeplatform.domain.order.entity.Order;
 import com.teamseven.cafeplatform.domain.user.entity.User;
 import com.teamseven.cafeplatform.domain.cafe.common.StampImage;
 import com.teamseven.cafeplatform.file.entity.CafePhoto;
@@ -46,5 +47,8 @@ public class Cafe extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private User owner;
+
+    @OneToMany(mappedBy = "cafe", orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
 
 }

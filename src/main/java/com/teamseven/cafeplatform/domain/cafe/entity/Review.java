@@ -29,8 +29,4 @@ public class Review extends BaseEntity {
     @OneToMany(mappedBy = "review", orphanRemoval = true)
     private List<ReviewPhoto> reviewPhotos = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "photo_id")
-    private Photo photo;
-
 }

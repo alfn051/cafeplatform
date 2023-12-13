@@ -6,6 +6,7 @@ import com.teamseven.cafeplatform.domain.user.common.UserState;
 import com.teamseven.cafeplatform.domain.user.entity.User;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -19,6 +20,7 @@ public class UserJoinDTO {
     private String phone;
     private LocalDate birthday;
     private Gender gender;
+    private MultipartFile photo;
 
     public User toEntity(){
         return User.builder()

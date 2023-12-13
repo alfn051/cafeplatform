@@ -13,7 +13,9 @@ import com.teamseven.cafeplatform.domain.cafe.entity.Menu;
 import com.teamseven.cafeplatform.domain.cafe.entity.Partnership;
 import com.teamseven.cafeplatform.domain.cafe.repository.CafeRepository;
 import com.teamseven.cafeplatform.domain.cafe.repository.PartnershipRepository;
+import com.teamseven.cafeplatform.domain.order.service.OrderService;
 import com.teamseven.cafeplatform.domain.propensity.dto.CafePropensityDTO;
+import com.teamseven.cafeplatform.domain.propensity.entity.CafePropensity;
 import com.teamseven.cafeplatform.domain.propensity.entity.UserPropensity;
 import com.teamseven.cafeplatform.domain.propensity.service.PropensityService;
 import com.teamseven.cafeplatform.domain.user.entity.User;
@@ -77,7 +79,7 @@ public class CafeService {
             try { //사진 파일 저장
                 fileService.storeCafePhotos(dto.getPhotoList(), cafe);
             } catch (IOException e) {
-                log.error("카페 등록 사진 파일 저장 실패");
+                log.error("카페 등록 사진 파일 저장 실패"+e.getMessage());
             }
         }
         return cafe;
@@ -94,12 +96,11 @@ public class CafeService {
     }
 
     @Transactional
-    public Cafe setPropensity(CafePropensityDTO dto) {
+    public CafePropensity setPropensity(CafePropensityDTO dto) {
         Optional<Cafe> optionalCafe = cafeRepository.findById(dto.getCafeId());
         if (optionalCafe.isEmpty()) return null;
         Cafe cafe = optionalCafe.get();
-        propensityService.setCafePropensity(dto, cafe);
-        return cafe;
+        return propensityService.setCafePropensity(dto, cafe);
     }
 
     @Transactional
