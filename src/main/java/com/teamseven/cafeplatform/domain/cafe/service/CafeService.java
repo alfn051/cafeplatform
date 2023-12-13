@@ -49,7 +49,7 @@ public class CafeService {
     @Value("${default_color}")
     private String defaultColor;
     @Value("distance_range")
-    private int distanceRange;
+    private String distanceRange;
     private final StampImage defaultStampImage = StampImage.A;
 
     @Transactional
@@ -134,7 +134,7 @@ public class CafeService {
      * @return 거리 정보와 적합도 정보가 포함되고 적합도가 작은 순대로 정렬된 거리 범위 내의 CafeDisplayDTO 리스트
      */
     public List<CafeDisplayDTO> getCafeListByUser(User user, DirectionDTO dir){
-        return getCafeByPropensity(getCafeByDirection(getAllActiveCafe().stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, distanceRange), user.getUserPropensity(), true);
+        return getCafeByPropensity(getCafeByDirection(getAllActiveCafe().stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), true);
     }
 
     /**
@@ -148,7 +148,7 @@ public class CafeService {
      * @return 거리 정보와 적합도 정보가 포함되고 적합도가 작은 순대로 정렬된 거리 범위 내의 검색어가 포함된 제휴상태의 CafeDisplayDTO 리스트
      */
     public List<CafeDisplayDTO> searchPartnerCafesByUser(User user, String keyword, DirectionDTO dir){
-        return getCafeByPropensity(getCafeByDirection(getAllSearchedCafe(keyword).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, distanceRange), user.getUserPropensity(), false)
+        return getCafeByPropensity(getCafeByDirection(getAllSearchedCafe(keyword).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), false)
                 .stream().filter(dto -> dto.getCafe().isPartnership()).collect(Collectors.toList());
     }
 
@@ -163,7 +163,7 @@ public class CafeService {
      * @return 거리 정보와 적합도 정보가 포함되고 거리가 가까운순대로 정렬된 거리 범위 내의 검색어가 포함된 제휴되지 않은 CafeDisplayDTO 리스트
      */
     public List<CafeDisplayDTO> searchNormalCafeListByUser(User user, String keyword, DirectionDTO dir){
-        return getCafeByPropensity(getCafeByDirection(getAllSearchedCafe(keyword).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, distanceRange), user.getUserPropensity(), false)
+        return getCafeByPropensity(getCafeByDirection(getAllSearchedCafe(keyword).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), false)
                 .stream().filter(dto -> !dto.getCafe().isPartnership()).collect(Collectors.toList());
     }
 
