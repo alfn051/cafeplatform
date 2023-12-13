@@ -1,0 +1,197 @@
+.customer-myPage-2 {
+    width: 1080px;
+    height: 720px;
+    position: relative;
+}
+
+.next-level {
+    position: absolute;
+    left: 910px;
+    top: 110px;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.1px solid #dddddd;
+    color: #838383;
+    font-weight: lighter;
+    border-radius: 7px;
+    background-color: #ffffff;
+}
+.tab-2 {
+    width: 150px;
+    height: 250px;
+    /* border: 1px solid #000000; */
+    position: absolute;
+    top: 150px;
+    left: 50px;
+}
+
+.myinfo-2 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    color: #000000;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.order-info-2 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+.stamp-info-2 {
+    width: 112px;
+    height: 33px;
+    background-color: #ae57f3;
+    border: 1px solid #dddddd;
+    color: #ffffff;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.cafe-info-2 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.my-attend-2 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.follwing-review-2 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+/* 보상 틀 */
+
+.reward-tap {
+    position: absolute;
+    width: 80px;
+    height: 16px;
+    left: 610px;
+    top: 70px;
+}
+
+/* 포인트 */
+
+.attend-point-title {
+    position: absolute;
+    font-size: 10px;
+    color: #000000;
+    top: 20px;
+}
+
+.attend-point-result {
+    position: absolute;
+    font-size: 7px;
+    color: #000000;
+    top: 40px;
+    left: 15px;
+}
+.point-image-reward {
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 13px;
+}
+
+/* 스탬프 */
+
+.stamp-image-reward {
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 95px;
+}
+
+.stamp-count-title {
+    width: 100px;
+    position: absolute;
+    font-size: 10px;
+    color: #000000;
+    top: 20px;
+    left: 80px;
+}
+.stamp-count-result {
+    position: absolute;
+    font-size: 7px;
+    color: #000000;
+    top: 40px;
+    left: 90px;
+}
+
+.result-2 {
+    position: absolute;
+    width: 740px;
+    height: 540px;
+    /* border: 1px solid black; */
+    left: 220px;
+    top: 150px;
+}
+
+.stamp-title-3 {
+    width: 90%;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    /* border-bottom: 1px solid black; */
+    padding-bottom: 5px;
+}
+
+/* 테이블 */
+
+.stamp-table-2 {
+    width: 600px;
+    height: 200px;
+    position: absolute;
+    top: 50px;
+    left: 10px;
+}
+.table-header-2 {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.table-body-2 {
+    width: 600px;
+    position: absolute;
+    border-bottom: 0.5px solid #dddddd;
+}
+
+#stamp-value-1 {
+    padding-left: 52px;
+}
+
+#stamp-value-2 {
+    padding-left: 50px;
+}

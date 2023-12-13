@@ -58,7 +58,7 @@ public class UserController {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
         model.addAttribute("loginUser", user);
         model.addAttribute("df", df);
-        return "user/myinfo";
+        return "user/mypage";
     }
 
     /**
@@ -89,6 +89,38 @@ public class UserController {
         }
         userService.unFollow(followId);
         return "redirect:"+httpServletRequest.getHeader("Referer"); //이전페이지로 리다이렉트
+    }
+
+    /**
+     * 페이지
+     *
+     */
+
+    @GetMapping("/mypage/1")
+    public String mypageOne(Model model){
+        return "user/mypage_one";
+
+    }
+
+
+    @GetMapping("/mypage/2")
+    public String mypageTwo(Model model){
+        return "user/mypage_two";
+    }
+
+    @GetMapping("/mypage/3")
+    public String mypageThree(Model model){
+        return "user/mypage_three";
+    }
+
+    @GetMapping("/mypage/4")
+    public String mypageFour(Model model){
+        return "user/mypage_four";
+    }
+
+    @GetMapping("/mypage/5")
+    public String mypageFive(Model model){
+        return "user/mypage_stamp_get";
     }
 
 }

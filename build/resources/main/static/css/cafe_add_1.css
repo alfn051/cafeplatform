@@ -1,0 +1,145 @@
+.enroll {
+  width: 1080px;
+  min-height: 2560px;
+  position: relative;
+}
+
+.enroll-title {
+  position: absolute;
+  width: 840px;
+  height: 45px;
+  border-bottom: 1px solid #000000;
+  top: 40px;
+  left: 40px;
+}
+
+.enroll-title-2 {
+  position: absolute;
+  width: 840px;
+  height: 45px;
+  border-bottom: 1px solid #000000;
+  top: 700px;
+  left: 0px;
+}
+
+.exit-button {
+  width: 58px;
+  height: 23px;
+  position: absolute;
+  border: 1px solid #9a82db;
+  border-radius: 50px;
+  background-color: #9a82db;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: lighter;
+  top: 50px;
+  left: 820px;
+}
+
+#box {
+  border: 1px solid #79747e;
+  border-radius: 4px;
+}
+.title-name-1 {
+  font-size: 24px;
+}
+
+.title-name-2 {
+  font-size: 24px;
+}
+
+.enroll-container-1 {
+  position: absolute;
+  left: 42px;
+  top: 100px;
+}
+
+.enroll-title-1 {
+  font-size: 14;
+}
+
+.enroll-title-2 {
+  font-size: 14;
+}
+
+.enroll-input-1 {
+  width: 210px;
+  height: 56px;
+  margin-bottom: 10px;
+  color: #838383;
+}
+
+.enroll-input-2 {
+  width: 520px;
+  height: 56px;
+  margin-bottom: 10px;
+  color: #838383;
+}
+
+.enroll-input-3 {
+  position: absolute;
+  width: 190px;
+  height: 56px;
+  color: #838383;
+  top: 235px;
+  left: 0px;
+}
+
+.enroll-input-4 {
+  position: absolute;
+  width: 190px;
+  height: 56px;
+  color: #838383;
+  top: 235px;
+  left: 220px;
+}
+
+.enroll-input-5 {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  color: #838383;
+  top: 310px;
+  left: 0px;
+}
+
+.enroll-input-6 {
+  position: absolute;
+  width: 304px;
+  height: 50px;
+  color: #838383;
+  top: 310px;
+  left: 120px;
+}
+
+.enroll-input-7 {
+  position: absolute;
+  width: 397px;
+  height: 50px;
+  color: #838383;
+  top: 305px;
+  left: 450px;
+}
+
+.enroll-input-8 {
+  position: absolute;
+  width: 863px;
+  height: 116px;
+  color: #838383;
+  top: 385px;
+  left: 0px;
+}
+
+.next-button {
+  width: 58px;
+  height: 23px;
+  position: absolute;
+  border: 1px solid #9a82db;
+  border-radius: 50px;
+  background-color: #9a82db;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: lighter;
+  top: 520px;
+  left: 800px;
+}
