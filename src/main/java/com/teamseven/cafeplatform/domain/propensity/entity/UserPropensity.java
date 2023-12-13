@@ -2,14 +2,14 @@ package com.teamseven.cafeplatform.domain.propensity.entity;
 
 import com.teamseven.cafeplatform.config.BaseEntity;
 import com.teamseven.cafeplatform.domain.user.entity.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -26,5 +26,11 @@ public class UserPropensity extends BaseEntity {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "userPropensity", orphanRemoval = true)
+    private List<SceneryPreferred> sceneryPreferredList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userPropensity", orphanRemoval = true)
+    private List<MenuPreferred> menuPreferredList = new ArrayList<>();
 
 }

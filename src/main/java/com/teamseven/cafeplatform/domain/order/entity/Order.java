@@ -7,6 +7,7 @@ import com.teamseven.cafeplatform.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,14 +20,15 @@ import java.util.List;
 @Entity
 @Table(name = "orders")
 public class Order extends BaseEntity {
-    @Column(nullable = false)
-    private long totalPrice;
-    @Column(nullable = false)
-    private long pointDiscount;
-    @Column(nullable = false)
-    private long stampDiscount;
-    @Column(nullable = false)
-    private long amount;
+    @Column(nullable = true)
+    private Long totalPrice;
+    @Column(nullable = true)
+    private Long pointDiscount;
+    @Column(nullable = true)
+    private Long stampDiscount;
+    @Column(nullable = true)
+    private Long amount;
+    private LocalDateTime orderedTime;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "order_state")

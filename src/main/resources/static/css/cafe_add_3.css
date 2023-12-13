@@ -1,0 +1,423 @@
+.enroll3 {
+  width: 1080px;
+  min-height: 720px;
+  position: relative;
+}
+
+.enroll-container-3 {
+  position: absolute;
+  width: 720px;
+  height: 720px;
+  left: 0px;
+  /* top: 270px; */
+}
+
+.enroll-title-6 {
+  position: absolute;
+  width: 1080px;
+  height: 50px;
+  border-bottom: 1px solid #000000;
+  top: 40px;
+  left: 40px;
+}
+
+.style-card {
+  position: absolute;
+  width: 280px;
+  height: 374px;
+  background-color: #ffffff;
+  border-radius: 28px;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 4px 0px;
+  top: 120px;
+  left: 50px;
+}
+
+.line {
+  position: absolute;
+  width: 230px;
+  height: 20px;
+  top: 255px;
+  left: 70px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.line-2 {
+  position: absolute;
+  width: 230px;
+  height: 20px;
+  top: 315px;
+  left: 70px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.tend-title-1 {
+  position: absolute;
+  font-size: 24px;
+  font-weight: normal;
+  left: 30px;
+}
+
+.tend-content-1 {
+  position: absolute;
+  font-size: 14px;
+  color: #49454f;
+  top: 60px;
+  left: 30px;
+}
+
+.tend-mark {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 90px;
+  left: 30px;
+  border: 1px solid #d0bcff;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tend-input-1 {
+  position: absolute;
+  top: 100px;
+  left: 80px;
+}
+
+.tend-check {
+  position: absolute;
+  accent-color: #6750a4;
+  top: 115px;
+  left: 220px;
+}
+
+.tend-mark-2 {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 150px;
+  left: 30px;
+  border: 1px solid #d0bcff;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tend-mark-3 {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 210px;
+  left: 30px;
+  border: 1px solid #d0bcff;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tend-input-2 {
+  position: absolute;
+  top: 160px;
+  left: 80px;
+}
+.tend-input-3 {
+  position: absolute;
+  top: 220px;
+  left: 80px;
+}
+
+.tend-check-2 {
+  position: absolute;
+  accent-color: #6750a4;
+  top: 175px;
+  left: 220px;
+}
+
+.tend-check-3 {
+  position: absolute;
+  accent-color: #6750a4;
+  top: 235px;
+  left: 220px;
+}
+
+.style-card-2 {
+  position: absolute;
+  width: 280px;
+  height: 374px;
+  background-color: #ffffff;
+  border-radius: 28px;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 4px 0px;
+  top: 120px;
+  left: 410px;
+}
+
+.tend-title-2 {
+  position: absolute;
+  font-size: 24px;
+  font-weight: normal;
+  left: 30px;
+}
+
+.tend-content-2 {
+  position: absolute;
+  font-size: 14px;
+  color: #49454f;
+  top: 60px;
+  left: 30px;
+}
+
+.tend-mark-4 {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 90px;
+  left: 30px;
+  border: 1px solid #d0bcff;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tend-input-4 {
+  position: absolute;
+  top: 220px;
+  left: 80px;
+  top: 100px;
+  left: 90px;
+}
+
+.exam {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  /* background-color: red; */
+}
+.tend-check-4 {
+  position: absolute;
+  accent-color: #6750a4;
+  top: 115px;
+  left: 220px;
+}
+
+.tend-mark-5 {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 155px;
+  left: 32px;
+  border: 1px solid #d0bcff;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tend-input-5 {
+  position: absolute;
+  top: 165px;
+  left: 90px;
+}
+.tend-check-5 {
+  position: absolute;
+  accent-color: #6750a4;
+  top: 180px;
+  left: 220px;
+}
+
+.tend-mark-6 {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 220px;
+  left: 32px;
+  border: 1px solid #d0bcff;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tend-input-6 {
+  position: absolute;
+  top: 230px;
+  left: 90px;
+}
+
+.tend-check-6 {
+  position: absolute;
+  top: 245px;
+  left: 220px;
+  accent-color: #6750a4;
+}
+
+.line-3 {
+  position: absolute;
+  width: 230px;
+  height: 20px;
+  top: 255px;
+  left: 430px;
+  border-bottom: 1px solid #dddddd;
+}
+.line-4 {
+  position: absolute;
+  width: 230px;
+  height: 20px;
+  top: 325px;
+  left: 433px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.style-card-3 {
+  position: absolute;
+  width: 280px;
+  height: 374px;
+  background-color: #ffffff;
+  border-radius: 28px;
+  box-shadow: rgb(0 0 0 /25%) 0px 4px 4px 0px;
+  top: 120px;
+  left: 780px;
+}
+
+.tend-title-3 {
+  position: absolute;
+  font-size: 24px;
+  font-weight: normal;
+  left: 30px;
+}
+
+.tend-content-3 {
+  position: absolute;
+  font-size: 14px;
+  color: #49454f;
+  top: 60px;
+  left: 30px;
+}
+
+.tend-mark-7 {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 90px;
+  left: 40px;
+  border: 1px solid #d0bcff;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tend-input-7 {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+}
+
+.tend-check-7 {
+  position: absolute;
+  accent-color: #6750a4;
+  top: 115px;
+  left: 220px;
+}
+
+.line-5 {
+  position: absolute;
+  width: 230px;
+  height: 20px;
+  top: 255px;
+  left: 810px;
+  border-bottom: 1px solid #dddddd;
+}
+
+.tend-mark-7 {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 90px;
+  left: 40px;
+  border: 1px solid #d0bcff;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tend-mark-8 {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 150px;
+  left: 40px;
+  border: 1px solid #d0bcff;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tend-input-8 {
+  position: absolute;
+  top: 163px;
+  left: 100px;
+}
+
+.tend-check-8 {
+  position: absolute;
+  top: 175px;
+  left: 220px;
+  accent-color: #6750a4;
+}
+
+.tend-mark-9 {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 210px;
+  left: 40px;
+  border: 1px solid #d0bcff;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tend-input-9 {
+  position: absolute;
+  top: 223px;
+  left: 100px;
+}
+
+.tend-check-9 {
+  position: absolute;
+  top: 245px;
+  left: 220px;
+  accent-color: #6750a4;
+}
+
+.exit-button {
+  width: 58px;
+  height: 23px;
+  position: absolute;
+  border: 1px solid #9a82db;
+  border-radius: 50px;
+  background-color: #9a82db;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: lighter;
+  top: 50px;
+  left: 1060px;
+}
+
+.next-button {
+  width: 58px;
+  height: 23px;
+  position: absolute;
+  border: 1px solid #9a82db;
+  border-radius: 50px;
+  background-color: #9a82db;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: lighter;
+  top: 540px;
+  left: 1060px;
+}

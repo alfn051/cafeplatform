@@ -1,0 +1,203 @@
+.customer-myPage-2 {
+    width: 1080px;
+    height: 720px;
+    position: relative;
+}
+
+.next-level {
+    position: absolute;
+    left: 910px;
+    top: 110px;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0.1px solid #dddddd;
+    color: #838383;
+    font-weight: lighter;
+    border-radius: 7px;
+    background-color: #ffffff;
+}
+
+.tab-2 {
+    width: 150px;
+    height: 250px;
+    /* border: 1px solid #000000; */
+    position: absolute;
+    top: 150px;
+    left: 50px;
+}
+
+.myinfo-2 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    color: #000000;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.order-info-2 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+.stamp-info-2 {
+    width: 112px;
+    height: 33px;
+    background-color: #ae57f3;
+    border: 1px solid #dddddd;
+    color: #ffffff;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.cafe-info-2 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.my-attend-2 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.follwing-review-2 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+.stamp-cafe-title-2 {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+
+.stamp-frame {
+    position: absolute;
+    width: 720px;
+    height: 320px;
+    border-radius: 4px;
+    border: 1px solid #dddddd;
+    top: 140px;
+    left: 300px;
+}
+
+.stamp-cafe-title {
+    position: absolute;
+    font-size: 24px;
+    font-weight: bold;
+    top: 100px;
+    left: 300px;
+}
+.cafe-stamp {
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    display: grid;
+    grid-template-areas:
+    "circle-1 circle-2 circle-3 circle-4 circle-5"
+    "circle-6 circle-7 circle-8 circle-9 circle-10";
+    gap: 5%;
+}
+
+.circle-1 {
+    /* position: absolute; */
+}
+#stamp-dot {
+    width: 90px;
+    height: 90px;
+    border: 1px dotted #dddddd;
+    border-radius: 100px;
+    margin-left: 10px;
+    margin-top: 40px;
+}
+div.release-date {
+    width: 100px;
+    height: 10px;
+    position: absolute;
+    font-size: 7px;
+    color: #838383;
+    top: 300px;
+    left: 610px;
+}
+
+/* 보상 틀 */
+.reward-tap {
+    position: absolute;
+    width: 80px;
+    height: 16px;
+    left: 610px;
+    top: 70px;
+}
+
+/* 포인트 */
+
+.attend-point-title {
+    position: absolute;
+    font-size: 10px;
+    color: #000000;
+    top: 20px;
+}
+
+.attend-point-result {
+    position: absolute;
+    font-size: 7px;
+    color: #000000;
+    top: 40px;
+    left: 15px;
+}
+.point-image-reward {
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 13px;
+}
+
+/* 스탬프 */
+
+.stamp-image-reward {
+    position: absolute;
+    width: 17px;
+    height: 17px;
+    left: 95px;
+}
+
+.stamp-count-title {
+    width: 100px;
+    position: absolute;
+    font-size: 10px;
+    color: #000000;
+    top: 20px;
+    left: 80px;
+}
+.stamp-count-result {
+    position: absolute;
+    font-size: 7px;
+    color: #000000;
+    top: 40px;
+    left: 90px;
+}

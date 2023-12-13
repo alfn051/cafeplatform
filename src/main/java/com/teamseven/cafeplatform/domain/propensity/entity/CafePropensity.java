@@ -6,6 +6,9 @@ import com.teamseven.cafeplatform.domain.propensity.common.Scenery;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -22,5 +25,8 @@ public class CafePropensity extends BaseEntity {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "cafe_id")
     private Cafe cafe;
+
+    @OneToMany(mappedBy = "cafePropensity", orphanRemoval = true)
+    private List<MenuFocused> menuFocusedList = new ArrayList<>();
 
 }

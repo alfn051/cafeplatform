@@ -1,0 +1,172 @@
+.enroll2 {
+  width: 1080px;
+  min-height: 720px;
+  position: relative;
+}
+
+.enroll-title-4 {
+  position: absolute;
+  width: 840px;
+  height: 50px;
+  border-bottom: 1px solid #000000;
+  top: 40px;
+  left: 40px;
+}
+
+.cafe-color {
+  position: absolute;
+  width: 200px;
+  height: 50px;
+  top: 100px;
+  left: 40px;
+}
+
+.title-name-3 {
+  position: absolute;
+  width: 200px;
+  height: 50px;
+  left: 370px;
+  top: 190px;
+}
+
+.enroll-container-2 {
+  position: absolute;
+  width: 720px;
+  height: 720px;
+  left: 125px;
+  top: 270px;
+  /* border: 1px solid #000000; */
+}
+
+.stamp-inner {
+  position: absolute;
+  width: 280px;
+  height: 264px;
+  background-color: #ffffff;
+  border-radius: 28px;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 4px 0px;
+}
+
+.stamp-container {
+  width: 280px;
+  height: 264px;
+  position: absolute;
+}
+
+.stamp {
+  position: absolute;
+  left: 130px;
+  top: 40px;
+  accent-color: #6750a4;
+}
+
+.stamp-image {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 90px;
+  top: 90px;
+}
+
+.stamp-inner-2 {
+  position: absolute;
+  width: 280px;
+  height: 264px;
+  background-color: #ffffff;
+  border-radius: 28px;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 4px 0px;
+  left: 370px;
+}
+
+.stamp-2 {
+  position: absolute;
+  left: 130px;
+  top: 40px;
+  accent-color: #6750a4;
+}
+
+.stamp-image-2 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 90px;
+  top: 90px;
+}
+
+.stamp-inner-3 {
+  position: absolute;
+  width: 280px;
+  height: 264px;
+  background-color: #ffffff;
+  border-radius: 28px;
+  box-shadow: rgb(0 0 0 /25%) 0px 4px 4px 0px;
+  top: 300px;
+}
+
+.stamp-3 {
+  position: absolute;
+  left: 130px;
+  top: 40px;
+  accent-color: #6750a4;
+}
+
+.stamp-image-3 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 90px;
+  top: 90px;
+}
+
+.stamp-inner-4 {
+  position: absolute;
+  width: 280px;
+  height: 264px;
+  background-color: #ffffff;
+  border-radius: 28px;
+  box-shadow: rgb(0 0 0 / 25%) 0px 4px 4px 0px;
+  top: 300px;
+  left: 370px;
+}
+
+.stamp-4 {
+  position: absolute;
+  left: 130px;
+  top: 40px;
+  accent-color: #6750a4;
+}
+
+.stamp-image-4 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 90px;
+  top: 90px;
+}
+.next-button {
+  width: 58px;
+  height: 23px;
+  position: absolute;
+  border: 1px solid #9a82db;
+  border-radius: 50px;
+  background-color: #9a82db;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: lighter;
+  top: 880px;
+  left: 810px;
+}
+
+.exit-button {
+  width: 58px;
+  height: 23px;
+  position: absolute;
+  border: 1px solid #9a82db;
+  border-radius: 50px;
+  background-color: #9a82db;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: lighter;
+  top: 50px;
+  left: 820px;
+}

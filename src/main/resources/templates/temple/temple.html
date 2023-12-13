@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<head>
+<!--    <link rel = "stylesheet" href = "style.css"/>-->
+    <!--    <link rel = "stylesheet" href = "../Navbar/style.css"/>-->
+    <link rel = "stylesheet" th:href = "@{/css/mypage1.css}"/>
+
+</head>
+<body>
+
+<!-- 고객마이페이지(내정보) -->
+
+<div th:include="/common/navbar"></div>
+
+<div class="customer-myPage-1">
+
+    <div class="tab-1">
+        <button class="myinfo" th:id = "tab-button">내정보</button>
+        <button class="order-info" th:id=  "tab-button">주문 내역 조회</button>
+        <button class="stamp-info" th:id = "tab-button">스탬프</button>
+        <button class="cafe-info" th:id = "tab-button">등록한 카페 조회</button>
+        <button class="my-attend" th:id = "tab-button">나의 출석</button>
+        <button class="follwing-review" th:id = "tab-button">팔로잉 리뷰</button>
+    </div>
+
+    <div class="customer-mypage-container-1">
+
+    </div>
+
+</div>
+
+
+
+
+</body>
+</html>
