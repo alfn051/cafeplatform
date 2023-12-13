@@ -61,7 +61,7 @@ public class CafeService {
         try {
             direction = kakaoLocalApiHelper.getDirectionByKeyword(dto.getBaseAddress());
         } catch (Exception e) {
-            log.error("주소 api에서 위도 경도 가져오는데 오류가 발생함: "+ e.getMessage());
+            log.error("주소 api에서 위도 경도 가져오는데 오류가 발생함: " + e.getMessage());
             direction = DirectionDTO.builder().longitude(129.07506783124393).latitude(35.17973748292069).build();
         }
 
@@ -72,7 +72,7 @@ public class CafeService {
                 .endDate(LocalDate.now().plusMonths(2))
                 .freeTrial(true)
                 .build());
-        if(dto.getPhotoList()!=null){
+        if (dto.getPhotoList() != null) {
             try { //사진 파일 저장
                 fileService.storeCafePhotos(dto.getPhotoList(), cafe);
             } catch (IOException e) {
@@ -83,9 +83,9 @@ public class CafeService {
     }
 
     @Transactional
-    public Cafe setTheme(CafeThemeDTO dto){
+    public Cafe setTheme(CafeThemeDTO dto) {
         Optional<Cafe> optionalCafe = cafeRepository.findById(dto.getCafeId());
-        if(optionalCafe.isEmpty()) return null;
+        if (optionalCafe.isEmpty()) return null;
         Cafe cafe = optionalCafe.get();
         cafe.setColor(dto.getColor());
         cafe.setStampImage(dto.getStampImage());
@@ -93,9 +93,9 @@ public class CafeService {
     }
 
     @Transactional
-    public Cafe setPropensity(CafePropensityDTO dto){
+    public Cafe setPropensity(CafePropensityDTO dto) {
         Optional<Cafe> optionalCafe = cafeRepository.findById(dto.getCafeId());
-        if(optionalCafe.isEmpty()) return null;
+        if (optionalCafe.isEmpty()) return null;
         Cafe cafe = optionalCafe.get();
         propensityService.setCafePropensity(dto, cafe);
         return cafe;
@@ -104,24 +104,24 @@ public class CafeService {
     @Transactional
     public Menu addMenu(MenuCreateDTO dto) {
         Optional<Cafe> optionalCafe = cafeRepository.findById(dto.getCafeId());
-        if(optionalCafe.isEmpty()) return null;
+        if (optionalCafe.isEmpty()) return null;
         Cafe cafe = optionalCafe.get();
         return menuService.createMenu(dto, cafe);
     }
 
-    public Cafe getCafeById(Long id){
+    public Cafe getCafeById(Long id) {
         return cafeRepository.findById(id).orElse(null);
     }
 
-    public List<Cafe> getAllCafe(){
+    public List<Cafe> getAllCafe() {
         return cafeRepository.findAll();
     }
 
-    public List<Cafe> getAllActiveCafe(){
+    public List<Cafe> getAllActiveCafe() {
         return cafeRepository.findAllByState(CafeState.ACTIVE);
     }
 
-    public List<Cafe> getAllSearchedCafe(String keyword){
+    public List<Cafe> getAllSearchedCafe(String keyword) {
         return cafeRepository.findAllByStateAndNameContaining(CafeState.ACTIVE, keyword);
     }
 
@@ -129,11 +129,12 @@ public class CafeService {
      * <h3>추천 카페 리스트 뽑을때 사용함!</h3>
      * 유저의 위치정보와 성향정보를 이용하여 유저에게 적합한 추천 카페 리스트를 반환함
      * <br>getCafeByDirection()과 getCafeByPropensity() 가 함께 적용됨
+     *
      * @param user 유저 엔티티
      * @param dir  DirectionDTO 유저의 위치
      * @return 거리 정보와 적합도 정보가 포함되고 적합도가 작은 순대로 정렬된 거리 범위 내의 CafeDisplayDTO 리스트
      */
-    public List<CafeDisplayDTO> getCafeListByUser(User user, DirectionDTO dir){
+    public List<CafeDisplayDTO> getCafeListByUser(User user, DirectionDTO dir) {
         return getCafeByPropensity(getCafeByDirection(getAllActiveCafe().stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), true);
     }
 
@@ -142,12 +143,13 @@ public class CafeService {
      * 검색어로 검색된 카페 중에서 유저의 위치정보와 성향정보를 이용하여 유저에게 적합한 순서대로 카페 리스트를 반환함
      * <br>getAllSearchedCafe()로 키워드가 이름에 포함된 카페리스트를 받아와 사용
      * <br>getCafeByDirection()과 getCafeByPropensity() 가 함께 적용됨
-     * @param user 유저 엔티티
+     *
+     * @param user    유저 엔티티
      * @param keyword 검색어 키워드
-     * @param dir  DirectionDTO 유저의 위치
+     * @param dir     DirectionDTO 유저의 위치
      * @return 거리 정보와 적합도 정보가 포함되고 적합도가 작은 순대로 정렬된 거리 범위 내의 검색어가 포함된 제휴상태의 CafeDisplayDTO 리스트
      */
-    public List<CafeDisplayDTO> searchPartnerCafesByUser(User user, String keyword, DirectionDTO dir){
+    public List<CafeDisplayDTO> searchPartnerCafesByUser(User user, String keyword, DirectionDTO dir) {
         return getCafeByPropensity(getCafeByDirection(getAllSearchedCafe(keyword).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), false)
                 .stream().filter(dto -> dto.getCafe().isPartnership()).collect(Collectors.toList());
     }
@@ -157,24 +159,26 @@ public class CafeService {
      * 검색어로 검색된 카페 중에서 유저의 위치정보와 성향정보를 이용하여 유저에게 적합한 순서대로 카페 리스트를 반환함
      * <br>getAllSearchedCafe()로 키워드가 이름에 포함된 카페리스트를 받아와 사용
      * <br>getCafeByDirection()과 getCafeByPropensity() 가 함께 적용됨
-     * @param user 유저 엔티티
+     *
+     * @param user    유저 엔티티
      * @param keyword 검색어 키워드
-     * @param dir  DirectionDTO 유저의 위치
+     * @param dir     DirectionDTO 유저의 위치
      * @return 거리 정보와 적합도 정보가 포함되고 거리가 가까운순대로 정렬된 거리 범위 내의 검색어가 포함된 제휴되지 않은 CafeDisplayDTO 리스트
      */
-    public List<CafeDisplayDTO> searchNormalCafeListByUser(User user, String keyword, DirectionDTO dir){
+    public List<CafeDisplayDTO> searchNormalCafeListByUser(User user, String keyword, DirectionDTO dir) {
         return getCafeByPropensity(getCafeByDirection(getAllSearchedCafe(keyword).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), false)
                 .stream().filter(dto -> !dto.getCafe().isPartnership()).collect(Collectors.toList());
     }
 
     /**
      * 카페dto 리스트와 유저의위치, 범위를 받아와 카페와 유저의 거리를 계산하고 범위안에 있는 카페만 거리정보를 포함하고 거리순으로 정렬된 리스트로 반환함
+     *
      * @param cafeDisplayDtoList 카페를 dto에 담은 dto리스트
-     * @param userDir DirectionDTO 유저의 위치
-     * @param range 유저와 카페의 거리의 범위
+     * @param userDir            DirectionDTO 유저의 위치
+     * @param range              유저와 카페의 거리의 범위
      * @return 거리 정보가 포함되고 거리가 가까운순대로 정렬된 거리 범위 내의 CafeDisplayDTO 리스트
      */
-    public List<CafeDisplayDTO> getCafeByDirection(List<CafeDisplayDTO> cafeDisplayDtoList, DirectionDTO userDir, int range){
+    public List<CafeDisplayDTO> getCafeByDirection(List<CafeDisplayDTO> cafeDisplayDtoList, DirectionDTO userDir, int range) {
         List<CafeDisplayDTO> newCafeDisplayDtoList = new ArrayList<>();
         cafeDisplayDtoList.forEach(cafeDisplayDTO -> {
             double distance = kakaoLocalApiHelper.calculateDistance(userDir, DirectionDTO.builder().longitude(cafeDisplayDTO.getCafe().getLongitude()).latitude(cafeDisplayDTO.getCafe().getLatitude()).build());
@@ -188,15 +192,16 @@ public class CafeService {
 
     /**
      * 카페dto 리스트와 유저의 성향을 받아 카페와 유저의 성향을 비교하여 적합도를 계산 후 카페dto에 적합도를 넣은 후 적합도가 작은순(더 저합함을 의미)대로 정렬하여 반환
+     *
      * @param cafeDisplayDTOList 카페를 dto에 담은 dto리스트
-     * @param propensity UserPropensity 유저의 성향
-     * @param checkPartnership 카페가 제휴를 맺었는지 확인 여부를 선택함, true일땐 제휴를 맺은(partnership==true) 카페만 반환함
+     * @param propensity         UserPropensity 유저의 성향
+     * @param checkPartnership   카페가 제휴를 맺었는지 확인 여부를 선택함, true일땐 제휴를 맺은(partnership==true) 카페만 반환함
      * @return 적합도 정보가 포함되고 적합도 작은순대로 정렬된 CafeDisplayDTO리스트
      */
-    public List<CafeDisplayDTO> getCafeByPropensity(List<CafeDisplayDTO> cafeDisplayDTOList, UserPropensity propensity, boolean checkPartnership){
+    public List<CafeDisplayDTO> getCafeByPropensity(List<CafeDisplayDTO> cafeDisplayDTOList, UserPropensity propensity, boolean checkPartnership) {
         cafeDisplayDTOList.forEach(cafe -> cafe.setFitness(propensityService.calculatePropensity(propensity, cafe.getCafe().getCafePropensity())));
         cafeDisplayDTOList.sort(Comparator.comparing(CafeDisplayDTO::getFitness));
-        if(checkPartnership){
+        if (checkPartnership) {
             return cafeDisplayDTOList.stream().filter(dto -> dto.getCafe().isPartnership()).collect(Collectors.toList());
         }
         return cafeDisplayDTOList;

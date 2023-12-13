@@ -33,4 +33,8 @@ public class MenuService {
         }
         return menuRepository.save(menu);
     }
+
+    public Menu getMenuById(long menuId) {
+        return menuRepository.findById(menuId).orElse(null);
+    }
 }
