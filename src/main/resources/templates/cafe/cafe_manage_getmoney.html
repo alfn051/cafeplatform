@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+    <link rel = "stylesheet" th:href = "@{/css/cafe_manage_getmoney.css}"/>
+
+</head>
+<link rel = "stylesheet" href = "../Navbar/style.css"/>
+<body>
+
+<div th:include="/common/navbar"></div>
+
+<!--점포관리 (매출관리)-->
+
+
+<div class="shop-manage-wrap-1">
+
+    <div class="shop-manage-tab-1">
+        <a href = "/cafe/manage/getmoney">
+        <button class="shop-sell">
+            매출 관리
+        </button>
+        </a>
+
+        <a href = "#">
+        <button class="shop-menu">
+            메뉴 관리
+        </button>
+        </a>
+
+        <a href = "/cafe/manage/stamp">
+        <button class="shop-stamp">스탬프 관리</button>
+        </a>
+
+        <a href = "/cafe/manage/propensity">
+        <button class="shop-marry">성향 서비스</button>
+        </a>
+
+    </div>
+
+
+    <div class="shop-title-1">
+        카페제목
+    </div>
+    <div class="shop-manage-container">
+        <table class="shop-manage">
+            <thead>
+            <tr class="shop-manage-thead">
+                <th class="thead-title">년월</th>
+                <th class="thead-title">매출액</th>
+                <th class="thead-title">스탬프 사용액</th>
+                <th class="thead-title">포인트 사용액</th>
+                <th class="thead-title">총액</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <th class="thead-content" th:id= "shop-manage-content">2023-01</th>
+                <th class="thead-contnet"th:id= "shop-manage-content">1,000,000</th>
+                <th class="thead-content" th:id= "shop-manage-content">56,000</th>
+                <th class="thead-content" th:id= "shop-manage-content">40,000</th>
+                <th class="thead-content" th:id= "shop-manage-content">5,000,000</th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

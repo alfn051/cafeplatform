@@ -1,0 +1,76 @@
+.customer-myPage-3 {
+    width: 1080px;
+    height: 720px;
+    position: relative;
+}
+
+.tab-3 {
+    width: 150px;
+    height: 250px;
+    /* border: 1px solid #000000; */
+    position: absolute;
+    top: 150px;
+    left: 50px;
+}
+
+.myinfo-3 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    color: #000000;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.order-info-3 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+.stamp-info-3 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.cafe-info-3 {
+    width: 112px;
+    height: 33px;
+    background-color: #ae57f3;
+    border: 1px solid #dddddd;
+    color: #ffffff;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.my-attend-3 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.follwing-review-3 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
