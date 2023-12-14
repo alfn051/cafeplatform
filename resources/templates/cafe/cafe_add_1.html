@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div data-include-path="../Navbar/index.html"></div>
+<div th:include="/common/navbar"></div>
  
 <div class="enroll">
     <div class="enroll-title">
@@ -35,8 +35,10 @@
         <input type = "text" id = "box" class = "enroll-input-6" value = "" placeholder="기본주소" />
         <input type = "text" id = "box" class = "enroll-input-7" value = "" placeholder="상세주소" />
         <input type = "text" id = "box" class = "enroll-input-8" value = "" placeholder="카페 소개" />
+        <a href = "/cafe/add/2">
 
         <button type = "button" class = "next-button">다음</button>
+        </a>
     </div>
 
 </div>

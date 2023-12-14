@@ -1,0 +1,417 @@
+/* 카페 상세페이지(메인) */
+.cafeInfo{
+position: relative;
+width: 1080px;
+height: 720px;
+
+background: #FFFFFF;
+}
+
+/* Elevation 5 */
+.cafeInfo-container{
+position: absolute;
+box-sizing: border-box;
+
+position: absolute;
+width: 896px;
+height: 627px;
+left: 92px;
+top: 56px;
+
+background: #FFFFFF;
+border: 1px solid #DDDDDD;
+border-radius: 5px;
+}
+
+
+/* 머시기카페 */
+.cafeTitle{
+position: absolute;
+width: 113px;
+height: 16px;
+left: 478px;
+top: 115px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 24px;
+line-height: 16px;
+/* identical to box height, or 67% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.5px;
+
+color: #000000;
+}
+
+/* image 60 */
+.star-icon-1{
+position: absolute;
+width: 29.53px;
+height: 34px;
+left: 488px;
+top: 169px;
+
+}
+
+/* image 61 */
+.star-icon-2{
+position: absolute;
+width: 29.53px;
+height: 34px;
+left: 458px;
+top: 169px;
+
+}
+
+/* image 62 */
+.star-icon-3{
+position: absolute;
+width: 29.53px;
+height: 34px;
+left: 518px;
+top: 169px;
+
+}
+
+/* image 63 */
+.star-icon-4{
+position: absolute;
+width: 29.53px;
+height: 34px;
+left: 550px;
+top: 169px;
+
+}
+
+/* image 59 */
+.star-black-icon-5{
+position: absolute;
+width: 31.45px;
+height: 34px;
+left: 580px;
+top: 169px;
+
+}
+
+/* 4 */
+.cafeRating{
+position: absolute;
+width: 14px;
+height: 16px;
+left: 616px;
+top: 156px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 24px;
+line-height: 16px;
+/* identical to box height, or 67% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.5px;
+
+color: #000000;
+}
+
+
+/* 최근리뷰 12 */
+.review-history{
+position: absolute;
+width: 64px;
+height: 16px;
+left: 458px;
+top: 204px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.5px;
+
+color: #828181;
+}
+
+
+/* 최소 주문 당 스탬프 12,000원 */
+.orderStamp{
+position: absolute;
+width: 156px;
+height: 16px;
+left: 458px;
+top: 230px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 12px;
+line-height: 16px;
+/* identical to box height, or 133% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.5px;
+
+color: #828181;
+}
+
+
+/* Line 1 */
+.line1{
+position: absolute;
+width: 869px;
+height: 0px;
+left: 112px;
+top: 269px;
+
+border: 1px solid #DDDDDD;
+transform: rotate(0.07deg);
+}
+
+/* Line 2 */
+.line2{
+position: absolute;
+width: 560px;
+height: 0px;
+left: 255px;
+top: 336px;
+
+border: 1px solid #DDDDDD;
+}
+
+/* 주소 : 부산광역시 사상구 주례로 51 */
+.addressContent{
+position: absolute;
+width: 199px;
+height: 16px;
+left: 119px;
+top: 275px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 13px;
+line-height: 16px;
+/* identical to box height, or 123% */
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.5px;
+
+color: #A2A2A2;
+}
+
+
+/* Rectangle 8 */
+.menu-tab{
+box-sizing: border-box;
+position: absolute;
+width: 90px;
+height: 18px;
+left: 360px;
+top: 313px;
+background: #FFFFFF;
+border: 1px solid #DDDDDD;
+border-radius: 1px;
+/* 메뉴 */
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 7px;
+/* identical to box height, or 343% */
+align-items: center;
+letter-spacing: 0.5px;
+color: #000000;
+}
+
+
+/* Rectangle 9 */
+.review-tab{
+box-sizing: border-box;
+
+position: absolute;
+width: 90px;
+height: 18px;
+left: 459px;
+top: 313px;
+
+background: #FFFFFF;
+border: 1px solid #DDDDDD;
+border-radius: 1px;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 7px;
+align-items: center;
+letter-spacing: 0.5px;
+
+color: #000000;
+}
+
+/* Rectangle 12 */
+.main-tab{
+position: absolute;
+width: 90px;
+height: 18px;
+left: 254px;
+top: 313px;
+border: #AE57F3;
+
+background: #AE57F3;
+border-radius: 1px;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 7px;
+/* identical to box height, or 343% */
+align-items: center;
+letter-spacing: 0.5px;
+
+color: #FFFFFF;
+
+}
+
+/* Rectangle 10 */
+.stamp-tab{
+box-sizing: border-box;
+
+position: absolute;
+width: 90px;
+height: 18px;
+left: 559px;
+top: 313px;
+
+background: #FFFFFF;
+border: 1px solid #DDDDDD;
+border-radius: 1px;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 7px;
+/* identical to box height, or 343% */
+align-items: center;
+letter-spacing: 0.5px;
+
+color: #000000;
+}
+
+
+/* Rectangle 11 */
+.orderhistory-tab{
+box-sizing: border-box;
+
+position: absolute;
+width: 90px;
+height: 18px;
+left: 655px;
+top: 313px;
+
+background: #FFFFFF;
+border: 1px solid #DDDDDD;
+border-radius: 1px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 7px;
+/* identical to box height, or 343% */
+align-items: center;
+letter-spacing: 0.5px;
+
+color: #000000
+}
+
+/* Rectangle 13 */
+.customer-enroll-button{
+box-sizing: border-box;
+
+position: absolute;
+width: 90px;
+height: 18px;
+left: 538px;
+top: 215px;
+
+background: #FFFFFF;
+border: 0.4px solid #8255CB;
+border-radius: 4px;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 300;
+font-size: 7px;
+/* identical to box height, or 343% */
+align-items: center;
+letter-spacing: 0.5px;
+
+color: #000000;
+}
+
+
+/* image 79 */
+.cafeImage-1{
+position: absolute;
+width: 160px;
+height: 100.63px;
+left: 267px;
+top: 358px;
+
+background: url(image.png);
+border-radius: 4px;
+}
+
+/* image 80 */
+.cafeImage-2{
+position: absolute;
+width: 160px;
+height: 100px;
+left: 454px;
+top: 357px;
+
+background: url(image.png);
+border-radius: 4px;
+}
+
+/* image 81 */
+.cafeImage-3{
+position: absolute;
+width: 160px;
+height: 100px;
+left: 637px;
+top: 356px;
+
+background: url(image.png);
+border-radius: 4px;
+}
+
+/* Section → Article → cp_information_img01.jpg */
+
+.cafeImage-4{
+position: absolute;
+height: 186px;
+left: 292px;
+right: 506px;
+top: 477px;
+
+background: url(.jpg);
+}
+
+/* image 104 */
+.cafeMainImage{
+position: absolute;
+width: 180px;
+height: 100px;
+left: 255px;
+top: 113px;
+
+background: url(image.png);
+border-radius: 7px;
+}
+

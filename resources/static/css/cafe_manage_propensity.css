@@ -1,0 +1,126 @@
+.shop-manage-wrap-3 {
+    width: 1080px;
+    height: 720px;
+    position: relative;
+}
+
+.shop-manage-tab-3 {
+    width: 150px;
+    height: 250px;
+    position: absolute;
+    top: 150px;
+    left: 50px;
+}
+
+.shop-sell-3 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    color: #000000;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.shop-menu-3 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+.shop-stamp-3 {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    color: #000000;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+.shop-marry-3 {
+    width: 112px;
+    height: 33px;
+    background-color: #ae57f3;
+    border: 1px solid #dddddd;
+    color: #ffffff;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+.marry-manage-container {
+    width: 810px;
+    height: 429px;
+    position: absolute;
+    border: 1px solid #ccc2dc;
+    border-radius: 16px;
+    box-shadow: rgb(0 0 0 / 30%) 0px 1px 3px 0px;
+    top: 160px;
+    left: 240px;
+}
+.attract {
+    width: 58px;
+    height: 23px;
+    background-color: #5096e8;
+    border-radius: 50px;
+    position: absolute;
+    box-shadow: rgb(0 0 0 /25%) 0px 1px 4px 0px;
+    left: 370px;
+    top: 70px;
+    font-size: 9px;
+    font-weight: bold;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.attract-title {
+    font-size: 29px;
+    font-weight: bold;
+    color: #000000;
+    position: absolute;
+    top: 100px;
+    left: 300px;
+}
+.attract-content {
+    height: 50px;
+    position: absolute;
+    align-items: center;
+    display: flex;
+    font-size: 15px;
+    font-weight: bold;
+    color: #000000;
+    border-top: 1px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    top: 150px;
+    left: 260px;
+}
+
+.attract-content-2 {
+    position: absolute;
+    font-size: 12px;
+    font-weight: bold;
+    color: #838383;
+    opacity: 0.53;
+    top: 210px;
+    left: 290px;
+}
+.register {
+    position: absolute;
+    background-color: #9a82db;
+    color: #ffffff;
+    font-size: 9px;
+    font-weight: normal;
+    border-radius: 4px;
+    border: none;
+    box-shadow: rgb(0 0 0 / 25%) 0px 1px 4px 0px;
+    left: 375px;
+    top: 320px;
+}
