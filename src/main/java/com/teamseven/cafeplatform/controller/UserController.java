@@ -1,24 +1,37 @@
 package com.teamseven.cafeplatform.controller;
 
+import com.teamseven.cafeplatform.domain.cafe.entity.Cafe;
+import com.teamseven.cafeplatform.domain.cafe.repository.CafeRepository;
+import com.teamseven.cafeplatform.domain.cafe.service.CafeService;
+import com.teamseven.cafeplatform.domain.user.dto.UserJoinDTO;
 import com.teamseven.cafeplatform.domain.user.dto.UserLoginDTO;
 import com.teamseven.cafeplatform.domain.user.entity.User;
 import com.teamseven.cafeplatform.domain.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/user")
 public class UserController {
 
     private final UserService userService;
+
+    private final CafeService cafeService;
+
+    private final CafeRepository cafeRepository;
 
     @GetMapping("/signin")
     public String signInPage() {
@@ -28,11 +41,11 @@ public class UserController {
 
     @PostMapping("/signin")
     public String login(@ModelAttribute UserLoginDTO dto, HttpServletRequest httpServletRequest, Model model) {
+        System.out.println("signin:"+dto);
         User user = userService.login(dto);
         if (user == null) {
             return "user/signin";
         }
-
         httpServletRequest.getSession().invalidate();
         HttpSession session = httpServletRequest.getSession(true);
         session.setAttribute("loginUser", user);
@@ -97,11 +110,18 @@ public class UserController {
      */
 
     @GetMapping("/mypage/1")
-    public String mypageOne(Model model){
+    public String mypageOne(Model model, @SessionAttribute(name = "loginUser" , required = false) User loginUser){
+
+        model.addAttribute("loginUser", loginUser);
+
+        System.out.println(loginUser);
+        User userInfo = userService.getUserByLoginId(loginUser.getLoginId());
+        model.addAttribute("userInfo", loginUser);
+//        System.out.println(userInfo);
+
+
         return "user/mypage_one";
-
     }
-
 
     @GetMapping("/mypage/2")
     public String mypageTwo(Model model){
@@ -109,12 +129,20 @@ public class UserController {
     }
 
     @GetMapping("/mypage/3")
-    public String mypageThree(Model model){
+    public String mypageThree(Model model, @SessionAttribute(name = "loginUser", required = false) User loginUser){
+
+        List<Cafe> cafeList = cafeRepository.findByOwnerId(loginUser.getId());
+        System.out.println("!!!"+cafeList);
+
+
+        model.addAttribute("loginUser", loginUser);
+
         return "user/mypage_three";
     }
 
     @GetMapping("/mypage/4")
-    public String mypageFour(Model model){
+    public String mypageFour(Model model)
+    {
         return "user/mypage_four";
     }
 
@@ -122,5 +150,21 @@ public class UserController {
     public String mypageFive(Model model){
         return "user/mypage_stamp_get";
     }
+
+    /**
+     * 마이페이지
+     * read / create only
+     */
+
+
+//    @PostMapping("/mypage/1")
+//    public String mypageOne(@RequestParam HashMap<String, Object> data){
+//        System.out.println("!!!"+ data);
+//
+//        return "redirect:/";
+//
+//    }
+
+
 
 }
