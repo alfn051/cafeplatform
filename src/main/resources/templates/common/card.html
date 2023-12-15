@@ -8,69 +8,26 @@
 
 <body>
 
-<div class="wrap">
+<div th:if = "${cafeList!=null}" class="wrap" th:each="cafe: ${cafeList}">
   <div class="card">
 
-    <div class="image">
+    <div class="image" href = "#">
     </div>
 
-    <div class="title">
-      <h1>카페1</h1>
+    <div>
+      <h1 class="title" th:text="${cafe.name}"></h1>
     </div>
 
     <div class="address">
-      <p>부산광역시 주례로 51 794-31</p>
+      <p th:text="${cafe.baseAddress}">부산광역시 주례로 51 794-31</p>
     </div>
 
   </div>
 
-  <div class="card">
-    <div class="image">
 
     </div>
 
-    <div class="title">
-      <h1>카페1</h1>
-    </div>
-    <div class="address">
-      <p>부산광역시 주례로 51 794-31</p>
-    </div>
   </div>
-
-  <div class="card">
-    <div class="image"></div>
-    <div class="title">
-      <h1>카페1</h1>
-    </div>
-
-
-    <div class="address">
-      <p>부산광역시 주례로 51 794-31</p>
-    </div>
-  </div>
-
-
-  <div class="card">
-    <div class="image"></div>
-    <div class="title">
-      <h1>카페1</h1>
-    </div>
-    <div class="address">
-      <p>부산광역시 주례로 51 794-31</p>
-    </div>
-  </div>
-
-
-  <div class="card">
-    <div class="image"></div>
-    <div class="title">
-      <h1>카페1</h1>
-    </div>
-    <div class="address">
-      <p>부산광역시 주례로 51 794-31</p>
-    </div>
-  </div>
-
 </div>
 
 </body>

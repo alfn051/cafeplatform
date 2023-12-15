@@ -1,570 +1,131 @@
-.myInfo{
-    position: relative;
+.customer-myPage-1 {
     width: 1080px;
     height: 720px;
-    background: #FFFFFF;
+    position: relative;
 }
 
-.myInfo-container{
-    box-sizing: border-box;
+.tab-1 {
+    width: 150px;
+    height: 250px;
+    /* border: 1px solid #000000; */
     position: absolute;
-    width: 594px;
-    height: 350px;
-    left: 187px;
-    top: 249px;
-    background: #FFFFFF;
-    border: 1px solid #CCC2DC;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-    border-radius: 16px;
+    top: 150px;
+    left: 50px;
 }
 
-.nicknamevalue{
+.myinfo {
+    width: 112px;
+    height: 33px;
+    background-color: #ae57f3;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    color: #ffffff;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.order-info {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+.stamp-info {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.cafe-info {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.my-attend {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+.follwing-review {
+    width: 112px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    color: #000000;
+    border-radius: 7px;
+    font-weight: lighter;
+    font-size: 12px;
+}
+
+#tab-button {
+    margin-top: 5px;
+}
+
+.customer-mypage-container-1 {
     position: absolute;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
+    left: 320px;
+    top: 100px;
+    width: 660px;
+    height: 490px;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+}
+
+.nickname{
     font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px; /* 66.667% */
-    letter-spacing: 0.5px;
-    left: 56px;
-    top: 51px;
-}
-
-.enroll-date{
+    font-weight: normal;
     position: absolute;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
+    left: 60px;
+    top: 40px;
+    color: black;
+}
+.register-date{
+    position: absolute;
     font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px; /* 320% */
-    letter-spacing: 0.5px;
-    left: 127px;
-    top: 76px;
+    font-weight: normal;
+    color: black;
+    top: 60px;
+    left: 140px;
 }
-
-.customer-id-1{
+.profile-image{
     position: absolute;
-    left: 243px;
-    top: 79px;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #dddddd;
+    left: 60px;
+    top: 80px;
+}
+.image-change{
+    position: absolute;
     font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px; /* 320% */
-    letter-spacing: 0.5px;
+    font-weight: normal;
+    top: 140px;
+    left: 70px;
 }
 
-.customer-pwd{
+.right_content{
     position: absolute;
-    left: 243px;
-    top: 99px;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px; /* 320% */
-    letter-spacing: 0.5px;
-}
-
-.customer-pwdCheck{
-    position: absolute;
-    right: 189px;
-    top: 99px;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-}
-
-.customer-email{
-    position: absolute;
-    right: 195px;
-    top: 119px;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-}
-
-
-.customer-name-1{
-    position: absolute;
-    left: 243px;
-    top: 119px;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px; /* 320% */
-    letter-spacing: 0.5px;
-}
-
-.customer-phone{
-    position: absolute;
-    left: 243px;
-    top: 139px;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px; /* 320% */
-    letter-spacing: 0.5px;
-}
-
-
-.customer-birth-1{
-    position: absolute;
-    left: 243px;
-    top: 159px;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px; /* 320% */
-    letter-spacing: 0.5px;
-}
-
-.customer-sex-1{
-    position: absolute;
-    left: 243px;
-    top: 179px;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px; /* 320% */
-    letter-spacing: 0.5px;
-}
-
-.customer-id-box{
-    position: absolute;
-    width: 90px;
-    height: 16px;
-    flex-shrink: 0;
-    left: 276px;
-    top: 78px;
-    border-radius: 16px;
-    border: 1px solid #CCC2DC;
-    background: #FFF;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.30);
-}
-
-.customer-pwd-box{
-    position: absolute;
-
-    width: 90px;
-    height: 16px;
-    flex-shrink: 0;
-    left: 276px;
-    top: 98px;
-    border-radius: 16px;
-    border: 1px solid #CCC2DC;
-    background: #FFF;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.30);
-}
-
-.customer-pwdCheck-box{
-    position: absolute;
-
-    width: 90px;
-    height: 16px;
-    flex-shrink: 0;
-    left: 410px;
-    top: 98px;
-    border-radius: 16px;
-    border: 1px solid #CCC2DC;
-    background: #FFF;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.30);
-}
-
-.customer-email-box{
-    position: absolute;
-
-    width: 90px;
-    height: 16px;
-    flex-shrink: 0;
-    left: 410px;
-    top: 118px;
-    border-radius: 16px;
-    border: 1px solid #CCC2DC;
-    background: #FFF;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.30);
-}
-
-.customer-name-box{
-    position: absolute;
-
-    width: 90px;
-    height: 16px;
-    flex-shrink: 0;
-    left: 276px;
-    top: 118px;
-    border-radius: 16px;
-    border: 1px solid #CCC2DC;
-    background: #FFF;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.30);
-}
-
-.customer-phone-box{
-    position: absolute;
-    width: 90px;
-    height: 16px;
-    flex-shrink: 0;
-    left: 276px;
-    top: 138px;
-    border-radius: 16px;
-    border: 1px solid #CCC2DC;
-    background: #FFF;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.30);
-}
-
-.customer-birth-box{
-    position: absolute;
-    width: 90px;
-    height: 16px;
-    flex-shrink: 0;
-    left: 276px;
-    top: 158px;
-    border-radius: 16px;
-    border: 1px solid #CCC2DC;
-    background: #FFF;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.30);
-}
-
-.customer-sex-box{
-    position: absolute;
-    width: 90px;
-    height: 16px;
-    flex-shrink: 0;
-    left: 276px;
-    top: 178px;
-    border-radius: 16px;
-    border: 1px solid #CCC2DC;
-    background: #FFF;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.30);
-}
-
-.tendency{
-    position: absolute;
-    top: 213px;
-    left: 255px;
-    color: #000;
-
-    font-family: Roboto;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-}
-
-.sight{
-    position: absolute;
-    top: 223px;
-    left: 265px;
-    color: #000;
-
-    font-family: Inter;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-}
-
-.atmosphere{
-    position: absolute;
-    top: 223px;
-    left: 305px;
-    color: #000;
-
-    font-family: Inter;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-}
-
-.interior{
-    position: absolute;
-    top: 223px;
-    left: 345px;
-    color: #000;
-
-    font-family: Inter;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-}
-
-.category-atomosphere{
-    position: absolute;
-    left: 251px;
-    top: 231px;
-    width: 40px;
-    height: 12.623px;
-    flex-shrink: 0;
-    color: #000;
-
-    font-family: Inter;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-}
-
-.category-interior{
-    position: absolute;
-    left: 293px;
-    top: 231px;
-    width: 40px;
-    height: 12.623px;
-    flex-shrink: 0;
-    color: #000;
-
-    font-family: Inter;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-}
-
-.category-sight{
-    position: absolute;
-    left: 335px;
-    top: 231px;
-    width: 40px;
-    height: 12.623px;
-    flex-shrink: 0;
-    color: #000;
-
-    font-family: Inter;
-    font-size: 5px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-}
-
-.save-button{
-    position: absolute;
-    left: 258px;
-    top: 265px;
-    width: 30px;
-    height: 10px;
-    background: #9A82DB;
-    color: #FFF;
-    font-family: Roboto;
-    font-size: 5px;
-}
-
-.myInfo-button-1{
-    position: absolute;
-    width: 112px;
-    height: 33px;
-    left: 45px;
-    top: 256px;
-    position: absolute;
-    background-color: #AE57F3;
-    border: 1px solid #DDDDDD;
-    border-radius: 7px;
-    color: #FFFFFF;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-}
-
-.orderHistory-button-1{
-    position: absolute;
-    width: 112px;
-    height: 33px;
-    left: 45px;
-    top: 294px;
-    border: 1px solid #DDDDDD;
-    border-radius: 7px;
-    color: #000;
-    background-color: #FFFFFF;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-}
-
-.stamp-button-1{
-    box-sizing: border-box;
-    position: absolute;
-    width: 112px;
-    height: 33px;
-    left: 45px;
-    top: 334px;
-    background-color: #FFFFFF;
-    border: 1px solid #DDDDDD;
-    border-radius: 7px;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-}
-
-.registeringCafe-button-1{
-    box-sizing: border-box;
-    position: absolute;
-    width: 112px;
-    height: 33px;
-    left: 45px;
-    top: 372px;
-    background: #FFFFFF;
-    border: 1px solid #DDDDDD;
-    border-radius: 7px;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-}
-
-.myAttendance-button-1{
-    box-sizing: border-box;
-    position: absolute;
-    width: 112px;
-    height: 33px;
-    left: 45px;
-    top: 412px;
-    background: #FFFFFF;
-    border: 1px solid #DDDDDD;
-    border-radius: 7px;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-}
-
-.followingReview-button-1{
-    box-sizing: border-box;
-    position: absolute;
-    width: 112px;
-    height: 33px;
-    left: 45px;
-    top: 452px;
-    background: #FFFFFF;
-    border: 1px solid #DDDDDD;
-    border-radius: 7px;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-}
-
-.stampCount-button-1{
-    box-sizing: border-box;
-    position: absolute;
-    width: 500;
-    height: 35;
-    background-color: #FFFFFF;
-    border: #FFFFFF;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px; /* 160% */
-    letter-spacing: 0.5px;
-    left: 658px;
-    top: 180px;
-}
-
-.stamp-button-icon-01{
-    width: 17px;
-    height: 17px;
-    flex-shrink: 0;
-}
-
-.myAttendancePoint-button-1{
-    box-sizing: border-box;
-    position: absolute;
-    width: 500;
-    height: 35px;
-    background-color: #FFFFFF;
-    border: #FFFFFF;
-    color: #000;
-    text-align: center;
-    font-family: Roboto;
-    font-size: 10px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 16px;
-    letter-spacing: 0.5px;
-    left: 723px;
-    top: 180px;
-}
-
-.point-icon{
-    width: 17px;
-    height: 17px;
-    flex-shrink: 0;
-}
-
-.stampa-count{
-    color: #000;
-    font-family: Roboto;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 14px;
-    letter-spacing: 0.5px;
-}
-
-.point-amount{
-    color: #000;
-    font-family: Roboto;
-    font-size: 7px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: 14px;
-    letter-spacing: 0.5px;
+    width: 400px;
+    height: 400px;
+    border: 1px solid black;
+    top: 40px;
+    left: 200px;
 }

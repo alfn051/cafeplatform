@@ -8,21 +8,9 @@
 <div th:insert="/common/navbar"></div>
 
 <div class="container">
-    <div>
-        <table>
-            <thead>
-            <tr>
-                <th>#</th> <th>이름</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="cafe : ${cafes}">
-                <td th:text="${cafe.id}"></td>
-                <td th:text="${cafe.name}"></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+
+    <div class="card" th:insert="/common/card" th:each="cafe: ${cafeList}"></div>
+
 
 </div> <!-- /container -->
 

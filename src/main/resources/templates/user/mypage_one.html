@@ -1,77 +1,96 @@
 <!DOCTYPE html>
 
 <head>
-    <link rel = "stylesheet" href = "style.css"/>
     <link rel = "stylesheet" th:href = "@{/css/mypage_one.css}"/>
-
 
 </head>
 <body>
+
+<!-- 고객마이페이지(내정보) -->
+
 <div th:include="/common/navbar"></div>
 
+<div class="customer-myPage-1">
 
-
-<div class="myInfo">
-    <div class="myInfo-container">
-        <p class="nicknamevalue">닉네임</p>
-        <p class="enroll-date">가입일:2023.01.01</p>
-        <p class="customer-id-1">회원 아이디</p>
-        <p class="customer-pwd">비밀번호</p>
-        <p class="customer-pwdCheck">비밀번호 확인</p>
-        <p class="customer-name-1">이름(실명)</p>
-        <p class="customer-email">이메일</p>
-        <p class="customer-phone">휴대전화</p>
-        <p class="customer-birth-1">생년월일</p>
-        <p class="customer-sex-1">성별</p>
-        <input class="customer-id-box"></input>
-        <input class="customer-pwd-box"></input>
-        <input class="customer-name-box"></input>
-        <input class="customer-phone-box"></input>
-        <input class="customer-birth-box"></input>
-        <input class="customer-sex-box"></input>
-        <input type="" class="customer-pwdCheck-box">
-        <input type="text" class="customer-email-box">
-        <p class="tendency">성향 설정</p>
-        <p class="sight">풍경</p>
-        <p class="atmosphere">분위기</p>
-        <p class="interior">인테리어</p>
-        <select class="category-sight">
-            <option value="산">산</option>
-            <option value="바다">바다</option>
-            <option value="도시">도시</option>
-        </select>
-        <select class="category-atomosphere">
-            <option value="산">산</option>
-            <option value="바다">바다</option>
-            <option value="도시">도시</option>
-        </select>
-        <select class="category-interior">
-            <option value="산">산</option>
-            <option value="바다">바다</option>
-            <option value="도시">도시</option>
-        </select>
-        <button class="save-button">저장</button>
+    <div class="tab-1">
+        <button class="myinfo" href = "/user/mypage/1" th:id = "tab-button">내정보</button>
+        <button class="order-info" href = "/user/mypage/2" th:id=  "tab-button">주문 내역 조회</button>
+        <button class="stamp-info" href = "/user/mypage/3" th:id = "tab-button">스탬프</button>
+        <button class="cafe-info" href = "/user/mypage/4" th:id = "tab-button">등록한 카페 조회</button>
+        <button class="my-attend" href = "/user/mypage/5" th:id = "tab-button">나의 출석</button>
+        <button class="follwing-review" href = "/user/mypage/6" th:id = "tab-button">팔로잉 리뷰</button>
     </div>
-    <button type="button" class="myInfo-button-1">내정보</button>
-    <button type="button" class="orderHistory-button-1">주문 내역 조회</button>
-    <button type="button" class="stamp-button-1">스탬프</button>
-    <button type="button" class="registeringCafe-button-1">등록한 카페 조회</button>
-    <button type="button" class="myAttendance-button-1">나의 출석</button>
-    <button type="button" class="followingReview-button-1">팔로잉 리뷰</button>
-    <button type="button" class="stampCount-button-1" >
-        <img th:src="@{/images/stamp.png}"class="stamp-button-icon-01"/>
-        <br/>
-        스탬프 개수>
-        <br/>
-        <p class="stampa-count">~개</p>
-    </button>
-    <button type="button" class="myAttendancePoint-button-1">
-        <img  th:src="@{/images/point.png}" class="point-icon">
-        <br/>
-        출석 포인트>
-        <p class="point-amount">10,000</p>
-    </button>
+
+
+    <form th:action = "@{/user/mypage/1}" th:object="${UserJoinDTO}" method="post">
+
+        <div class="customer-mypage-container-1">
+            <div class="left-content">
+            <div class="nickname">닉네임</div>
+            <div class="register-date" th:text="가입일 ">}</div>
+            <div class="profile-image"></div>
+            <div class="image-change">사진 변경</div>
+        </div>
+
+        <div class="right_content">
+            <div class="customer-name">회원아이디</div>
+            <input type = "text" name= "loginId" class="customer-name-input" th:value = "${userInfo.loginId}"/>
+
+            <div class="customer-password">비밀번호</div>
+            <input type = "text" name = "password" class="customer-password-input" th:value = "${userInfo.password}"/>
+
+
+            <div class="customer-readName" >이름(실명)</div>
+            <input type = "text" name = "name" class="customer-realName-input" th:value = "${userInfo.name}"/>
+
+            <div class="customer-phonenumber">휴대전화</div>
+            <input type = "text" name = "phone" class="customer-phonenumber-input" th:value = "${userInfo.phone}"/>
+
+
+            <div class="customer-date">생년월일</div>
+            <input type = "text" name = "birthday" class="customer-date-input"  th:value = "${userInfo.birthday}"/>
+
+
+            <div class="customer-sex">성별</div>
+            <input type = "text" name = "gender" class="customer-sex-input" th:value="${userInfo.gender}"/>
+
+            <div class="customer-paswword-check">비밀번호 확인</div>
+            <input type = "text" name = "checkpassword" class="customer-password-check-input"  th:value="${userInfo.password}"/>
+
+            <div class="customer-name">이메일</div>
+            <input type = "text" name = "email"  class="customer-email-input" th:value = "${userInfo.email}"/>
+
+            <div class="propensity-setting-name">성향 설정</div>
+            <div class="mountain">풍경</div>
+
+            <select class="propensity-1">
+                <option>산</option>
+<!--                <option>바다</option>-->
+<!--                <option>도시</option>-->
+            </select>
+
+            <select class="propensity-2">
+                <option>고요함</option>
+<!--                <option>잔잔한 음악</option>-->
+<!--                <option>시끌벅적</option>-->
+            </select>
+
+            <select class="propensity-3">
+                <option>모던</option>
+<!--                <option>원목</option>-->
+<!--                <option>기타 컨셉</option>-->
+            </select>
+
+            <button type="submit">저장</button>
+        </div>
+
+    </div>
+    </form>
+
+
 </div>
+
+
 
 
 </body>

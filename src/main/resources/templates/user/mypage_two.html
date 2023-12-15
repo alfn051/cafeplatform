@@ -9,16 +9,17 @@
 
 <div th:insert="/common/navbar"></div>
 
+<!--주문내역 조회-->
 
 <div class="customer-myPage-3">
 
-    <div class="tab-3">
-        <button class="myinfo-3" th:id = "tab-button">내정보</button>
-        <button class="order-info-3" th:id=  "tab-button">주문 내역 조회</button>
-        <button class="stamp-info-3" th:id = "tab-button">스탬프</button>
-        <button class="cafe-info-3" th:id = "tab-button">등록한 카페 조회</button>
-        <button class="my-attend-3" th:id = "tab-button">나의 출석</button>
-        <button class="follwing-review-3" th:id = "tab-button">팔로잉 리뷰</button>
+    <div class="tab-1">
+        <button class="myinfo-1" href = "/user/mypage/1" th:id = "tab-button">내정보</button>
+        <button class="order-info-1" href = "/user/mypage/2" th:id=  "tab-button">주문 내역 조회</button>
+        <button class="stamp-info-1" href = "/user/mypage/3" th:id = "tab-button">스탬프</button>
+        <button class="cafe-info-1" href = "/user/mypage/4" th:id = "tab-button">등록한 카페 조회</button>
+        <button class="my-attend-1" href = "/user/mypage/5" th:id = "tab-button">나의 출석</button>
+        <button class="follwing-review-1" href = "/user/mypage/6" th:id = "tab-button">팔로잉 리뷰</button>
     </div>
 
     <div class="cafe-select">
