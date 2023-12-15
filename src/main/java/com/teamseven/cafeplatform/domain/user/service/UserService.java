@@ -45,10 +45,12 @@ public class UserService {
     public User join(UserJoinDTO dto) {
         if(checkLoginIdDuplicate(dto.getLoginId())) return null;
         User user = userRepository.save(dto.toEntity());
-        try {
-            user.setPhoto(fileService.storePhoto(dto.getPhoto(), Classify.USER).orElseThrow());
-        } catch (IOException e) {
-            log.error("유저등록시 사진저장 실패: "+ e.getMessage());
+        if (dto.getPhoto() != null) {
+            try {
+                user.setPhoto(fileService.storePhoto(dto.getPhoto(), Classify.USER).orElseThrow());
+            } catch (IOException e) {
+                log.error("유저등록시 사진저장 실패: "+ e.getMessage());
+            }
         }
         return userRepository.save(user);
     }

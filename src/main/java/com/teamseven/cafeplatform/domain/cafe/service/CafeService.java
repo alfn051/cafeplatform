@@ -18,6 +18,9 @@ import com.teamseven.cafeplatform.domain.propensity.dto.CafePropensityDTO;
 import com.teamseven.cafeplatform.domain.propensity.entity.CafePropensity;
 import com.teamseven.cafeplatform.domain.propensity.entity.UserPropensity;
 import com.teamseven.cafeplatform.domain.propensity.service.PropensityService;
+import com.teamseven.cafeplatform.domain.stamp.dto.StampSettingDTO;
+import com.teamseven.cafeplatform.domain.stamp.entity.StampSetting;
+import com.teamseven.cafeplatform.domain.stamp.service.StampService;
 import com.teamseven.cafeplatform.domain.user.entity.User;
 import com.teamseven.cafeplatform.domain.user.repository.UserRepository;
 import com.teamseven.cafeplatform.domain.user.service.UserService;
@@ -48,6 +51,7 @@ public class CafeService {
     private final MenuService menuService;
     private final PropensityService propensityService;
     private final KakaoLocalApiHelper kakaoLocalApiHelper;
+    private final StampService stampService;
 
     @Value("${default_color}")
     private String defaultColor;
@@ -68,7 +72,7 @@ public class CafeService {
             direction = DirectionDTO.builder().longitude(129.07506783124393).latitude(35.17973748292069).build();
         }
 
-        Cafe cafe = cafeRepository.save(dto.toEntity(owner, defaultColor, defaultStampImage, direction));
+        Cafe cafe = cafeRepository.save(dto.toEntity(owner, defaultColor, defaultStampImage, direction, CafeState.PREPARING));
         //제휴 첫등록 2개월 무료 등록
         partnershipRepository.save(Partnership.builder()
                 .startDate(LocalDate.now())
@@ -79,7 +83,7 @@ public class CafeService {
             try { //사진 파일 저장
                 fileService.storeCafePhotos(dto.getPhotoList(), cafe);
             } catch (IOException e) {
-                log.error("카페 등록 사진 파일 저장 실패"+e.getMessage());
+                log.error("카페 등록 사진 파일 저장 실패" + e.getMessage());
             }
         }
         return cafe;
@@ -102,6 +106,7 @@ public class CafeService {
         Cafe cafe = optionalCafe.get();
         return propensityService.setCafePropensity(dto, cafe);
     }
+
 
     @Transactional
     public Menu addMenu(MenuCreateDTO dto) {

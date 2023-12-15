@@ -1,6 +1,7 @@
 package com.teamseven.cafeplatform.domain.cafe.dto;
 
 import com.teamseven.cafeplatform.config.DirectionDTO;
+import com.teamseven.cafeplatform.domain.cafe.common.CafeState;
 import com.teamseven.cafeplatform.domain.cafe.common.StampImage;
 import com.teamseven.cafeplatform.domain.cafe.entity.Cafe;
 import com.teamseven.cafeplatform.domain.cafe.entity.Partnership;
@@ -30,7 +31,7 @@ public class CafeRegistrationDTO {
         return this;
     }
 
-    public Cafe toEntity(User owner, String color, StampImage stampImage, DirectionDTO direction) {
+    public Cafe toEntity(User owner, String color, StampImage stampImage, DirectionDTO direction, CafeState state) {
         return Cafe.builder()
                 .name(name)
                 .phone(phone)
@@ -47,6 +48,7 @@ public class CafeRegistrationDTO {
                 .longitude(direction.getLongitude())
                 .latitude(direction.getLatitude())
                 .owner(owner)
+                .state(state)
                 .build();
 
     }

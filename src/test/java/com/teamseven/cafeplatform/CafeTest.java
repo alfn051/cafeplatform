@@ -2,6 +2,7 @@ package com.teamseven.cafeplatform;
 
 import com.teamseven.cafeplatform.config.DirectionDTO;
 import com.teamseven.cafeplatform.config.KakaoLocalApiHelper;
+import com.teamseven.cafeplatform.domain.cafe.common.CafeState;
 import com.teamseven.cafeplatform.domain.cafe.common.StampImage;
 import com.teamseven.cafeplatform.domain.cafe.dto.CafeRegistrationDTO;
 import com.teamseven.cafeplatform.domain.cafe.entity.Cafe;
@@ -55,7 +56,7 @@ public class CafeTest {
         } catch (Exception e) {
             direction = DirectionDTO.builder().longitude(129.07506783124393).latitude(35.17973748292069).build();
         }
-        Cafe cafe = dto.toEntity(user, "#8a4500", StampImage.A, direction);
+        Cafe cafe = dto.toEntity(user, "#8a4500", StampImage.A, direction, CafeState.PREPARING);
         Cafe testCafe = cafeService.registerCafe(dto);
 
         Assertions.assertThat(testCafe).isEqualTo(cafe);
