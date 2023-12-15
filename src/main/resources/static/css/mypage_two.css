@@ -26,9 +26,9 @@
 .order-info-3 {
     width: 112px;
     height: 33px;
-    background-color: #ffffff;
+    background-color: #ae57f3;
     border: 1px solid #dddddd;
-    color: #000000;
+    color: #ffffff;
     border-radius: 7px;
     font-weight: lighter;
     font-size: 12px;
@@ -47,9 +47,9 @@
 .cafe-info-3 {
     width: 112px;
     height: 33px;
-    background-color: #ae57f3;
+    background-color: #ffffff;
     border: 1px solid #dddddd;
-    color: #ffffff;
+    color: #000000;
     border-radius: 7px;
     font-weight: lighter;
     font-size: 12px;

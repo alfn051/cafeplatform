@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<head>
+
+    <link rel = "stylesheet" th:href = "@{/css/mypage_two.css}"/>
+
+</head>
+<body>
+
+<div th:insert="/common/navbar"></div>
+
+
+<div class="customer-myPage-3">
+
+    <div class="tab-3">
+        <button class="myinfo-3" th:id = "tab-button">내정보</button>
+        <button class="order-info-3" th:id=  "tab-button">주문 내역 조회</button>
+        <button class="stamp-info-3" th:id = "tab-button">스탬프</button>
+        <button class="cafe-info-3" th:id = "tab-button">등록한 카페 조회</button>
+        <button class="my-attend-3" th:id = "tab-button">나의 출석</button>
+        <button class="follwing-review-3" th:id = "tab-button">팔로잉 리뷰</button>
+    </div>
+
+    <div class="cafe-select">
+
+    </div>
+</div>
+
+</body>
+</html>
