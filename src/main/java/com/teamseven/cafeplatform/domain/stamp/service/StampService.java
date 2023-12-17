@@ -140,4 +140,12 @@ public class StampService {
     public StampGift getStampGiftById(long id) {
         return stampGiftRepository.findById(id).orElse(null);
     }
+
+    public List<StampGift> getAllStampGiftByUser(Long userId){
+        return stampGiftRepository.findAllByStampBoardCafeMemberUserIdAndUsed(userId, false);
+    }
+
+    public List<StampGift> getAllStampGiftByUserAndCafe(Long userId, Long cafeId) {
+        return stampGiftRepository.findAllByUserAndCafe(userId, cafeId);
+    }
 }

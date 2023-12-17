@@ -144,6 +144,22 @@ public class CafeService {
                     .freeTrial(true)
                     .build();
         }
+        cafe.setPartnerState(true);
+        return partnership;
+    }
+
+    public Partnership checkPartnership(Long cafeId) {
+        Cafe cafe = getCafeById(cafeId);
+        if(cafe == null) return null;
+        Optional<Partnership> optionalPartnership = partnershipRepository.findFirstByCafeOrderByEndDateDesc(cafe);
+        if(optionalPartnership.isEmpty()){
+            cafe.setPartnerState(false);
+            return null;
+        }
+        Partnership partnership = optionalPartnership.get();
+        if(partnership.getEndDate().isBefore(LocalDate.now())){
+            cafe.setPartnerState(false);
+        }
         return partnership;
     }
 

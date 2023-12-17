@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+</head>
+<body>
+<!--헤더 프레그먼트-->
+<div th:insert="~{fragments :: headerFragment}"></div>
+<a th:href="@{/cafe/cafemanagemoney}">월별 매출 조회</a>
+<a th:href="@{/cafe/cafemanagestamp}">스탬프 관리</a>
+<a th:href="@{/cafe/cafemanagepropensity}">성향 관리</a>
+<a th:href="@{/cafe/cafemanagepartner}">성향서비스 제휴</a>
+
+<h2>월별 매출 기록</h2>
+
+<table>
+    <tr>
+        <th>월</th>
+        <th>총 매출</th>
+        <th>스탬프할인금액</th>
+        <th>포이트할인금액</th>
+        <th>총 수익</th>
+    </tr>
+    <tr th:each="montly:${cafe.monthlyRecords}">
+        <td th:text="${montly.month.getMonth()}"></td>
+        <td th:text="${montly.amount}"></td>
+        <td th:text="${montly.stampAmount}"></td>
+        <td th:text="${montly.pointAmount}"></td>
+        <td th:text="${montly.toString()}"></td>
+    </tr>
+</table>
+
+<button type="button" onclick="window.history.back()">이전으로</button>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+</head>
+<body>
+<!--헤더 프레그먼트-->
+<div th:insert="~{fragments :: headerFragment}"></div>
+<a th:href="@{/cafe/cafemanagemoney}">월별 매출 조회</a>
+<a th:href="@{/cafe/cafemanagestamp}">스탬프 관리</a>
+<a th:href="@{/cafe/cafemanagepropensity}">성향 관리</a>
+<a th:href="@{/cafe/cafemanagepartner}">성향서비스 제휴</a>
+
+<h2>스탬프 관리</h2>
+
+<h3>현재 스탬프 설정</h3>
+<ul>
+    <li th:text="|총 스탬프 개수: ${stampSetting.totalStamp.number}개|"></li>
+    <li th:text="|만료기간 단위: ${stampSetting.expiration.display}|"></li>
+    <li th:text="|스탬프 적립 단위: ${stampSetting.criterionAmount}원|"></li>
+    <li th:text="|10개적립 보상: ${stampSetting.giftFirst.name}|"></li>
+    <li th:if="${stampSetting.totalStamp.number==20}" th:text="|20개적립 보상: ${stampSetting.giftSecond.name}|"></li>
+</ul>
+
+<h3>스탬프 설정 변경</h3>
+<form th:action="@{/cafe/cafemanagestamp}" method="post">
+    <ul>
+        <li>
+            총 스탬프 개수 :
+            <select name="totalStamp">
+                <option th:each="totalStamp:${T(com.teamseven.cafeplatform.domain.stamp.common.TotalStamp).values()}"
+                th:value="${totalStamp}"
+                th:text="${totalStamp.display}"></option>
+            </select>
+        </li>
+        <li>
+            만료기간 단위 :
+            <select name="expiration">
+                <option th:each="expiration:${T(com.teamseven.cafeplatform.domain.stamp.common.StampExpiration).values()}"
+                        th:value="${expiration}"
+                        th:text="${expiration.display}"></option>
+            </select>
+        </li>
+        <li>스탬프 적립 단위: <input type="number" name="criterionAmount"></li>
+        <li>
+            10개적립 보상:
+            <select name="giftFirst">
+                <option th:each="menu:${cafe.menus}"
+                        th:value="${menu}"
+                        th:text="${menu.name}"></option>
+            </select>
+        </li>
+        <li>
+            20개적립 보상:
+            <select name="giftSecond">
+                <option th:each="menu:${cafe.menus}"
+                        th:value="${menu}"
+                        th:text="${menu.name}"></option>
+            </select>
+        </li>
+    </ul>
+    <input type="submit" value="스탬프 설정 등록">
+</form>
+
+
+<button type="button" onclick="window.history.back()">이전으로</button>
+
+</body>
+</html>

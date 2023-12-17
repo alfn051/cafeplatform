@@ -2,6 +2,7 @@ package com.teamseven.cafeplatform.domain.order.service;
 
 import com.teamseven.cafeplatform.domain.cafe.entity.Cafe;
 import com.teamseven.cafeplatform.domain.cafe.entity.Menu;
+import com.teamseven.cafeplatform.domain.cafe.entity.MonthlyRecord;
 import com.teamseven.cafeplatform.domain.cafe.repository.CafeRepository;
 import com.teamseven.cafeplatform.domain.cafe.service.CafeService;
 import com.teamseven.cafeplatform.domain.cafe.service.MenuService;
@@ -121,13 +122,25 @@ public class OrderService {
                 order.setStampDiscount(order.getStampDiscount()+orderMenu.getMenu().getPrice());
             }
         });
-        //포인트 차감하는 거 만들거
+        order.getUser().setPoint(order.getUser().getPoint()-order.getPointDiscount());
 
         order.setAmount(order.getTotalPrice() - order.getStampDiscount() - order.getPointDiscount());
         order.setOrderedTime(LocalDateTime.now());
         order.setOrderState(OrderState.ORDERED);
+        stampService.earnStamp(order.getUser().getId(), order.getCafe().getId(), order, (int) (order.getAmount() % stampService.getRecentSetting(order.getCafe().getId()).getCriterionAmount()), false, false);
         cafeService.recordMonthlyRecord(order.getCafe().getId(), order.getTotalPrice(), order.getStampDiscount(), order.getPointDiscount(), order.getAmount()); //월별매출기록
         return orderRepository.save(order);
+    }
+
+    @Transactional
+    public void cancelOrder(Long userId, Long cafeId) {
+        Optional<Order> optionalOrder = orderRepository.findByUserIdAndCafeIdAndOrderState(userId, cafeId, OrderState.PREPARING);
+        if (optionalOrder.isEmpty()) return;
+        orderRepository.delete(optionalOrder.get());
+    }
+
+    public Order getPreparingOrderBtUserAndCafe(Long userId, Long cafeId) {
+        return orderRepository.findByUserIdAndCafeIdAndOrderState(userId, cafeId, OrderState.PREPARING).orElse(null);
     }
 
     public List<Order> getAllOrderByUser(long userId) {

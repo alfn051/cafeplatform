@@ -47,7 +47,7 @@ public class HomeController {
             cafeDisplayDTOList = cafeService.getCafeListByUser(user, DirectionDTO.builder().longitude(129.007282).latitude(35.145730).build());
             recentReviewList = reviewService.getFolloweeRecentReview(user.getId(), 5);
             if(user.getClassification().equals(UserClassification.OWNER)){
-                model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()));
+                model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
             }
         }else {
             cafeDisplayDTOList = cafeService.getAllActiveCafe().stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).fitness(null).distance(null).build()).toList();
@@ -80,7 +80,7 @@ public class HomeController {
             cafeDisplayDTOListProp = cafeService.searchPartnerCafesByUser(user, search, DirectionDTO.builder().longitude(129.007282).latitude(35.145730).build());
             cafeDisplayDTOList = cafeService.searchNormalCafeListByUser(user, search, DirectionDTO.builder().longitude(129.007282).latitude(35.145730).build());
             if(user.getClassification().equals(UserClassification.OWNER)){
-                model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()));
+                model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
             }
         }else {
             cafeDisplayDTOList = cafeService.getAllSearchedCafe(search).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).fitness(null).distance(null).build()).toList();

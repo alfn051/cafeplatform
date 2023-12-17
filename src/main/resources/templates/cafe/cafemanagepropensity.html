@@ -7,14 +7,12 @@
 <body>
 <!--헤더 프레그먼트-->
 <div th:insert="~{fragments :: headerFragment}"></div>
-<a th:href="@{/user/mypage}">내 정보</a>
-<a th:href="@{/user/mypage/propensity}">내 성향</a>
-<a th:href="@{/user/mypage/cafe}">나의 카페들</a>
-<a th:href="@{/user/mypage/stamp}">내 스탬프 판들</a>
-<a th:href="@{/user/mypage/order}">주문내역</a>
-<a th:href="@{/user/mypage/gift}">내 쿠폰</a>
+<a th:href="@{/cafe/cafemanagemoney}">월별 매출 조회</a>
+<a th:href="@{/cafe/cafemanagestamp}">스탬프 관리</a>
+<a th:href="@{/cafe/cafemanagepropensity}">성향 관리</a>
+<a th:href="@{/cafe/cafemanagepartner}">성향서비스 제휴</a>
 
-<h2>내 성향</h2>
+<h2>카페 성향 관리</h2>
 
 <div th:if="${propensity!=null}">
     <ul>
@@ -31,23 +29,23 @@
             <span th:text="|분위기(1:조용 - 10:떠들석): ${propensity.mood}|"></span>
         </li>
     </ul>
-    <span>선호풍경</span>
+    <span>중점풍경</span>
     <ul>
-        <li th:each="sp : ${propensity.getSceneryPreferredList()}">
-            <span th:text="${sp.scenery.display}"></span>
+        <li>
+            <span th:text="${propensity.sceneryType.display}"></span>
         </li>
     </ul>
-    <span>선호메뉴카테고리</span>
+    <span>중점메뉴카테고리</span>
     <ul>
-        <li th:each="cp : ${propensity.getMenuPreferredList()}">
+        <li th:each="cp : ${propensity.menuFocusedList}">
             <span th:text="${cp.category.display}"></span>
         </li>
     </ul>
 </div>
 
 <div th:unless="${propensity!=null}">
-    <form th:action="@{/user/mypage/propensity}" th:method="post">
-        <input name="userId" th:value="${loginUser.id}" hidden="hidden">
+    <form th:action="@{/cafe/mypage/propensity}" th:method="post">
+        <input name="cafeId" th:value="${cafe.id}" hidden="hidden">
         <ul>
             <li>
                 <label for="sceneryImportance">풍경중시도(1~10사이)</label>
@@ -66,27 +64,28 @@
                 <input type="range" name="mood" id="mood" th:value="${propensity.mood}" min="1" max="10">
             </li>
             <li>
-                <label for="sceneryPreferred">선호풍경</label>
-                <select name="sceneryPreferred" id="sceneryPreferred">
+                <label for="sceneryType">중점풍경</label>
+                <select name="sceneryType" id="sceneryType">
                     <option th:each="scenery : ${T(com.teamseven.cafeplatform.domain.propensity.common.Scenery).values()}"
                             th:value="${scenery}"
                             th:text="${scenery.display}"></option>
                 </select>
             </li>
             <li>
-                <label for="menuPreferred">선호메뉴카테고리</label>
-                <select name="menuPreferred" id="menuPreferred">
+                <label for="menuFocused">중점메뉴카테고리</label>
+                <select name="menuFocused" id="menuFocused">
                     <option th:each="category : ${T(com.teamseven.cafeplatform.domain.cafe.common.Category).values()}"
                             th:value="${category}"
                             th:text="${category.display}"></option>
                 </select>
             </li>
         </ul>
-        <input type="submit" value="내 성향 등록하기">
+        <input type="submit" value="카페 성향 등록하기">
     </form>
 </div>
 
-    <button type="button" onclick="window.history.back()">이전으로</button>
+
+<button type="button" onclick="window.history.back()">이전으로</button>
 
 </body>
 </html>

@@ -10,6 +10,7 @@ import com.teamseven.cafeplatform.domain.order.service.OrderService;
 import com.teamseven.cafeplatform.domain.propensity.dto.UserPropensityDTO;
 import com.teamseven.cafeplatform.domain.propensity.service.PropensityService;
 import com.teamseven.cafeplatform.domain.stamp.entity.StampBoard;
+import com.teamseven.cafeplatform.domain.stamp.entity.StampGift;
 import com.teamseven.cafeplatform.domain.stamp.service.StampService;
 import com.teamseven.cafeplatform.domain.user.common.UserClassification;
 import com.teamseven.cafeplatform.domain.user.dto.UserJoinDTO;
@@ -82,7 +83,7 @@ public class UserController {
 
         User user = userService.getUserById(loginUser.getId());
         if(user.getClassification().equals(UserClassification.OWNER)){
-            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()));
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
         }
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
         model.addAttribute("loginUser", user);
@@ -102,7 +103,7 @@ public class UserController {
         model.addAttribute("memberCafeList", memberCafeList);
 
         if(user.getClassification().equals(UserClassification.OWNER)){
-            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()));
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
         }
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
         model.addAttribute("loginUser", user);
@@ -122,7 +123,7 @@ public class UserController {
         model.addAttribute("stampBoards", stampBoards);
 
         if(user.getClassification().equals(UserClassification.OWNER)){
-            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()));
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
         }
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
         model.addAttribute("loginUser", user);
@@ -142,7 +143,7 @@ public class UserController {
         model.addAttribute("orders", orders);
 
         if(user.getClassification().equals(UserClassification.OWNER)){
-            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()));
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
         }
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
         model.addAttribute("loginUser", user);
@@ -161,12 +162,33 @@ public class UserController {
         model.addAttribute("propensity", user.getUserPropensity());
 
         if(user.getClassification().equals(UserClassification.OWNER)){
-            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()));
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
         }
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
         model.addAttribute("loginUser", user);
         model.addAttribute("df", df);
         return "user/mypagepropensity";
+    }
+
+    @GetMapping("/mypage/gift")
+    public String myPageGift(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model) {
+        if (loginUser == null) {
+            return "redirect:/user/login";
+        }
+
+        User user = userService.getUserById(loginUser.getId());
+
+        List<StampGift> gifts = stampService.getAllStampGiftByUser(user.getId());
+
+        model.addAttribute("gifts", gifts);
+
+        if(user.getClassification().equals(UserClassification.OWNER)){
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
+        }
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
+        model.addAttribute("loginUser", user);
+        model.addAttribute("df", df);
+        return "user/mypagegift";
     }
 
     @PostMapping("/mypage/propensity")
@@ -182,7 +204,7 @@ public class UserController {
         propensityService.setUserPropensity(dto, user);
 
         if(user.getClassification().equals(UserClassification.OWNER)){
-            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()));
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
         }
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
         model.addAttribute("loginUser", user);

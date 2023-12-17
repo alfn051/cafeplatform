@@ -29,9 +29,10 @@ public class PropensityService {
     @Transactional
     public CafePropensity setCafePropensity(CafePropensityDTO dto, Cafe cafe) {
         CafePropensity cafePropensity = cafePropensityRepository.save(dto.toEntity(cafe));
-        menuFocusedRepository.saveAll(dto.getMenuFocusedList().stream()
-                .map(category -> dto.toMenuFocused(category, cafePropensity))
-                .collect(Collectors.toList()));
+//        menuFocusedRepository.saveAll(dto.getMenuFocusedList().stream()
+//                .map(category -> dto.toMenuFocused(category, cafePropensity))
+//                .collect(Collectors.toList()));
+        menuFocusedRepository.save(dto.toMenuFocused(dto.getMenuFocused(), cafePropensity));
         return cafePropensity;
     }
 

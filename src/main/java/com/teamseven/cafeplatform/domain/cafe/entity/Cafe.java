@@ -58,6 +58,9 @@ public class Cafe extends BaseEntity {
     @OneToMany(mappedBy = "cafe")
     private List<Menu> menus = new ArrayList<>();
 
+    @OneToMany(mappedBy = "cafe")
+    private List<MonthlyRecord> monthlyRecords = new ArrayList<>();
+
 
     public CafePhoto getFirstPhoto(){
         return this.getCafePhotos().stream().findFirst().orElse(null);
