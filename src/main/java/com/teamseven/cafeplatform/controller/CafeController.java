@@ -60,4 +60,10 @@ public class CafeController {
         return "/cafe/cafe_add_3";
     }
 
+    @GetMapping("/detail")
+    public String cafeDetail(Model model){
+
+
+        return "/cafe/cafeDetail";
+    }
 }

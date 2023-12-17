@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<head>
+    <link rel = "stylesheet" th:href = "@{/css/mypage_three.css}"/>
+
+</head>
+<body>
+
+<div th:include="/common/navbar"></div>
+
+<button class="next-level">></button>
+
+<dis class="customer-mypage-2">
+
+    <div class="reward-tap">
+        <img src="./point.png" class = "point-image-reward" />
+        <p class="attend-point-title">출석 포인트></p>
+        <p class="attend-point-result">~개</p>
+
+        <img src="./stamp.png" class = "stamp-image-reward" />
+        <p class="stamp-count-title">스탬프 개수></p>
+        <p class="stamp-count-result">10,000</p>
+    </div>
+
+    <div class="tab-2">
+        <button class="myinfo-2" href = "/user/mypage/1" th:id = "tab-button">내정보</button>
+        <button class="order-info-2" href = "/user/mypage/2" th:id=  "tab-button">주문 내역 조회</button>
+        <button class="stamp-info-2" href = "/user/mypage/3" th:id = "tab-button">스탬프</button>
+        <button class="cafe-info-2" href = "/user/mypage/4" th:id = "tab-button">등록한 카페 조회</button>
+        <button class="my-attend-2" href = "/user/mypage/5" th:id = "tab-button">나의 출석</button>
+        <button class="follwing-review-2" href = "/user/mypage/6" th:id = "tab-button">팔로잉 리뷰</button>
+    </div>
+
+
+
+    <div th:include="/common/stampFrame"></div>
+
+
+
+
+</dis>
+
+
+
+</body>
+</html>
