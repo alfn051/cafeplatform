@@ -1,6 +1,7 @@
 package com.teamseven.cafeplatform.domain.cafe.service;
 
 import com.teamseven.cafeplatform.domain.cafe.dto.ReviewDTO;
+import com.teamseven.cafeplatform.domain.cafe.dto.ReviewDisplayDTO;
 import com.teamseven.cafeplatform.domain.cafe.dto.ReviewEvaluateDTO;
 import com.teamseven.cafeplatform.domain.cafe.entity.Cafe;
 import com.teamseven.cafeplatform.domain.cafe.entity.Review;
@@ -50,23 +51,23 @@ public class ReviewService {
         return review;
     }
 
-    public List<Review> getAllReviewByCafe(long cafeId) {
+    public List<ReviewDisplayDTO> getAllReviewByCafe(long cafeId) {
         Optional<Cafe> optionalCafe = cafeRepository.findById(cafeId);
         if(optionalCafe.isEmpty()) return null;
         Cafe cafe = optionalCafe.get();
-        return cafe.getOrders().stream().map(Order::getReview).toList();
+        return cafe.getOrders().stream().map(Order::getReview).toList().stream().map(review -> ReviewDisplayDTO.builder().review(review).reviewPhoto(review.getFirstReviewPhoto()).build()).toList();
     }
 
-    public List<Review> getAllReviewByUser(long userId) {
+    public List<ReviewDisplayDTO> getAllReviewByUser(long userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isEmpty()) return null;
         User user = optionalUser.get();
-        return user.getOrders().stream().map(Order::getReview).toList();
+        return user.getOrders().stream().map(Order::getReview).toList().stream().map(review -> ReviewDisplayDTO.builder().review(review).reviewPhoto(review.getFirstReviewPhoto()).build()).toList();
     }
 
-    public List<Review> getFolloweeRecentReview(long userId, int number) {
+    public List<ReviewDisplayDTO> getFolloweeRecentReview(long userId, int number) {
         Pageable pageable =  PageRequest.of(0, number, Sort.by(Sort.Direction.DESC, "createTime"));
-        return reviewRepository.findFolloweeRecentReview(userId, pageable);
+        return reviewRepository.findFolloweeRecentReview(userId, pageable).stream().map(review -> ReviewDisplayDTO.builder().review(review).reviewPhoto(review.getFirstReviewPhoto()).build()).toList();
     }
 
     @Transactional
@@ -77,7 +78,7 @@ public class ReviewService {
         Optional<Review> optionalReview = reviewRepository.findById(dto.getReviewId());
         if (optionalReview.isEmpty()) return null;
         Review review = optionalReview.get();
-        review.setEvaluate(review.getEvaluate()+dto.getEvaluate().getValue());
+        review.setEvaluate(review.getEvaluate()+dto.getEvaluate().getNumber());
         return reviewEvaluateRepository.save(ReviewEvaluate.builder().user(user).review(review).evaluate(dto.getEvaluate()).build());
     }
 }

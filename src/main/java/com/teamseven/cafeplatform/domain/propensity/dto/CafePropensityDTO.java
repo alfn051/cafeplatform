@@ -20,7 +20,7 @@ public class CafePropensityDTO {
     private int interiorImportance;
     private int menuImportance;
     private int mood;
-    private List<Category> menuFocusedList;
+    private Category menuFocused;
 
     public CafePropensity toEntity(Cafe cafe) {
         return CafePropensity.builder()

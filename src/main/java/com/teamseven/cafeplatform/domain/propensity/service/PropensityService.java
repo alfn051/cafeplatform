@@ -29,21 +29,24 @@ public class PropensityService {
     @Transactional
     public CafePropensity setCafePropensity(CafePropensityDTO dto, Cafe cafe) {
         CafePropensity cafePropensity = cafePropensityRepository.save(dto.toEntity(cafe));
-        menuFocusedRepository.saveAll(dto.getMenuFocusedList().stream()
-                .map(category -> dto.toMenuFocused(category, cafePropensity))
-                .collect(Collectors.toList()));
+//        menuFocusedRepository.saveAll(dto.getMenuFocusedList().stream()
+//                .map(category -> dto.toMenuFocused(category, cafePropensity))
+//                .collect(Collectors.toList()));
+        menuFocusedRepository.save(dto.toMenuFocused(dto.getMenuFocused(), cafePropensity));
         return cafePropensity;
     }
 
     @Transactional
     public UserPropensity setUserPropensity(UserPropensityDTO dto, User user) {
         UserPropensity userPropensity = userPropensityRepository.save(dto.toEntity(user));
-        menuPreferredRepository.saveAll(dto.getMenuPreferredList().stream()
-                .map(category -> dto.toMenuPreferred(category, userPropensity))
-                .collect(Collectors.toList()));
-        sceneryPreferredRepository.saveAll(dto.getSceneryPreferredList().stream()
-                .map(scenery -> dto.toSceneryPreferred(scenery, userPropensity))
-                .collect(Collectors.toList()));
+//        menuPreferredRepository.saveAll(dto.getMenuPreferredList().stream()
+//                .map(category -> dto.toMenuPreferred(category, userPropensity))
+//                .collect(Collectors.toList()));
+//        sceneryPreferredRepository.saveAll(dto.getSceneryPreferredList().stream()
+//                .map(scenery -> dto.toSceneryPreferred(scenery, userPropensity))
+//                .collect(Collectors.toList()));
+        menuPreferredRepository.save(dto.toMenuPreferred(dto.getMenuPreferred(), userPropensity));
+        sceneryPreferredRepository.save(dto.toSceneryPreferred(dto.getSceneryPreferred(), userPropensity));
         return userPropensity;
     }
 

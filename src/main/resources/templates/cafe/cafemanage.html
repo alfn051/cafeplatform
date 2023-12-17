@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+</head>
+<body>
+<!--헤더 프레그먼트-->
+<div th:insert="~{fragments :: headerFragment}"></div>
+<a th:href="@{/cafe/cafemanagemoney}">월별 매출 조회</a>
+<a th:href="@{/cafe/cafemanagestamp}">스탬프 관리</a>
+<a th:href="@{/cafe/cafemanagepropensity}">성향 관리</a>
+<a th:href="@{/cafe/cafemanagepartner}">성향서비스 제휴</a>
+
+<button type="button" onclick="window.history.back()">이전으로</button>
+
+</body>
+</html>

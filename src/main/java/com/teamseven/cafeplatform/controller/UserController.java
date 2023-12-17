@@ -1,10 +1,21 @@
 package com.teamseven.cafeplatform.controller;
 
+import com.teamseven.cafeplatform.config.DirectionDTO;
 import com.teamseven.cafeplatform.domain.cafe.entity.Cafe;
+import com.teamseven.cafeplatform.domain.cafe.entity.Review;
 import com.teamseven.cafeplatform.domain.cafe.repository.CafeRepository;
 import com.teamseven.cafeplatform.domain.cafe.service.CafeService;
+import com.teamseven.cafeplatform.domain.order.entity.Order;
+import com.teamseven.cafeplatform.domain.order.service.OrderService;
+import com.teamseven.cafeplatform.domain.propensity.dto.UserPropensityDTO;
+import com.teamseven.cafeplatform.domain.propensity.service.PropensityService;
+import com.teamseven.cafeplatform.domain.stamp.entity.StampBoard;
+import com.teamseven.cafeplatform.domain.stamp.entity.StampGift;
+import com.teamseven.cafeplatform.domain.stamp.service.StampService;
+import com.teamseven.cafeplatform.domain.user.common.UserClassification;
 import com.teamseven.cafeplatform.domain.user.dto.UserJoinDTO;
 import com.teamseven.cafeplatform.domain.user.dto.UserLoginDTO;
+import com.teamseven.cafeplatform.domain.user.entity.CafeMember;
 import com.teamseven.cafeplatform.domain.user.entity.User;
 import com.teamseven.cafeplatform.domain.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -31,20 +42,22 @@ public class UserController {
 
     private final CafeService cafeService;
 
-    private final CafeRepository cafeRepository;
+    private final StampService stampService;
 
-    @GetMapping("/signin")
+    private final OrderService orderService;
+    private final PropensityService propensityService;
+
+    @GetMapping("/login")
     public String signInPage() {
-        return "user/signin";
+        return "user/userLoginForm";
     }
 
 
-    @PostMapping("/signin")
+    @PostMapping("/login")
     public String login(@ModelAttribute UserLoginDTO dto, HttpServletRequest httpServletRequest, Model model) {
-        System.out.println("signin:"+dto);
         User user = userService.login(dto);
         if (user == null) {
-            return "user/signin";
+            return "user/userLoginForm";
         }
         httpServletRequest.getSession().invalidate();
         HttpSession session = httpServletRequest.getSession(true);
@@ -62,16 +75,141 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/info")
-    public String myInfo(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model) {
+    @GetMapping("/mypage")
+    public String myPage(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model) {
         if (loginUser == null) {
             return "redirect:/user/login";
         }
+
         User user = userService.getUserById(loginUser.getId());
+        if(user.getClassification().equals(UserClassification.OWNER)){
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
+        }
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
         model.addAttribute("loginUser", user);
         model.addAttribute("df", df);
         return "user/mypage";
+    }
+
+    @GetMapping("/mypage/cafe")
+    public String myPageCafe(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model) {
+        if (loginUser == null) {
+            return "redirect:/user/login";
+        }
+
+        User user = userService.getUserById(loginUser.getId());
+
+        List<CafeMember> memberCafeList = user.getCafeMembers();
+        model.addAttribute("memberCafeList", memberCafeList);
+
+        if(user.getClassification().equals(UserClassification.OWNER)){
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
+        }
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
+        model.addAttribute("loginUser", user);
+        model.addAttribute("df", df);
+        return "user/mypagecafe";
+    }
+
+    @GetMapping("/mypage/stamp")
+    public String myPageStamp(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model) {
+        if (loginUser == null) {
+            return "redirect:/user/login";
+        }
+
+        User user = userService.getUserById(loginUser.getId());
+
+        List<StampBoard> stampBoards = stampService.getAllUsersStampBoard(user.getId());
+        model.addAttribute("stampBoards", stampBoards);
+
+        if(user.getClassification().equals(UserClassification.OWNER)){
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
+        }
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
+        model.addAttribute("loginUser", user);
+        model.addAttribute("df", df);
+        return "user/mypagestamp";
+    }
+
+    @GetMapping("/mypage/order")
+    public String myPageOrder(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model) {
+        if (loginUser == null) {
+            return "redirect:/user/login";
+        }
+
+        User user = userService.getUserById(loginUser.getId());
+
+        List<Order> orders = orderService.getAllOrderByUser(user.getId());
+        model.addAttribute("orders", orders);
+
+        if(user.getClassification().equals(UserClassification.OWNER)){
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
+        }
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
+        model.addAttribute("loginUser", user);
+        model.addAttribute("df", df);
+        return "user/mypageorder";
+    }
+
+    @GetMapping("/mypage/propensity")
+    public String myPagePropensity(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model) {
+        if (loginUser == null) {
+            return "redirect:/user/login";
+        }
+
+        User user = userService.getUserById(loginUser.getId());
+
+        model.addAttribute("propensity", user.getUserPropensity());
+
+        if(user.getClassification().equals(UserClassification.OWNER)){
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
+        }
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
+        model.addAttribute("loginUser", user);
+        model.addAttribute("df", df);
+        return "user/mypagepropensity";
+    }
+
+    @GetMapping("/mypage/gift")
+    public String myPageGift(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model) {
+        if (loginUser == null) {
+            return "redirect:/user/login";
+        }
+
+        User user = userService.getUserById(loginUser.getId());
+
+        List<StampGift> gifts = stampService.getAllStampGiftByUser(user.getId());
+
+        model.addAttribute("gifts", gifts);
+
+        if(user.getClassification().equals(UserClassification.OWNER)){
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
+        }
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
+        model.addAttribute("loginUser", user);
+        model.addAttribute("df", df);
+        return "user/mypagegift";
+    }
+
+    @PostMapping("/mypage/propensity")
+    public String addUserPropensity(@SessionAttribute(name = "loginUser", required = false) User loginUser, UserPropensityDTO dto, Model model) {
+        if (loginUser == null) {
+            return "redirect:/user/login";
+        }
+
+        User user = userService.getUserById(loginUser.getId());
+
+        model.addAttribute("propensity", user.getUserPropensity());
+
+        propensityService.setUserPropensity(dto, user);
+
+        if(user.getClassification().equals(UserClassification.OWNER)){
+            model.addAttribute("mycafeId", cafeService.getCafeByOwner(user.getId()).getId());
+        }
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
+        model.addAttribute("loginUser", user);
+        model.addAttribute("df", df);
+        return "redirect:/user/mypage/propensity";
     }
 
     /**
@@ -104,58 +242,64 @@ public class UserController {
         return "redirect:"+httpServletRequest.getHeader("Referer"); //이전페이지로 리다이렉트
     }
 
-    /**
-     * 페이지
-     *
-     */
-
-    @GetMapping("/mypage/1")
-    public String mypageOne(Model model, @SessionAttribute(name = "loginUser" , required = false) User loginUser){
-
-        model.addAttribute("loginUser", loginUser);
-
-        System.out.println(loginUser);
-        User userInfo = userService.getUserByLoginId(loginUser.getLoginId());
-        model.addAttribute("userInfo", loginUser);
-//        System.out.println(userInfo);
 
 
-        return "user/mypage_one";
-    }
-
-    @GetMapping("/mypage/2")
-    public String mypageTwo(Model model){
-        return "user/mypage_two";
-    }
-
-    @GetMapping("/mypage/3")
-    public String mypageThree(Model model, @SessionAttribute(name = "loginUser", required = false) User loginUser){
-        //서비스에서 필오한 기능 찾아서 호출하기
-        //List<Cafe> cafeList = cafeRepository.findByOwnerId(loginUser.getId());
-        //System.out.println("!!!"+cafeList);
 
 
-        model.addAttribute("loginUser", loginUser);
-
-        return "user/mypage_three";
-    }
-
-    @GetMapping("/mypage/4")
-    public String mypageFour(Model model)
-    {
-        return "user/mypage_four";
-    }
-
-    @GetMapping("/mypage/5")
-    public String mypageFive(Model model){
-        return "user/mypage_stamp_get";
-    }
 
 
-    /**
-     * 마이페이지
-     * read / create only
-     */
+//    /**
+//     * 페이지
+//     *
+//     */
+
+//    @GetMapping("/mypage/1")
+//    public String mypageOne(Model model, @SessionAttribute(name = "loginUser" , required = false) User loginUser){
+//
+//        model.addAttribute("loginUser", loginUser);
+//
+//        System.out.println(loginUser);
+//        User userInfo = userService.getUserByLoginId(loginUser.getLoginId());
+//        model.addAttribute("userInfo", loginUser);
+////        System.out.println(userInfo);
+//
+//
+//        return "user/mypage_one";
+//    }
+//
+//    @GetMapping("/mypage/2")
+//    public String mypageTwo(Model model){
+//        return "user/mypage_two";
+//    }
+//
+//    @GetMapping("/mypage/3")
+//    public String mypageThree(Model model, @SessionAttribute(name = "loginUser", required = false) User loginUser){
+//        //서비스에서 필오한 기능 찾아서 호출하기
+//        //List<Cafe> cafeList = cafeRepository.findByOwnerId(loginUser.getId());
+//        //System.out.println("!!!"+cafeList);
+//
+//
+//        model.addAttribute("loginUser", loginUser);
+//
+//        return "user/mypage_three";
+//    }
+//
+//    @GetMapping("/mypage/4")
+//    public String mypageFour(Model model)
+//    {
+//        return "user/mypage_four";
+//    }
+//
+//    @GetMapping("/mypage/5")
+//    public String mypageFive(Model model){
+//        return "user/mypage_stamp_get";
+//    }
+//
+//
+//    /**
+//     * 마이페이지
+//     * read / create only
+//     */
 
 
 //    @PostMapping("/mypage/1")

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+</head>
+<body>
+<!--헤더 프레그먼트-->
+<!--<div th:insert="~{fragments :: headerFragment}"></div>-->
+
+<h2 th:text="|${cafe.name} 주문 키오스크|">ㅇㅇㅇ카페 주문 키오스크</h2>
+<a th:href="@{/order/${cafeId}/cart}">장바구니</a>
+<h2>메뉴 담기</h2>
+    <div class="form-group">
+        <table>
+            <tr>
+                <th>사진</th>
+                <th>이름</th>
+                <th>카테고리</th>
+                <th>가격</th>
+                <th></th>
+            </tr>
+            <tr th:each="menu:${cafe.menus}">
+                <td>
+                    <img width="200" th:if="${menu.photo.saveName!=null}" th:src="'/display?filename='+${menu.photo.saveName}" alt="이미지 로딩중..." src="/images/system/noImg.jpg"/>
+                    <img width="200" th:unless="${menu.photo.saveName!=null}" alt="이미지 로딩중..." src="/images/system/noImg.jpg"/>
+                </td>
+                <td th:text="${menu.name}"></td>
+                <td th:text="${menu.category.display}"></td>
+                <td th:text="${menu.price}"></td>
+                <td>
+                    <form th:action="@{/order/${cafe.id}/addcart}" method="post">
+                        <label for="orderId" hidden="hidden"></label>
+                        <input type="hidden" th:value="${order.id}" name="orderId" id="orderId">
+                        <label for="menuId" hidden="hidden"></label>
+                        <input type="hidden" th:value="${menu.id}" name="menuId" id="menuId">
+                        <label for="quantity" hidden="hidden"></label>
+                        <input type="number" name="quantity" id="quantity" value="1" min="0" max="100" style="width: 50px">
+                        <button type="submit">장바구니 담기</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <button type="button" onclick="window.history.back()">이전으로</button>
+
+</body>
+</html>

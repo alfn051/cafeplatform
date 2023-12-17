@@ -56,4 +56,7 @@ public class User extends BaseEntity {
     @JoinColumn(name = "photo_id")
     private Photo photo;
 
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<CafeMember> cafeMembers = new ArrayList<>();
+
 }

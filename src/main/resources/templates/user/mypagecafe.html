@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+</head>
+<body>
+<!--헤더 프레그먼트-->
+<div th:insert="~{fragments :: headerFragment}"></div>
+<a th:href="@{/user/mypage}">내 정보</a>
+<a th:href="@{/user/mypage/propensity}">내 성향</a>
+<a th:href="@{/user/mypage/cafe}">나의 카페들</a>
+<a th:href="@{/user/mypage/stamp}">내 스탬프 판들</a>
+<a th:href="@{/user/mypage/order}">주문내역</a>
+<a th:href="@{/user/mypage/gift}">내 쿠폰</a>
+
+<h2>내가 고객으로 등록한 카페들</h2>
+<table>
+    <tbody>
+    <tr th:each="memberCafe : ${memberCafeList}">
+        <td th:onclick="|location.href='@{/cafe(cafeId=${memberCafe.cafe.id})}'|" style="cursor:pointer;" width="90">
+            <img width="90" th:if="${memberCafe.getCafe().getFirstPhoto()!=null}" th:src="'/display?filename='+${memberCafe.getCafe().getFirstPhoto().getPhoto().getSaveName()}" alt="이미지 로딩중..." src="/images/system/noImg.jpg"/>
+            <img width="90" th:unless="${memberCafe.getCafe().getFirstPhoto()!=null}" alt="이미지 로딩중..." src="/images/system/noImg.jpg"/>
+        </td>
+        <td><a th:text="${memberCafe.cafe.name}" th:href="@{/cafe(cafeId=${memberCafe.cafe.id})}"></a></td>
+    </tr>
+    </tbody>
+</table>
+
+
+    <button type="button" onclick="window.history.back()">이전으로</button>
+
+</body>
+</html>

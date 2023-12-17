@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+</head>
+<body>
+<!--헤더 프레그먼트-->
+<div th:insert="~{fragments :: headerFragment}"></div>
+<a th:href="@{/user/mypage}">내 정보</a>
+<a th:href="@{/user/mypage/propensity}">내 성향</a>
+<a th:href="@{/user/mypage/cafe}">나의 카페들</a>
+<a th:href="@{/user/mypage/stamp}">내 스탬프 판들</a>
+<a th:href="@{/user/mypage/order}">주문내역</a>
+<a th:href="@{/user/mypage/gift}">내 쿠폰</a>
+
+<h2>내 스탬프 판들</h2>
+
+<ul>
+    <li th:each="gift : ${gifts}">
+        <span th:text="|카페: ${gift.stampBoard.cafeMember.cafe.name}|">가나다카페:</span>
+        <span th:text="|메뉴 ${gift.menu.name}|">메뉴: 아메리카노</span>
+    </li>
+</ul>
+
+
+    <button type="button" onclick="window.history.back()">이전으로</button>
+
+</body>
+</html>
