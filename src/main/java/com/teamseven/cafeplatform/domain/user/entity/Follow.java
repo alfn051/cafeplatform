@@ -19,7 +19,7 @@ public class Follow extends BaseEntity {
     private User follower;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "followee_id")
     private User followee;
 
 }

@@ -1,12 +1,15 @@
 package com.teamseven.cafeplatform.file.service;
 
 import com.teamseven.cafeplatform.domain.cafe.entity.Cafe;
+import com.teamseven.cafeplatform.domain.cafe.entity.Review;
 import com.teamseven.cafeplatform.file.common.Classify;
 import com.teamseven.cafeplatform.file.common.FileInfoDTO;
 import com.teamseven.cafeplatform.file.entity.CafePhoto;
 import com.teamseven.cafeplatform.file.entity.Photo;
+import com.teamseven.cafeplatform.file.entity.ReviewPhoto;
 import com.teamseven.cafeplatform.file.repository.CafePhotoRepository;
 import com.teamseven.cafeplatform.file.repository.PhotoRepository;
+import com.teamseven.cafeplatform.file.repository.ReviewPhotoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -25,6 +28,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class FileService {
+    private final ReviewPhotoRepository reviewPhotoRepository;
     private final PhotoRepository photoRepository;
     private final CafePhotoRepository cafePhotoRepository;
     private final String rootPath = System.getProperty("user.dir");
@@ -108,6 +112,13 @@ public class FileService {
         return storePhotos(multipartFiles, Classify.CAFE).stream()
                 .map(photo -> CafePhoto.builder().photo(photo).cafe(cafe).build())
                 .map(cafePhotoRepository::save).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<ReviewPhoto> storeReviewPhotos(List<MultipartFile> multipartFiles, Review review) throws IOException{
+        return storePhotos(multipartFiles, Classify.REVIEW).stream()
+                .map(photo -> ReviewPhoto.builder().photo(photo).review(review).build())
+                .map(reviewPhotoRepository::save).collect(Collectors.toList());
     }
 
 }

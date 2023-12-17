@@ -19,6 +19,7 @@ public class Partnership extends BaseEntity {
     private LocalDate startDate;
     private LocalDate endDate;
     private boolean freeTrial;
+    private Long viewCount;
 
     @ManyToOne
     @JoinColumn(name = "cafe_id")

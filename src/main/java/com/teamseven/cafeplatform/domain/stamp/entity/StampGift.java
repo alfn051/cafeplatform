@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -26,6 +27,6 @@ public class StampGift extends BaseEntity {
     private Menu menu;
 
     private boolean used;
-    private LocalDate usedTime;
+    private LocalDateTime usedTime;
 
 }

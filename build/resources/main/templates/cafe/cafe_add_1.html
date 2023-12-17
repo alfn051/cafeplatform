@@ -4,12 +4,9 @@
 
     <link rel = "stylesheet" th:href = "@{/css/cafe_add_1.css}"/>
 
-    <link rel = "stylesheet" href = "../Navbar/style.css"/>
-    
-
 </head>
 <body>
-<div th:include="/common/navbar"></div>
+<div th:insert="/common/navbar"></div>
  
 <div class="enroll">
     <div class="enroll-title">
@@ -22,50 +19,27 @@
 
         <p class="enroll-title-1">카페 이름</p>
 
-        <input type = "text" id = "box" class = "enroll-input-1" value = "카페 1"/>
-        <input type = "text" id = "box" class = "enroll-input-2" value = "카페 주소" />
+        <input type = "text" th:id = "box" class = "enroll-input-1" value = "카페 1"/>
+        <input type = "text" th:id = "box" class = "enroll-input-2" value = "카페 주소" />
 
         <p class="enroll-title-3">카페 정보</p>
 
-        <input type = "text" id = "box" class="enroll-input-2" value = "카페 추가정보 입력" />
+        <input type = "text" th:id = "box" class="enroll-input-2" value = "카페 추가정보 입력" />
 
-        <input type = "text" id = "box" class = "enroll-input-3" value = "010-1234-1234" placeholder="전화번호" />
-        <input type = "text" id = "box" class = "enroll-input-4" value = "01 120449293249" placeholder="사업자 번호" />
-        <input type = "text" id = "box" class = "enroll-input-5" value = "" placeholder="우편번호" />
-        <input type = "text" id = "box" class = "enroll-input-6" value = "" placeholder="기본주소" />
-        <input type = "text" id = "box" class = "enroll-input-7" value = "" placeholder="상세주소" />
-        <input type = "text" id = "box" class = "enroll-input-8" value = "" placeholder="카페 소개" />
+        <input type = "text" th:id = "box" class = "enroll-input-3" value = "010-1234-1234" placeholder="전화번호" />
+        <input type = "text" th:id = "box" class = "enroll-input-4" value = "01 120449293249" placeholder="사업자 번호" />
+        <input type = "text" th:id = "box" class = "enroll-input-5" value = "" placeholder="우편번호" />
+        <input type = "text" th:id = "box" class = "enroll-input-6" value = "" placeholder="기본주소" />
+        <input type = "text" th:id = "box" class = "enroll-input-7" value = "" placeholder="상세주소" />
+        <input type = "text" th:id = "box" class = "enroll-input-8" value = "" placeholder="카페 소개" />
+
+
         <a href = "/cafe/add/2">
-
         <button type = "button" class = "next-button">다음</button>
         </a>
-    </div>
 
+    </div>
 </div>
 
-
-
-<!-- 임시 include 대신 사용 -->
-<script>
- 
-    window.addEventListener('load', function() {
-        var allElements = document.getElementsByTagName('*');
-        Array.prototype.forEach.call(allElements, function(el) {
-            var includePath = el.dataset.includePath;
-            if (includePath) {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        el.outerHTML = this.responseText;
-                    }
-                };
-                xhttp.open('GET', includePath, true);
-                xhttp.send();
-            }
-        });
-    });
-
-</script>
-   
 </body>
 </html>

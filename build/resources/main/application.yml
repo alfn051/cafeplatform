@@ -3,7 +3,7 @@ spring:
     url: jdbc:mysql://localhost:3306/dbseven
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password:
+    password: Qlffuwnrl11!
 
   jpa:
     show-sql: true
@@ -19,15 +19,12 @@ spring:
     multipart:
       max-file-size: 5MB
 
-  devtools:
-    livereload:
-      enabled: true
-    thymeleaf:
-      cache: false
-      prefix: classpath:/templates/
-    restart:
-      enabled: true
+  thymeleaf:
+    cache: false
 
+  devtools:
+    restart:
+      enabled: false
 
 server:
   servlet:
@@ -36,4 +33,5 @@ server:
 
 default_color: "#8a4500"
 kakao_api_key: "c577b3ea3b76692b990e5674df1e0fb5"
-distance_range: 1000
+distance_range: "1000"
+

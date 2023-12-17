@@ -7,6 +7,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -14,6 +16,7 @@ import lombok.*;
 @Entity
 @Table(name = "monthly_record")
 public class MonthlyRecord extends BaseEntity {
+    private LocalDate month;
     private long amount;
     private long stampAmount;
     private long pointAmount;
