@@ -34,6 +34,7 @@ public class OrderService {
     private final StampService stampService;
     private final UserRepository userRepository;
     private final CafeRepository cafeRepository;
+    private final CafeService cafeService;
 
     @Transactional
     public Order createPreparingOrder(User user, Cafe cafe) {
@@ -100,7 +101,7 @@ public class OrderService {
         Optional<Order> optionalOrder = orderRepository.findById(orderId);
         if (optionalOrder.isEmpty()) return null;
         Order order = optionalOrder.get();
-        if (order.getPointDiscount() + point > order.getUser().getPoint()) return null; //유저가 가진 포인트보다 적으면 적용안됨
+        if (order.getPointDiscount() + point > order.getUser().getPoint()) return null; //유저가 가진 포인트보다 많으면 적용안됨
         order.setPointDiscount(order.getPointDiscount() + point);
         order.setAmount(order.getTotalPrice() - order.getPointDiscount() - order.getStampDiscount());
         return orderRepository.save(order);
@@ -112,17 +113,20 @@ public class OrderService {
         if (optionalOrder.isEmpty()) return null;
         Order order = optionalOrder.get();
         order.setTotalPrice(0L);
-        order.setPointDiscount(0L);
         order.setAmount(0L);
         order.getOrderMenus().forEach(orderMenu -> {
             order.setTotalPrice(order.getTotalPrice()+orderMenu.getMenu().getPrice() * orderMenu.getQuantity());
             if(orderMenu.getStampGift() != null){
+                stampService.useStampGift(orderMenu.getStampGift());
                 order.setStampDiscount(order.getStampDiscount()+orderMenu.getMenu().getPrice());
             }
         });
+        //포인트 차감하는 거 만들거
+
         order.setAmount(order.getTotalPrice() - order.getStampDiscount() - order.getPointDiscount());
         order.setOrderedTime(LocalDateTime.now());
         order.setOrderState(OrderState.ORDERED);
+        cafeService.recordMonthlyRecord(order.getCafe().getId(), order.getTotalPrice(), order.getStampDiscount(), order.getPointDiscount(), order.getAmount()); //월별매출기록
         return orderRepository.save(order);
     }
 

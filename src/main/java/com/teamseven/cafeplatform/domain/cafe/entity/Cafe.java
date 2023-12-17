@@ -33,7 +33,7 @@ public class Cafe extends BaseEntity {
     @Column(nullable = true)
     private Double ratingAverage;
     private String color;
-    private boolean partnership;
+    private boolean partnerState;
     private StampImage stampImage;
     private double longitude; //경도
     private double latitude; //위도
@@ -50,5 +50,8 @@ public class Cafe extends BaseEntity {
 
     @OneToMany(mappedBy = "cafe", orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cafe", orphanRemoval = true)
+    private List<Partnership> partnerships = new ArrayList<>();
 
 }

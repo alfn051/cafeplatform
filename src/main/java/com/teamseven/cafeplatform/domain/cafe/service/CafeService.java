@@ -10,24 +10,21 @@ import com.teamseven.cafeplatform.domain.cafe.dto.CafeThemeDTO;
 import com.teamseven.cafeplatform.domain.cafe.dto.MenuCreateDTO;
 import com.teamseven.cafeplatform.domain.cafe.entity.Cafe;
 import com.teamseven.cafeplatform.domain.cafe.entity.Menu;
+import com.teamseven.cafeplatform.domain.cafe.entity.MonthlyRecord;
 import com.teamseven.cafeplatform.domain.cafe.entity.Partnership;
 import com.teamseven.cafeplatform.domain.cafe.repository.CafeRepository;
+import com.teamseven.cafeplatform.domain.cafe.repository.MonthlyRecordRepository;
 import com.teamseven.cafeplatform.domain.cafe.repository.PartnershipRepository;
-import com.teamseven.cafeplatform.domain.order.service.OrderService;
 import com.teamseven.cafeplatform.domain.propensity.dto.CafePropensityDTO;
 import com.teamseven.cafeplatform.domain.propensity.entity.CafePropensity;
 import com.teamseven.cafeplatform.domain.propensity.entity.UserPropensity;
 import com.teamseven.cafeplatform.domain.propensity.service.PropensityService;
-import com.teamseven.cafeplatform.domain.stamp.dto.StampSettingDTO;
-import com.teamseven.cafeplatform.domain.stamp.entity.StampSetting;
 import com.teamseven.cafeplatform.domain.stamp.service.StampService;
 import com.teamseven.cafeplatform.domain.user.entity.User;
-import com.teamseven.cafeplatform.domain.user.repository.UserRepository;
 import com.teamseven.cafeplatform.domain.user.service.UserService;
 import com.teamseven.cafeplatform.file.service.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,6 +47,7 @@ public class CafeService {
     private final FileService fileService;
     private final MenuService menuService;
     private final PropensityService propensityService;
+    private final MonthlyRecordRepository monthlyRecordRepository;
     private final KakaoLocalApiHelper kakaoLocalApiHelper;
     private final StampService stampService;
 
@@ -116,6 +114,70 @@ public class CafeService {
         return menuService.createMenu(dto, cafe);
     }
 
+    public Partnership partnership(Long cafeId, boolean freeTrial) {
+        Cafe cafe = getCafeById(cafeId);
+        if(cafe == null) return null;
+        Optional<Partnership> optionalPartnership = partnershipRepository.findFirstByCafeOrderByEndDateDesc(cafe);
+        Partnership partnership;
+        if(optionalPartnership.isPresent()){
+            if(optionalPartnership.get().getEndDate().isAfter(LocalDate.now())){
+                partnership = Partnership.builder()
+                        .cafe(cafe)
+                        .startDate(optionalPartnership.get().getEndDate().plusDays(1))
+                        .endDate(optionalPartnership.get().getEndDate().plusMonths(1))
+                        .freeTrial(false)
+                        .build();
+            }else {
+                partnership = Partnership.builder()
+                        .cafe(cafe)
+                        .startDate(LocalDate.now())
+                        .endDate(LocalDate.now().plusMonths(1))
+                        .freeTrial(false)
+                        .build();
+            }
+        }else {
+            partnership = Partnership.builder()
+                    .cafe(cafe)
+                    .startDate(LocalDate.now())
+                    .endDate(LocalDate.now().plusMonths(1))
+                    .freeTrial(true)
+                    .build();
+        }
+        return partnership;
+    }
+
+    public MonthlyRecord makeMonthlyRecord(Long cafeId) {
+        Cafe cafe = getCafeById(cafeId);
+        if(cafe == null) return null;
+        return monthlyRecordRepository.save(MonthlyRecord.builder()
+                .cafe(cafe)
+                .month(LocalDate.now())
+                .amount(0)
+                .stampAmount(0)
+                .pointAmount(0)
+                .totalAmount(0)
+                .build());
+    }
+
+    public MonthlyRecord recordMonthlyRecord(Long cafeId, Long amount, Long stamp, Long point, Long total) {
+        Optional<MonthlyRecord> optionalMonthlyRecord = monthlyRecordRepository.findFirstByCafeIdOrderByMonthDesc(cafeId);
+        MonthlyRecord monthlyRecord;
+        if (optionalMonthlyRecord.isPresent()){
+            if (optionalMonthlyRecord.get().getMonth().getMonth() == LocalDate.now().getMonth()){
+                monthlyRecord = optionalMonthlyRecord.get();
+            }else {
+                monthlyRecord = makeMonthlyRecord(cafeId);
+            }
+        }else {
+            monthlyRecord = makeMonthlyRecord(cafeId);
+        }
+        monthlyRecord.setAmount(monthlyRecord.getAmount()+amount);
+        monthlyRecord.setStampAmount(monthlyRecord.getStampAmount()+stamp);
+        monthlyRecord.setPointAmount(monthlyRecord.getPointAmount()+point);
+        monthlyRecord.setTotalAmount(monthlyRecord.getTotalAmount()+total);
+        return monthlyRecordRepository.save(monthlyRecord);
+    }
+
     public Cafe getCafeById(Long id) {
         return cafeRepository.findById(id).orElse(null);
     }
@@ -158,7 +220,7 @@ public class CafeService {
      */
     public List<CafeDisplayDTO> searchPartnerCafesByUser(User user, String keyword, DirectionDTO dir) {
         return getCafeByPropensity(getCafeByDirection(getAllSearchedCafe(keyword).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), false)
-                .stream().filter(dto -> dto.getCafe().isPartnership()).collect(Collectors.toList());
+                .stream().filter(dto -> dto.getCafe().isPartnerState()).collect(Collectors.toList());
     }
 
     /**
@@ -174,7 +236,7 @@ public class CafeService {
      */
     public List<CafeDisplayDTO> searchNormalCafeListByUser(User user, String keyword, DirectionDTO dir) {
         return getCafeByPropensity(getCafeByDirection(getAllSearchedCafe(keyword).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), false)
-                .stream().filter(dto -> !dto.getCafe().isPartnership()).collect(Collectors.toList());
+                .stream().filter(dto -> !dto.getCafe().isPartnerState()).collect(Collectors.toList());
     }
 
     /**
@@ -209,7 +271,11 @@ public class CafeService {
         cafeDisplayDTOList.forEach(cafe -> cafe.setFitness(propensityService.calculatePropensity(propensity, cafe.getCafe().getCafePropensity())));
         cafeDisplayDTOList.sort(Comparator.comparing(CafeDisplayDTO::getFitness));
         if (checkPartnership) {
-            return cafeDisplayDTOList.stream().filter(dto -> dto.getCafe().isPartnership()).collect(Collectors.toList());
+            cafeDisplayDTOList.forEach(cafeDisplayDTO -> {
+                Optional<Partnership> partnership = partnershipRepository.findFirstByCafeOrderByEndDateDesc(cafeDisplayDTO.getCafe());
+                partnership.ifPresent(value -> value.setViewCount(value.getViewCount() + 1));
+            });
+            return cafeDisplayDTOList.stream().filter(dto -> dto.getCafe().isPartnerState()).collect(Collectors.toList());
         }
         return cafeDisplayDTOList;
     }

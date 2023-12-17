@@ -10,6 +10,7 @@ import com.teamseven.cafeplatform.domain.order.service.OrderService;
 import com.teamseven.cafeplatform.domain.propensity.dto.UserPropensityDTO;
 import com.teamseven.cafeplatform.domain.propensity.entity.UserPropensity;
 import com.teamseven.cafeplatform.domain.propensity.service.PropensityService;
+import com.teamseven.cafeplatform.domain.stamp.service.StampService;
 import com.teamseven.cafeplatform.domain.user.dto.UserJoinDTO;
 import com.teamseven.cafeplatform.domain.user.dto.UserLoginDTO;
 import com.teamseven.cafeplatform.domain.user.entity.CafeMember;
@@ -41,6 +42,7 @@ public class UserService {
     private final PropensityService propensityService;
     private final CafeRepository cafeRepository;
     private final FileService fileService;
+    private final StampService stampService;
 
     public User join(UserJoinDTO dto) {
         if(checkLoginIdDuplicate(dto.getLoginId())) return null;
@@ -116,7 +118,7 @@ public class UserService {
         if (optionalCafe.isEmpty()) return null;
         Cafe cafe = optionalCafe.get();
         CafeMember cafeMember = cafeMemberRepository.save(CafeMember.builder().user(user).cafe(cafe).build());
-        //여기서 스탬프보드 생성해야함
+        stampService.makeStampBoard(userId, cafeId);
         return cafeMember;
     }
 
