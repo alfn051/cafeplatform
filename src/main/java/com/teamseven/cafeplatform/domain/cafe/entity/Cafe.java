@@ -7,6 +7,7 @@ import com.teamseven.cafeplatform.domain.user.entity.User;
 import com.teamseven.cafeplatform.domain.cafe.common.StampImage;
 import com.teamseven.cafeplatform.file.entity.CafePhoto;
 import com.teamseven.cafeplatform.domain.propensity.entity.CafePropensity;
+import com.teamseven.cafeplatform.file.entity.Photo;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -54,4 +55,11 @@ public class Cafe extends BaseEntity {
     @OneToMany(mappedBy = "cafe", orphanRemoval = true)
     private List<Partnership> partnerships = new ArrayList<>();
 
+    @OneToMany(mappedBy = "cafe")
+    private List<Menu> menus = new ArrayList<>();
+
+
+    public CafePhoto getFirstPhoto(){
+        return this.getCafePhotos().stream().findFirst().orElse(null);
+    }
 }

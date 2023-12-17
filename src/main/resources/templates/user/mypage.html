@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+</head>
+<body>
+<!--헤더 프레그먼트-->
+<div th:insert="~{fragments :: headerFragment}"></div>
+<a th:href="@{/user/mypage}">내 정보</a>
+<a th:href="@{/user/mypage/propensity}">내 성향</a>
+<a th:href="@{/user/mypage/cafe}">나의 카페들</a>
+<a th:href="@{/user/mypage/stamp}">내 스탬프 판들</a>
+<a th:href="@{/user/mypage/order}">주문내역</a>
+
+<h2>기본정보</h2>
+    <div class="form-group">
+        <ul>
+            <li>
+                <p th:text="|아이디 : ${loginUser.username}|">id</p>
+            </li>
+            <li>
+                <p th:text="|이름 : ${loginUser.name}|"></p>
+            </li>
+            <li>
+                <p th:text="|이메일 : ${loginUser.email}|"></p>
+            </li>
+            <li>
+                <p th:text="|전화 : ${loginUser.phone}|"></p>
+            </li>
+            <li>
+                <p th:text="|생년월일 : ${loginUser.birthday}|"></p>
+            </li>
+            <li>
+                <p th:text="|성별 : ${loginUser.gender.display}|"></p>
+            </li>
+            <li>
+                <p th:text="|구분 : ${loginUser.classification.display}|"></p>
+            </li>
+            <li>
+                <p th:text="|포인트 : ${loginUser.point}|"></p>
+            </li>
+        </ul>
+    </div>
+    <button type="button" onclick="window.history.back()">이전으로</button>
+
+</body>
+</html>

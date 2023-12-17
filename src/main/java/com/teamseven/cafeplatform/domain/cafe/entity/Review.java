@@ -29,4 +29,7 @@ public class Review extends BaseEntity {
     @OneToMany(mappedBy = "review", orphanRemoval = true)
     private List<ReviewPhoto> reviewPhotos = new ArrayList<>();
 
+    public ReviewPhoto getFirstReviewPhoto(){
+        return this.reviewPhotos.stream().findFirst().orElse(null);
+    }
 }

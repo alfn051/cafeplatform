@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+</head>
+<body>
+<!--헤더 프레그먼트-->
+<div th:insert="~{fragments :: headerFragment}"></div>
+<a th:href="@{/user/mypage}">내 정보</a>
+<a th:href="@{/user/mypage/propensity}">내 성향</a>
+<a th:href="@{/user/mypage/cafe}">나의 카페들</a>
+<a th:href="@{/user/mypage/stamp}">내 스탬프 판들</a>
+<a th:href="@{/user/mypage/order}">주문내역</a>
+
+<h2>내 주문 기록</h2>
+
+<ul style="list-style-type: none">
+    <li th:each="order:${orders}">
+        <fieldset style="width: fit-content">
+            <table width="1000">
+                <thead>
+                <tr>
+                    <td colspan="4"></td>
+                    <td th:text="|주문번호: ${order.id}|" align="right">번호</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th colspan="5">주문 메뉴</th>
+                </tr>
+                <tr th:each="orderMenu:${order.orderMenus}" style="cursor:pointer;">
+                    <td th:text="${orderMenu.menu.name}"></td>
+                    <td th:text="|${orderMenu.menu.price}원|"></td>
+                    <td th:text="|${orderMenu.quantity}개|"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="5"></td>
+                </tr>
+                </tbody>
+            </table>
+            <table width="1000">
+                <tfoot>
+                <tr>
+                    <td th:text="주문날짜">날짜</td>
+                    <td th:text="${df.format(order.orderedTime)}"></td>
+                    <th th:text="|포인트로 ${order.pointDiscount}원 할인됨|" style="text-align: right"></th>
+                    <th th:text="|쿠폰으로 ${order.stampDiscount}원 할인됨|" style="text-align: right"></th>
+                    <th th:text="|${order.amount}원 결제|" style="text-align: right"></th>
+                </tr>
+                </tfoot>
+            </table>
+        </fieldset>
+    </li>
+</ul>
+
+
+    <button type="button" onclick="window.history.back()">이전으로</button>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<body>
+  <header th:fragment="headerFragment">
+    <h1 th:onclick="|location.href='@{/}'|" style="cursor:pointer;">Coffee Platform</h1>
+    <th:block th:if="${loginUser!=null}">
+      <div>
+        <span th:text="|안녕하세요 아이디: ${loginUser.username} 이름: ${loginUser.name}|">안녕하세요 아이디 이름</span>
+        <a th:href="@{/user/mypage}">마이페이지</a>
+        <a th:href="@{/user/logout}">로그아웃</a>
+        <a th:if='${loginUser.classification.display.equals("점주")}' th:href="@{/cafe(cafeId=${mycafeId})}">카페관리</a>
+      </div>
+    </th:block>
+    <th:block th:unless="${loginUser!=null}">
+      <div>
+        <a th:href="@{/user/login}">로그인</a>
+        <a th:href="@{/user/join}">회원가입</a>
+      </div>
+    </th:block>
+    <hr>
+  </header>
+</body>
+</html>

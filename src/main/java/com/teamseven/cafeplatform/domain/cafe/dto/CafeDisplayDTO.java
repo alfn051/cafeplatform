@@ -8,6 +8,7 @@ import lombok.Data;
 @Builder
 public class CafeDisplayDTO {
     private Cafe cafe;
-    private double fitness;
-    private double distance;
+    private Double fitness;
+    private Double distance;
+    private String filename;
 }

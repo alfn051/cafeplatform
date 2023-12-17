@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cafe</title>
+</head>
+<body>
+<!--헤더 프레그먼트-->
+<div th:insert="~{fragments :: headerFragment}"></div>
+
+<h2 style="display: inline; margin: 30px; text-align: center">카페 검색</h2>
+<form th:action="@{/search}" method="get" style="display: inline">
+    <fieldset style="width: fit-content; display: inline">
+        <input type="text" name="search" placeholder="검색어 입력" style="width: 500px; height: 30px; border-style: none">
+        <input type="submit" value="검색">
+    </fieldset>
+</form>
+<div th:if="${loginUser!=null}">
+    <div th:if="${!reviewList.isEmpty()}">
+        <h4>팔로우한 유저의 최근 리뷰!</h4>
+        <table>
+            <tbody>
+            <tr th:each="reviewDto : ${reviewList}">
+                <td style="cursor:pointer;" width="90">
+                    <img width="90" th:if="${reviewDto.reviewPhoto.photo.saveName!=null}" th:src="'/display?filename='+${reviewDto.reviewPhoto.photo.saveName}" alt="이미지 로딩중..." src="/images/system/noImg.jpg"/>
+                    <img width="90" th:unless="${reviewDto.reviewPhoto.photo.saveName!=null}" alt="이미지 로딩중..." src="/images/system/noImg.jpg"/>
+                    <span th:text="|${reviewDto.review.order.user.name} 님의 리뷰|"></span>
+                </td>
+                <td><span th:text="|카페: ${reviewDto.review.order.cafe.name}|"></span></td>
+                <td><span th:text="|제목: ${reviewDto.review.title}|"></span></td>
+                <td><span th:text="|내용: ${reviewDto.review.content}|"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:unless="${!reviewList.isEmpty()}">
+        <h4>팔로우한 유저나 팔로우한 유저의 리뷰가 존재하지 않습니다. </h4>
+    </div>
+</div>
+
+<h4 th:if="${loginUser!=null}">추천카페</h4>
+<h4 th:unless="${loginUser!=null}">전체카페(로그인 해야 추천카페가 표시됩니다.)</h4>
+<div th:if="${!cafeList.isEmpty()}">
+    <table>
+        <tbody>
+        <tr th:each="cafeDto : ${cafeList}">
+            <td th:onclick="|location.href='@{/cafe(cafeId=${cafeDto.cafe.id})}'|" style="cursor:pointer;" width="90">
+                <img width="90" th:if="${cafeDto.filename!=null}" th:src="'/display?filename='+${cafeDto.filename}" alt="이미지 로딩중..." src="/images/system/noImg.jpg"/>
+                <img width="90" th:unless="${cafeDto.filename!=null}" alt="이미지 로딩중..." src="/images/system/noImg.jpg"/>
+            </td>
+            <td><a th:text="${cafeDto.cafe.name}" th:href="@{/cafe(cafeId=${cafeDto.cafe.id})}"></a></td>
+            <td><span th:if="${cafeDto.fitness!=null}" th:text="|내 성향과 적합도 : ${cafeDto.fitness}|"></span></td>
+            <td><span th:if="${cafeDto.distance!=null}" th:text="|나와의 거리: ${cafeDto.distance}|"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div th:unless="${!cafeList.isEmpty()}">
+    <h4>카페가 존재하지 않습니다. </h4>
+</div>
+</body>
+</html>

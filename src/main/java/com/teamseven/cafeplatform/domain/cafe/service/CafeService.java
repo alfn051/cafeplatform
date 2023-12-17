@@ -183,6 +183,10 @@ public class CafeService {
         return cafeRepository.findById(id).orElse(null);
     }
 
+    public Cafe getCafeByOwner(Long ownerId) {
+        return cafeRepository.findByOwnerId(ownerId).orElse(null);
+    }
+
     public List<Cafe> getAllCafe() {
         return cafeRepository.findAll();
     }
@@ -205,7 +209,7 @@ public class CafeService {
      * @return 거리 정보와 적합도 정보가 포함되고 적합도가 작은 순대로 정렬된 거리 범위 내의 CafeDisplayDTO 리스트
      */
     public List<CafeDisplayDTO> getCafeListByUser(User user, DirectionDTO dir) {
-        return getCafeByPropensity(getCafeByDirection(getAllActiveCafe().stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), true);
+        return getCafeByPropensity(getCafeByDirection(getAllActiveCafe().stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).filename(cafe.getCafePhotos().stream().findFirst().get().getPhoto().getSaveName()).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), true);
     }
 
     /**

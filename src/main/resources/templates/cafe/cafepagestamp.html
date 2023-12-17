@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+</head>
+<body>
+<!--헤더 프레그먼트-->
+<div th:insert="~{fragments :: headerFragment}"></div>
+<a th:href="@{/cafe/cafepage(cafeId=${cafe.id})}">카페소개</a>
+<a th:href="@{/cafe/cafepagemenu(cafeId=${cafe.id})}">메뉴</a>
+<a th:href="@{/cafe/cafepagereview(cafeId=${cafe.id})}">리뷰</a>
+<div th:if="${loginUser!=null}">
+    <a th:href="@{/cafe/cafepagestamp(cafeId=${cafe.id})}">스탬프</a>
+    <a th:href="@{/cafe/cafepageorder(cafeId=${cafe.id})}">주문내역</a>
+</div>
+
+<h2 th:text="${cafe.name}">ㅇㅇㅇ카페</h2>
+<h2>스탬프</h2>
+    <div class="form-group">
+        <span th:text="|총 ${board.stampSetting.totalStamp.getNumber()}개 중 ${board.accruedStamp}개 모음음|">총 10개 중 5개 모음</span>
+        <span th:text="|유효기간: ${board.expirationDate}|">유효기간 20000000까지</span>
+        <span th:text="|10개 보상: ${board.stampSetting.getGiftFirst().name}|">10개 보상: 아메리카노</span>
+        <span th:if="${board.stampSetting.totalStamp.getNumber()==20}" th:text="|20개 보상: ${board.stampSetting.getGiftSecond().name}|">20개 보상: 모카</span>
+    </div>
+    <button type="button" onclick="window.history.back()">이전으로</button>
+
+</body>
+</html>

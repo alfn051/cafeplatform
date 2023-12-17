@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+</head>
+<body>
+<!--헤더 프레그먼트-->
+<div th:insert="~{fragments :: headerFragment}"></div>
+<a th:href="@{/cafe/cafepage(cafeId=${cafe.id})}">카페소개</a>
+<a th:href="@{/cafe/cafepagemenu(cafeId=${cafe.id})}">메뉴</a>
+<a th:href="@{/cafe/cafepagereview(cafeId=${cafe.id})}">리뷰</a>
+<div th:if="${loginUser!=null}">
+    <a th:href="@{/cafe/cafepagestamp(cafeId=${cafe.id})}">스탬프</a>
+    <a th:href="@{/cafe/cafepageorder(cafeId=${cafe.id})}">주문내역</a>
+</div>
+
+<h2 th:text="${cafe.name}">ㅇㅇㅇ카페</h2>
+    <div class="form-group">
+        <ul>
+            <li>
+                <p th:text="|매장 소개: ${cafe.introduction}|"></p>
+            </li>
+            <li>
+                <p th:text="|전화번호: ${cafe.phone}|"></p>
+            </li>
+            <li>
+                <p th:text="|주소: ${cafe.baseAddress} ,${cafe.detailAddress}|"></p>
+            </li>
+        </ul>
+        <h3>매장 사진들</h3>
+        <ul>
+            <li th:each="cafePhoto : ${cafe.cafePhotos}">
+                <img width="200" th:if="${cafePhoto.photo.saveName!=null}" th:src="'/display?filename='+${cafePhoto.photo.saveName}" alt="이미지 로딩중..." src="/images/system/noImg.jpg"/>
+                <img width="200" th:unless="${cafePhoto.photo.saveName!=null}" alt="이미지 로딩중..." src="/images/system/noImg.jpg"/>
+            </li>
+        </ul>
+    </div>
+    <button type="button" onclick="window.history.back()">이전으로</button>
+
+</body>
+</html>

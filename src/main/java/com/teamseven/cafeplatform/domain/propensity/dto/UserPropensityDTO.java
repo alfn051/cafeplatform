@@ -18,8 +18,8 @@ public class UserPropensityDTO {
     private int interiorImportance;
     private int menuImportance;
     private int mood;
-    private List<Scenery> sceneryPreferredList;
-    private List<Category> menuPreferredList;
+    private Scenery sceneryPreferred;
+    private Category menuPreferred;
 
     public UserPropensity toEntity(User user) {
         return UserPropensity.builder()
