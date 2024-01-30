@@ -2,14 +2,14 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+    <title>CafePlatform</title>
 </head>
 <body>
 <!--헤더 프레그먼트-->
 <!--<div th:insert="~{fragments :: headerFragment}"></div>-->
 
 <h2 th:text="|${cafe.name} 주문 키오스크|">ㅇㅇㅇ카페 주문 키오스크</h2>
-<a th:href="@{/order/${cafeId}/cart}">메뉴담기</a>
+<a th:href="@{/order/{cafeId}(cafeId=${cafe.id})}">메뉴담기</a>
 <h2>장바구니</h2>
     <div class="form-group">
         <table>
@@ -27,28 +27,30 @@
         <ul>
             <li th:each="gift : ${gifts}">
                 <span th:text="${gift.menu.name}"></span>
-                <form th:action="@{/order/${cafe.id}/usegift}" method="post">
+                <form th:action="@{/order/{cafeId}/usegift(cafeId=${cafe.id})}" method="post">
                     <label for="orderId" hidden="hidden"></label>
-                    <input type="hidden" th:value="${order.id}" name="orderId" id="orderId">
+                    <input type="number" th:value="${order.id}" name="orderId" id="orderId" hidden="hidden">
                     <label for="stampGiftId" hidden="hidden"></label>
-                    <input type="hidden" th:value="${gift.id}" name="stampGiftId" id="stampGiftId">
+                    <input type="number" th:value="${gift.id}" name="stampGiftId" id="stampGiftId" hidden="hidden">
                     <button type="submit">쿠폰 사용</button>
                 </form>
             </li>
         </ul>
     </div>
-    <form th:action="@{/order/${cafe.id}/usegift}" method="post">
+    <form th:action="@{/order/{cafeId}/usegift(cafeId=${cafe.id})}" method="post">
         <label for="orderId1" hidden="hidden"></label>
-        <input type="hidden" th:value="${order.id}" name="orderId" id="orderId1">
+        <input type="number" th:value="${order.id}" name="orderId" id="orderId1" hidden="hidden">
         <label for="point" hidden="hidden"></label>
         <input type="number" th:value="${order.pointDiscount}" name="point" id="point">
         <button type="submit">포인트사용</button>
     </form>
     <br/>
     <span th:text="|스탬프 ${stampAvailable}개 적립 가능!|"></span>
-    <form th:action="@{/order/${cafe.id}/confirm}" method="post">
+
+    <form th:action="@{/order/{cafeId}/confirm(cafeId=${cafe.id})}" method="post">
         <label for="orderId2" hidden="hidden"></label>
-        <input type="hidden" th:value="${order.id}" name="orderId" id="orderId2">
+        <input type="number" th:value="${order.id}" name="orderId" id="orderId2" hidden="hidden">
+        <span th:text="|총 금액${order.amount}|"></span>
         <button type="submit">결제</button>
     </form>
 

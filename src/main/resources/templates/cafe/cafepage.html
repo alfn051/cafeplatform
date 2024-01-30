@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+    <title>CafePlatform</title>
 </head>
 <body>
 <!--헤더 프레그먼트-->
@@ -16,6 +16,11 @@
 </div>
 
 <h2 th:text="${cafe.name}">ㅇㅇㅇ카페</h2>
+<form th:action="@{/cafe/cafejoin}" method="post">
+    <input type="number" name="cafeId" th:value="${cafe.id}" hidden="hidden">
+    <input type="submit" value="멤버되기">
+</form>
+<a th:href="@{/order(cafeId=${cafe.id})}">주문하기(원래는 방문해서 키오스크임)</a>
     <div class="form-group">
         <ul>
             <li>

@@ -18,10 +18,10 @@
 
 <ul>
     <li th:each="board : ${stampBoards}">
-        <span th:text="|카페: ${board.cafeMember.cafe.name}|">가나다카페:</span>
-        <span th:text="|총 ${board.stampSetting.totalStamp.getNumber()}개 중 ${board.accruedStamp}개 모음음|">총 10개 중 5개 모음</span>
-        <span th:text="|유효기간: ${board.expirationDate}|">유효기간 20000000까지</span>
-        <span th:text="|10개 보상: ${board.stampSetting.getGiftFirst().name}|">10개 보상: 아메리카노</span>
+        <span th:text="|카페: ${board.cafeMember.cafe.name}  |">가나다카페:</span>
+        <span th:text="|   총 ${board.stampSetting.totalStamp.getNumber()}개 중 ${board.accruedStamp}개 모음|">총 10개 중 5개 모음</span>
+        <span th:text="|   유효기간: ${board.expirationDate}|">유효기간 20000000까지</span>
+        <span th:text="|   10개 보상: ${board.stampSetting.getGiftFirst().name}|">10개 보상: 아메리카노</span>
         <span th:if="${board.stampSetting.totalStamp.getNumber()==20}" th:text="|20개 보상: ${board.stampSetting.getGiftSecond().name}|">20개 보상: 모카</span>
     </li>
 </ul>

@@ -14,7 +14,8 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -49,11 +50,11 @@ public class Cafe extends BaseEntity {
     @JoinColumn(name = "owner_id")
     private User owner;
 
-    @OneToMany(mappedBy = "cafe", orphanRemoval = true)
+    @OneToMany(mappedBy = "cafe")
     private List<Order> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "cafe", orphanRemoval = true)
-    private List<Partnership> partnerships = new ArrayList<>();
+//    @OneToMany(mappedBy = "cafe")
+//    private List<Partnership> partnerships = new ArrayList<>();
 
     @OneToMany(mappedBy = "cafe")
     private List<Menu> menus = new ArrayList<>();

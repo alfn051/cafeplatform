@@ -32,7 +32,7 @@ public class FileService {
     private final PhotoRepository photoRepository;
     private final CafePhotoRepository cafePhotoRepository;
     private final String rootPath = System.getProperty("user.dir");
-    private final String filePath = rootPath + "/src/main/resources/static/images/product/";
+    private final String filePath = rootPath + "/src/main/resources/static/images/";
 
     public String getFullPath(String filename) {
         return filePath + filename;

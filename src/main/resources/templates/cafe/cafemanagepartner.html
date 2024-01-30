@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+    <title>CafePlatform</title>
 </head>
 <body>
 <!--헤더 프레그먼트-->
@@ -24,7 +24,7 @@
 </div>
 <div th:unless="${cafe.partnerState}">
     <form th:action="@{/cafe/cafemanagepartner}" method="post">
-        <input type="hidden" name="cafeId" th:value="${cafe.id}">
+        <input type="number" name="cafeId" th:value="${cafe.id}" hidden="hidden">
         <input type="submit" value="제휴 맺기(누르면 한달씩 추가됩니다)">
     </form>
 </div>

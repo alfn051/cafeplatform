@@ -14,7 +14,7 @@ public class StampSettingDTO {
     private Long cafeId;
     private TotalStamp totalStamp;
     private StampExpiration expiration;
-    private long criterionAmount;
+    private int criterionAmount;
     private boolean eventFirst;
     private boolean eventBirthday;
     private Long giftFirstId;

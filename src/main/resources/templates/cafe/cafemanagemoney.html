@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+    <title>CafePlatform</title>
 </head>
 <body>
 <!--헤더 프레그먼트-->
@@ -22,8 +22,8 @@
         <th>포이트할인금액</th>
         <th>총 수익</th>
     </tr>
-    <tr th:each="montly:${cafe.monthlyRecords}">
-        <td th:text="${montly.month.getMonth()}"></td>
+    <tr th:if="${!cafe.monthlyRecords.isEmpty()}" th:each="montly:${cafe.monthlyRecords}">
+        <td th:text="${montly.month.month}"></td>
         <td th:text="${montly.amount}"></td>
         <td th:text="${montly.stampAmount}"></td>
         <td th:text="${montly.pointAmount}"></td>

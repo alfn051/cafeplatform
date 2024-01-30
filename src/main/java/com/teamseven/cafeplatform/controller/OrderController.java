@@ -15,6 +15,7 @@ import com.teamseven.cafeplatform.domain.user.entity.User;
 import com.teamseven.cafeplatform.domain.user.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("order")
+@Slf4j
 public class OrderController {
     private final CafeService cafeService;
     private final UserService userService;
@@ -88,6 +90,7 @@ public class OrderController {
         Cafe cafe = cafeService.getCafeById(cafeId);
         if(cafe == null){
             redirectAttributes.addAttribute("cafeId", cafeId);
+            log.error("cafeId가 넘어오지 않았음: " +cafeId);
             return "redirect:"+ httpServletRequest.getHeader("Referer");
         }
 
@@ -114,7 +117,7 @@ public class OrderController {
 
         Order order = orderService.getPreparingOrderBtUserAndCafe(user.getId(), cafeId);
         List<StampGift> gifts = stampService.getAllStampGiftByUserAndCafe(user.getId(), cafeId);
-        int stampAvailable = (int) (order.getAmount() % stampService.getRecentSetting(order.getCafe().getId()).getCriterionAmount());
+        int stampAvailable = (int)(order.getAmount() / stampService.getRecentSetting(order.getCafe().getId()).getCriterionAmount());
         model.addAttribute("stampAvailable", stampAvailable);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd a hh:mm:ss zzz");
@@ -184,7 +187,7 @@ public class OrderController {
     public String confirmOrder(@PathVariable("cafeId") Long cafeId,
                           @SessionAttribute(name = "loginUser", required = false) User loginUser,
                           Model model, RedirectAttributes redirectAttributes,
-                          @ModelAttribute Long orderId,
+                          @ModelAttribute("orderId") Long orderId,
                           HttpServletRequest httpServletRequest
     ) {
         if (loginUser == null) {
@@ -202,14 +205,16 @@ public class OrderController {
         model.addAttribute("cafe", cafe);
         model.addAttribute("loginUser", user);
         model.addAttribute("df", df);
-        return "redirect:"+ httpServletRequest.getHeader("Referer");
+        redirectAttributes.addAttribute("cafeId", cafe.getId());
+        redirectAttributes.addAttribute("orderId", orderId);
+        return "redirect:/";
     }
 
-    @GetMapping("/{cafeId}/confirm/{orderId}")
-    public String confirmOrderPage(@PathVariable("cafeId") Long cafeId,
+    @GetMapping("/confirmed")
+    public String confirmOrderPage(@ModelAttribute("cafeId") Long cafeId,
                                @SessionAttribute(name = "loginUser", required = false) User loginUser,
                                Model model, RedirectAttributes redirectAttributes,
-                               @PathVariable("orderId") Long orderId,
+                               @ModelAttribute("orderId") Long orderId,
                                HttpServletRequest httpServletRequest
     ) {
         if (loginUser == null) {

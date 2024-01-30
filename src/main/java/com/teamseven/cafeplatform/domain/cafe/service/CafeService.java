@@ -25,7 +25,6 @@ import com.teamseven.cafeplatform.domain.user.service.UserService;
 import com.teamseven.cafeplatform.file.service.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,8 +53,7 @@ public class CafeService {
 
     @Value("${default_color}")
     private String defaultColor;
-    @Value("distance_range")
-    private String distanceRange;
+    private final int distanceRange = 1000;
     private final StampImage defaultStampImage = StampImage.A;
 
     @Transactional
@@ -71,14 +69,9 @@ public class CafeService {
             direction = DirectionDTO.builder().longitude(129.07506783124393).latitude(35.17973748292069).build();
         }
 
-        Cafe cafe = cafeRepository.save(dto.toEntity(owner, defaultColor, defaultStampImage, direction, CafeState.PREPARING));
-        //제휴 첫등록 2개월 무료 등록
-        partnershipRepository.save(Partnership.builder()
-                .startDate(LocalDate.now())
-                .endDate(LocalDate.now().plusMonths(2))
-                .freeTrial(true)
-                .build());
-        if (dto.getPhotoList() != null) {
+        Cafe cafe = cafeRepository.save(dto.toEntity(owner, defaultColor, defaultStampImage, direction, CafeState.ACTIVE));
+        partnership(cafe.getId(), true);
+        if (dto.getPhoto() != null) {
             try { //사진 파일 저장
                 fileService.storeCafePhotos(dto.getPhotoList(), cafe);
             } catch (IOException e) {
@@ -127,6 +120,7 @@ public class CafeService {
                         .startDate(optionalPartnership.get().getEndDate().plusDays(1))
                         .endDate(optionalPartnership.get().getEndDate().plusMonths(1))
                         .freeTrial(false)
+                        .viewCount(0L)
                         .build();
             }else {
                 partnership = Partnership.builder()
@@ -134,6 +128,7 @@ public class CafeService {
                         .startDate(LocalDate.now())
                         .endDate(LocalDate.now().plusMonths(1))
                         .freeTrial(false)
+                        .viewCount(0L)
                         .build();
             }
         }else {
@@ -142,10 +137,11 @@ public class CafeService {
                     .startDate(LocalDate.now())
                     .endDate(LocalDate.now().plusMonths(1))
                     .freeTrial(true)
+                    .viewCount(0L)
                     .build();
         }
         cafe.setPartnerState(true);
-        return partnership;
+        return partnershipRepository.save(partnership);
     }
 
     public Partnership checkPartnership(Long cafeId) {
@@ -225,7 +221,7 @@ public class CafeService {
      * @return 거리 정보와 적합도 정보가 포함되고 적합도가 작은 순대로 정렬된 거리 범위 내의 CafeDisplayDTO 리스트
      */
     public List<CafeDisplayDTO> getCafeListByUser(User user, DirectionDTO dir) {
-        return getCafeByPropensity(getCafeByDirection(getAllActiveCafe().stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).filename(cafe.getCafePhotos().stream().findFirst().get().getPhoto().getSaveName()).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), true);
+        return getCafeByPropensity(getCafeByDirection(getAllActiveCafe().stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).cafePhoto(cafe.getCafePhotos().stream().findFirst().orElse(null)).build()).collect(Collectors.toList()), dir, distanceRange), user.getUserPropensity(), true);
     }
 
     /**
@@ -240,7 +236,7 @@ public class CafeService {
      * @return 거리 정보와 적합도 정보가 포함되고 적합도가 작은 순대로 정렬된 거리 범위 내의 검색어가 포함된 제휴상태의 CafeDisplayDTO 리스트
      */
     public List<CafeDisplayDTO> searchPartnerCafesByUser(User user, String keyword, DirectionDTO dir) {
-        return getCafeByPropensity(getCafeByDirection(getAllSearchedCafe(keyword).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), false)
+        return getCafeByPropensity(getCafeByDirection(getAllSearchedCafe(keyword).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, distanceRange), user.getUserPropensity(), false)
                 .stream().filter(dto -> dto.getCafe().isPartnerState()).collect(Collectors.toList());
     }
 
@@ -256,7 +252,7 @@ public class CafeService {
      * @return 거리 정보와 적합도 정보가 포함되고 거리가 가까운순대로 정렬된 거리 범위 내의 검색어가 포함된 제휴되지 않은 CafeDisplayDTO 리스트
      */
     public List<CafeDisplayDTO> searchNormalCafeListByUser(User user, String keyword, DirectionDTO dir) {
-        return getCafeByPropensity(getCafeByDirection(getAllSearchedCafe(keyword).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, Integer.parseInt(distanceRange)), user.getUserPropensity(), false)
+        return getCafeByPropensity(getCafeByDirection(getAllSearchedCafe(keyword).stream().map(cafe -> CafeDisplayDTO.builder().cafe(cafe).build()).collect(Collectors.toList()), dir, distanceRange), user.getUserPropensity(), false)
                 .stream().filter(dto -> !dto.getCafe().isPartnerState()).collect(Collectors.toList());
     }
 

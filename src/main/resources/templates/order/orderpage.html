@@ -2,14 +2,14 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+    <title>CafePlatform</title>
 </head>
 <body>
 <!--헤더 프레그먼트-->
 <!--<div th:insert="~{fragments :: headerFragment}"></div>-->
 
 <h2 th:text="|${cafe.name} 주문 키오스크|">ㅇㅇㅇ카페 주문 키오스크</h2>
-<a th:href="@{/order/${cafeId}/cart}">장바구니</a>
+<a th:href="@{/order/{cafeId}/cart(cafeId=${cafe.id})}">장바구니</a>
 <h2>메뉴 담기</h2>
     <div class="form-group">
         <table>
@@ -29,7 +29,7 @@
                 <td th:text="${menu.category.display}"></td>
                 <td th:text="${menu.price}"></td>
                 <td>
-                    <form th:action="@{/order/${cafe.id}/addcart}" method="post">
+                    <form th:action="@{/order/{cafeId}/addcart(cafeId=${cafe.id})}" method="post">
                         <label for="orderId" hidden="hidden"></label>
                         <input type="hidden" th:value="${order.id}" name="orderId" id="orderId">
                         <label for="menuId" hidden="hidden"></label>

@@ -122,6 +122,12 @@ public class UserService {
         return cafeMember;
     }
 
+    public CafeMember joinMember(User user, Cafe cafe){
+        CafeMember cafeMember = cafeMemberRepository.save(CafeMember.builder().user(user).cafe(cafe).build());
+        stampService.makeStampBoard(user.getId(), cafe.getId());
+        return cafeMember;
+    }
+
 
     //ReviewService 에 있는거 사용(그건 쿼리문으로 불러옴)
 //    public List<Review> getFolloweeRecentReview(Long userId, int number) {

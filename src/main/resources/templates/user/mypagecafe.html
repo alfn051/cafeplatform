@@ -18,11 +18,11 @@
 <table>
     <tbody>
     <tr th:each="memberCafe : ${memberCafeList}">
-        <td th:onclick="|location.href='@{/cafe(cafeId=${memberCafe.cafe.id})}'|" style="cursor:pointer;" width="90">
+        <td th:onclick="|location.href='@{/cafe/cafepage(cafeId=${memberCafe.cafe.id})}'|" style="cursor:pointer;" width="90">
             <img width="90" th:if="${memberCafe.getCafe().getFirstPhoto()!=null}" th:src="'/display?filename='+${memberCafe.getCafe().getFirstPhoto().getPhoto().getSaveName()}" alt="이미지 로딩중..." src="/images/system/noImg.jpg"/>
             <img width="90" th:unless="${memberCafe.getCafe().getFirstPhoto()!=null}" alt="이미지 로딩중..." src="/images/system/noImg.jpg"/>
         </td>
-        <td><a th:text="${memberCafe.cafe.name}" th:href="@{/cafe(cafeId=${memberCafe.cafe.id})}"></a></td>
+        <td><a th:text="${memberCafe.cafe.name}" th:href="@{/cafe/cafepage(cafeId=${memberCafe.cafe.id})}"></a></td>
     </tr>
     </tbody>
 </table>

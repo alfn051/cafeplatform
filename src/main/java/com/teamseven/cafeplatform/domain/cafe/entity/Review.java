@@ -26,7 +26,7 @@ public class Review extends BaseEntity {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @OneToMany(mappedBy = "review", orphanRemoval = true)
+    @OneToMany(mappedBy = "review")
     private List<ReviewPhoto> reviewPhotos = new ArrayList<>();
 
     public ReviewPhoto getFirstReviewPhoto(){

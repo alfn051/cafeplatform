@@ -20,7 +20,7 @@ import lombok.*;
 public class StampSetting extends BaseEntity {
     private TotalStamp totalStamp;
     private StampExpiration expiration;
-    private long criterionAmount;
+    private int criterionAmount;
     private boolean eventFirst;
     private boolean eventBirthday;
 

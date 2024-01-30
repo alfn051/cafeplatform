@@ -37,8 +37,6 @@ public class HomeController {
     @GetMapping("/")
     public String Home(@SessionAttribute(name = "loginUser", required = false)User loginUser, HttpServletRequest httpServletRequest , Model model){
 
-        log.info("loginUser : {}", loginUser);
-
         List<CafeDisplayDTO> cafeDisplayDTOList;
         List<ReviewDisplayDTO> recentReviewList;
         if(loginUser!=null){
@@ -70,7 +68,6 @@ public class HomeController {
     @GetMapping("/search")
     public String Search(@RequestParam("search") String search, @SessionAttribute(name = "loginUser", required = false)User loginUser, HttpServletRequest httpServletRequest , Model model){
 
-        log.info("loginUser : {}", loginUser);
 
         List<CafeDisplayDTO> cafeDisplayDTOListProp = new ArrayList<>();
         List<CafeDisplayDTO> cafeDisplayDTOList;

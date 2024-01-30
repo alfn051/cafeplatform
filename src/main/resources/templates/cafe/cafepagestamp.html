@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="|내정보 : ${loginUser.name}|">My Page</title>
+    <title>CafePlatform</title>
 </head>
 <body>
 <!--헤더 프레그먼트-->
@@ -17,7 +17,7 @@
 
 <h2 th:text="${cafe.name}">ㅇㅇㅇ카페</h2>
 <h2>스탬프</h2>
-    <div class="form-group">
+    <div class="form-group" th:if="${board!=null}">
         <span th:text="|총 ${board.stampSetting.totalStamp.getNumber()}개 중 ${board.accruedStamp}개 모음음|">총 10개 중 5개 모음</span>
         <span th:text="|유효기간: ${board.expirationDate}|">유효기간 20000000까지</span>
         <span th:text="|10개 보상: ${board.stampSetting.getGiftFirst().name}|">10개 보상: 아메리카노</span>

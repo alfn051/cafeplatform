@@ -23,6 +23,7 @@ import com.teamseven.cafeplatform.domain.user.common.UserClassification;
 import com.teamseven.cafeplatform.domain.user.entity.CafeMember;
 import com.teamseven.cafeplatform.domain.user.entity.User;
 import com.teamseven.cafeplatform.domain.user.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -57,7 +58,7 @@ public class CafeController {
     @GetMapping("/cafepage")
     public String cafePage(@SessionAttribute(name = "loginUser", required = false) User loginUser, @RequestParam(value = "cafeId") Long cafeId, Model model) {
 
-        User user;
+        User user = null;
         if(loginUser!=null){
             user = userService.getUserById(loginUser.getId());
             model.addAttribute("loginUser", user);
@@ -68,6 +69,10 @@ public class CafeController {
 
         Cafe cafe = cafeService.getCafeById(cafeId);
         if (cafe == null) return "redirect:/";
+
+        if(user!=null){
+            boolean isMember = user.getCafeMembers().stream().map(CafeMember::getCafe).toList().contains(cafe);
+        }
 
         model.addAttribute("cafe", cafe);
 
@@ -177,6 +182,24 @@ public class CafeController {
         return "cafe/cafepageorder";
     }
 
+    @PostMapping("/cafejoin")
+    public String cafeJoin(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model, @ModelAttribute(value = "cafeId") Long cafeId, HttpServletRequest httpServletRequest) {
+
+        User user;
+        if(loginUser!=null){
+            user = userService.getUserById(loginUser.getId());
+            model.addAttribute("loginUser", user);
+        }else {
+            return "redirect:/login";
+        }
+
+        Cafe cafe = cafeService.getCafeById(cafeId);
+        if (cafe == null) return "redirect:/";
+
+        userService.joinMember(user, cafe);
+        return "redirect:" + httpServletRequest.getHeader("Referer");
+    }
+
     @GetMapping("/cafemanage")
     public String cafeManage(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model) {
 
@@ -202,7 +225,7 @@ public class CafeController {
     }
 
     @GetMapping("/cafemanagemoney")
-    public String cafeManageMoney(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model, @RequestParam Integer month) {
+    public String cafeManageMoney(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model) {
 
         User user;
         if(loginUser!=null){
@@ -348,7 +371,7 @@ public class CafeController {
     }
 
     @PostMapping("/cafemanagepartner")
-    public String cafeManagePartnerAdd(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model, @ModelAttribute Long cafeId) {
+    public String cafeManagePartnerAdd(@SessionAttribute(name = "loginUser", required = false) User loginUser, Model model, @ModelAttribute("cafeId") long cafeId) {
 
         User user;
         if(loginUser!=null){

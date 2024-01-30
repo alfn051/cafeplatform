@@ -45,7 +45,7 @@
                 <tfoot>
                 <tr>
                     <td th:text="주문날짜">날짜</td>
-                    <td th:text="${df.format(order.orderedTime)}"></td>
+                    <td th:text="${order.orderedTime}"></td>
                     <th th:text="|포인트로 ${order.pointDiscount}원 할인됨|" style="text-align: right"></th>
                     <th th:text="|쿠폰으로 ${order.stampDiscount}원 할인됨|" style="text-align: right"></th>
                     <th th:text="|${order.amount}원 결제|" style="text-align: right"></th>

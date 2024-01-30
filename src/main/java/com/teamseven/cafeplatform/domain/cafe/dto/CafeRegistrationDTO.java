@@ -9,6 +9,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,11 +23,17 @@ public class CafeRegistrationDTO {
     private int postalCode;
     private String introduction;
     private long ownerId;
-    private List<MultipartFile> photoList;
+    private MultipartFile photo;
 
     public CafeRegistrationDTO setOwnerId(long ownerId){
         this.ownerId = ownerId;
         return this;
+    }
+
+    public List<MultipartFile> getPhotoList(){
+        List<MultipartFile> list = new ArrayList<>();
+        list.add(this.photo);
+        return list;
     }
 
     public Cafe toEntity(User owner, String color, StampImage stampImage, DirectionDTO direction, CafeState state) {

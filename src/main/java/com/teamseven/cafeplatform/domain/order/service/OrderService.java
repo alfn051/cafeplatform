@@ -12,8 +12,10 @@ import com.teamseven.cafeplatform.domain.order.entity.Order;
 import com.teamseven.cafeplatform.domain.order.entity.OrderMenu;
 import com.teamseven.cafeplatform.domain.order.repository.OrderMenuRepository;
 import com.teamseven.cafeplatform.domain.order.repository.OrderRepository;
+import com.teamseven.cafeplatform.domain.stamp.entity.StampBoard;
 import com.teamseven.cafeplatform.domain.stamp.entity.StampGift;
 import com.teamseven.cafeplatform.domain.stamp.service.StampService;
+import com.teamseven.cafeplatform.domain.user.entity.CafeMember;
 import com.teamseven.cafeplatform.domain.user.entity.User;
 import com.teamseven.cafeplatform.domain.user.repository.UserRepository;
 import com.teamseven.cafeplatform.domain.user.service.UserService;
@@ -60,7 +62,7 @@ public class OrderService {
         OrderMenu orderMenu = orderMenuRepository.findByOrderAndMenu(order, menu)
                 .orElse(OrderMenu.builder().order(order).menu(menu).quantity(0).build());
         orderMenu.setQuantity(orderMenu.getQuantity() + dto.getQuantity());
-        order.setTotalPrice(order.getTotalPrice() + (orderMenu.getMenu().getPrice() * orderMenu.getQuantity()));
+        order.setTotalPrice(order.getTotalPrice() + (orderMenu.getMenu().getPrice() * dto.getQuantity()));
         order.setAmount(order.getTotalPrice() - order.getPointDiscount() - order.getStampDiscount());
         return orderMenuRepository.save(orderMenu);
     }
@@ -127,7 +129,10 @@ public class OrderService {
         order.setAmount(order.getTotalPrice() - order.getStampDiscount() - order.getPointDiscount());
         order.setOrderedTime(LocalDateTime.now());
         order.setOrderState(OrderState.ORDERED);
-        stampService.earnStamp(order.getUser().getId(), order.getCafe().getId(), order, (int) (order.getAmount() % stampService.getRecentSetting(order.getCafe().getId()).getCriterionAmount()), false, false);
+        if(order.getUser().getCafeMembers().stream().map(CafeMember::getCafe).toList().contains(order.getCafe())){
+            stampService.earnStamp(order.getUser().getId(), order.getCafe().getId(), order, (int) (order.getAmount() % stampService.getRecentSetting(order.getCafe().getId()).getCriterionAmount()), false, false);
+
+        }
         cafeService.recordMonthlyRecord(order.getCafe().getId(), order.getTotalPrice(), order.getStampDiscount(), order.getPointDiscount(), order.getAmount()); //월별매출기록
         return orderRepository.save(order);
     }

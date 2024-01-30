@@ -37,26 +37,26 @@ public class User extends BaseEntity {
     private UserClassification classification;
     private long point;
 
-    @OneToMany(mappedBy = "follower", orphanRemoval = true)
+    @OneToMany(mappedBy = "follower")
     private List<Follow> followees = new ArrayList<>();
 
-    @OneToMany(mappedBy = "followee", orphanRemoval = true)
+    @OneToMany(mappedBy = "followee")
     private List<Follow> followers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user")
     private List<AttendanceBoard> attendanceBoards = new ArrayList<>();
 
-    @OneToOne(mappedBy = "user", orphanRemoval = true)
+    @OneToOne(mappedBy = "user")
     private UserPropensity userPropensity;
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "photo_id")
     private Photo photo;
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @OneToMany(mappedBy = "user")
     private List<CafeMember> cafeMembers = new ArrayList<>();
 
 }

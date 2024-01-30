@@ -101,14 +101,14 @@ public class StampService {
         stampBoard.setAccruedStamp(stampBoard.getAccruedStamp() + accrual); //보드에 적립된스탬프 추가
 
         if(stampBoard.getStampSetting().getTotalStamp().equals(TotalStamp.TEN)) {   //총개수 10개일경우
-            if (stampBoard.getAccruedStamp() == 10) {   //10개달성 - 보상주고 상태 achieved 로 변경
+            if (stampBoard.getAccruedStamp() >= 10) {   //10개달성 - 보상주고 상태 achieved 로 변경
                 makeStampGift(stampBoard, stampBoard.getStampSetting().getGiftFirst());
                 stampBoard.setState(BoardState.ACHIEVED);
             }
         }else { //총개수 20개일경우
             if (stampBoard.getAccruedStamp() == 10) { //10개 달서 - 보상줌
                 makeStampGift(stampBoard, stampBoard.getStampSetting().getGiftFirst());
-            } else if (stampBoard.getAccruedStamp() == 20) {    //20개 달성 - 보사주고 상태 achieved 로 변경
+            } else if (stampBoard.getAccruedStamp() >= 20) {    //20개 달성 - 보사주고 상태 achieved 로 변경
                 makeStampGift(stampBoard, stampBoard.getStampSetting().getGiftSecond());
                 stampBoard.setState(BoardState.ACHIEVED);
             }
